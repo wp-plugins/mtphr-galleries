@@ -1,0 +1,415 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Metaphor Galleries v1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-03-10 14:29:57+0000\n"
+"Last-Translator: admin <joe@metaphorcreations.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: includes/functions.php:24
+#: includes/settings.php:51
+#@ mtphr-galleries
+msgid "Gallery"
+msgstr "Gallery"
+
+#: includes/functions.php:25
+#: includes/settings.php:59
+#@ mtphr-galleries
+msgid "Galleries"
+msgstr "Galleries"
+
+#: includes/functions.php:211
+#@ mtphr-galleries
+msgid "Previous"
+msgstr "Previous"
+
+#: includes/functions.php:211
+#@ mtphr-galleries
+msgid "Next"
+msgstr "Next"
+
+#: includes/meta-boxes.php:26
+#@ mtphr-galleries
+msgid "Rotation type"
+msgstr "Next"
+
+#: includes/meta-boxes.php:28
+#@ mtphr-galleries
+msgid "Fade"
+msgstr "Fade"
+
+#: includes/meta-boxes.php:29
+#@ mtphr-galleries
+msgid "Slide left"
+msgstr "Slide left"
+
+#: includes/meta-boxes.php:30
+#@ mtphr-galleries
+msgid "Slide right"
+msgstr "Slide right"
+
+#: includes/meta-boxes.php:31
+#@ mtphr-galleries
+msgid "Slide up"
+msgstr "Slide up"
+
+#: includes/meta-boxes.php:32
+#@ mtphr-galleries
+msgid "Slide down"
+msgstr "Slide down"
+
+#: includes/meta-boxes.php:35
+#@ mtphr-galleries
+msgid "Set the type of rotation for the ticker."
+msgstr "Set the type of rotation for the ticker."
+
+#: includes/meta-boxes.php:40
+#@ mtphr-galleries
+msgid "Dynamic slide direction"
+msgstr "Dynamic slide direction"
+
+#: includes/meta-boxes.php:49
+#@ mtphr-galleries
+msgid "Auto rotate"
+msgstr "Auto rotate"
+
+#: includes/meta-boxes.php:50
+#: includes/meta-boxes.php:86
+#: includes/meta-boxes.php:101
+#@ mtphr-galleries
+msgid "Enable"
+msgstr "Enable"
+
+#: includes/meta-boxes.php:51
+#@ mtphr-galleries
+msgid "Set the delay between rotations."
+msgstr "Set the delay between rotations."
+
+#: includes/meta-boxes.php:56
+#@ mtphr-galleries
+msgid "Seconds delay"
+msgstr "Seconds delay"
+
+#: includes/meta-boxes.php:60
+#@ mtphr-galleries
+msgid "Pause on mouse over"
+msgstr "Pause on mouse over"
+
+#: includes/meta-boxes.php:69
+#@ mtphr-galleries
+msgid "Rotate speed"
+msgstr "Rotate speed"
+
+#: includes/meta-boxes.php:71
+#@ mtphr-galleries
+msgid "Tenths of a second"
+msgstr "Tenths of a second"
+
+#: includes/meta-boxes.php:72
+#@ mtphr-galleries
+msgid "Set the speed & easing of the rotation."
+msgstr "Set the speed & easing of the rotation."
+
+#: includes/meta-boxes.php:85
+#@ mtphr-galleries
+msgid "Directional navigation"
+msgstr "Directional navigation"
+
+#: includes/meta-boxes.php:87
+#@ mtphr-galleries
+msgid "Set the directional navigation options."
+msgstr "Set the directional navigation options."
+
+#: includes/meta-boxes.php:91
+#@ mtphr-galleries
+msgid "Autohide navigation"
+msgstr "Autohide navigation"
+
+#: includes/meta-boxes.php:100
+#@ mtphr-galleries
+msgid "Control navigation"
+msgstr "Control navigation"
+
+#: includes/meta-boxes.php:102
+#@ mtphr-galleries
+msgid "Set the control navigation options."
+msgstr "Set the control navigation options."
+
+#: includes/meta-boxes.php:107
+#@ mtphr-galleries
+msgid "Gallery Settings"
+msgstr "Gallery Settings"
+
+#: includes/meta-boxes.php:133
+#@ mtphr-galleries
+msgid "Resources"
+msgstr "Resources"
+
+#: includes/meta-boxes.php:134
+#@ mtphr-galleries
+msgid "Insert attachments or paste url directly into text field."
+msgstr "Insert attachments or paste url directly into text field."
+
+#: includes/meta-boxes.php:139
+#@ mtphr-galleries
+msgid "Gallery Resources"
+msgstr "Gallery Resources"
+
+#: includes/metaboxer/metaboxer.php:330
+#@ mtphr-galleries
+msgid "Rearrange"
+msgstr "Rearrange"
+
+#: includes/metaboxer/metaboxer.php:335
+#: includes/metaboxer/metaboxer.php:337
+#@ mtphr-galleries
+msgid "Upload/Select"
+msgstr "Upload/Select"
+
+#: includes/metaboxer/metaboxer.php:343
+#@ mtphr-galleries
+msgid "Delete"
+msgstr "Delete"
+
+#: includes/metaboxer/metaboxer.php:345
+#@ mtphr-galleries
+msgid "Add"
+msgstr "Add"
+
+#: includes/post-types.php:27
+#: includes/post-types.php:28
+#: includes/post-types.php:38
+#, php-format
+#@ mtphr-galleries
+msgid "%s"
+msgstr "%s"
+
+#: includes/post-types.php:29
+#@ mtphr-galleries
+msgid "Add New"
+msgstr "Add New"
+
+#: includes/post-types.php:30
+#, php-format
+#@ mtphr-galleries
+msgid "Add New %s"
+msgstr "Add New %s"
+
+#: includes/post-types.php:31
+#, php-format
+#@ mtphr-galleries
+msgid "Edit %s"
+msgstr "Edit %s"
+
+#: includes/post-types.php:32
+#, php-format
+#@ mtphr-galleries
+msgid "New %s"
+msgstr "New %s"
+
+#: includes/post-types.php:33
+#, php-format
+#@ mtphr-galleries
+msgid "View %s"
+msgstr "View %s"
+
+#: includes/post-types.php:34
+#, php-format
+#@ mtphr-galleries
+msgid "Search %s"
+msgstr "Search %s"
+
+#: includes/post-types.php:35
+#, php-format
+#@ mtphr-galleries
+msgid "No %s Found"
+msgstr "No %s Found"
+
+#: includes/post-types.php:36
+#, php-format
+#@ mtphr-galleries
+msgid "No %s Found in Trash"
+msgstr "No %s Found in Trash"
+
+#: includes/scripts.php:43
+#@ mtphr-galleries
+msgid "Gallery attachments"
+msgstr "Gallery attachments"
+
+#: includes/scripts.php:44
+#@ mtphr-galleries
+msgid "Insert attachments"
+msgstr "Insert attachments"
+
+#: includes/scripts.php:45
+#@ mtphr-galleries
+msgid "Insert attachment"
+msgstr "Insert attachment"
+
+#: includes/scripts.php:46
+#@ mtphr-galleries
+msgid "Invalid url"
+msgstr "Invalid url"
+
+#: includes/settings.php:41
+#@ mtphr-galleries
+msgid "Slug"
+msgstr "Slug"
+
+#: includes/settings.php:45
+#@ mtphr-galleries
+msgid "Set the slug for the gallery post type and category.<br/><strong>* You must update permalinks after changing the slug.</strong><br/><strong>* You must not have a page slug with the same name as this slug.</strong>"
+msgstr "Set the slug for the gallery post type and category.<br/><strong>* You must update permalinks after changing the slug.</strong><br/><strong>* You must not have a page slug with the same name as this slug.</strong>"
+
+#: includes/settings.php:49
+#@ mtphr-galleries
+msgid "Singular Label"
+msgstr "Singular Label"
+
+#: includes/settings.php:53
+#@ mtphr-galleries
+msgid "Set the singular label for the gallery post type and category."
+msgstr "Set the singular label for the gallery post type and category."
+
+#: includes/settings.php:57
+#@ mtphr-galleries
+msgid "Plural Label"
+msgstr "Plural Label"
+
+#: includes/settings.php:61
+#@ mtphr-galleries
+msgid "Set the plural label for the gallery post type."
+msgstr "Set the plural label for the gallery post type."
+
+#: includes/settings.php:104
+#@ mtphr-galleries
+msgid "Global Gallery Settings"
+msgstr "Global Gallery Settings"
+
+#: includes/shortcodes.php:84
+#, php-format
+#@ mtphr-galleries
+msgid "Permalink to %s"
+msgstr "Permalink to %s"
+
+#: includes/shortcodes.php:122
+#@ mtphr-galleries
+msgid "Newer"
+msgstr "Newer"
+
+#: includes/shortcodes.php:125
+#@ mtphr-galleries
+msgid "Older"
+msgstr "Older"
+
+#: includes/taxonomies.php:26
+#, php-format
+#@ mtphr-galleries
+msgid "%s Categories"
+msgstr "%s Categories"
+
+#: includes/taxonomies.php:27
+#@ mtphr-galleries
+msgid "Category"
+msgstr "Category"
+
+#: includes/taxonomies.php:28
+#@ mtphr-galleries
+msgid "Search Categories"
+msgstr "Search Categories"
+
+#: includes/taxonomies.php:29
+#@ mtphr-galleries
+msgid "All Categories"
+msgstr "All Categories"
+
+#: includes/taxonomies.php:30
+#@ mtphr-galleries
+msgid "Parent"
+msgstr "Parent"
+
+#: includes/taxonomies.php:31
+#@ mtphr-galleries
+msgid "Parent:"
+msgstr "Parent:"
+
+#: includes/taxonomies.php:32
+#@ mtphr-galleries
+msgid "Edit Category"
+msgstr "Edit Category"
+
+#: includes/taxonomies.php:33
+#@ mtphr-galleries
+msgid "Update Category"
+msgstr "Update Category"
+
+#: includes/taxonomies.php:34
+#@ mtphr-galleries
+msgid "Add New Category"
+msgstr "Add New Category"
+
+#: includes/taxonomies.php:35
+#@ mtphr-galleries
+msgid "New Category"
+msgstr "New Category"
+
+#: includes/taxonomies.php:36
+#@ mtphr-galleries
+msgid "Categories"
+msgstr "Categories"
+
+#: includes/widget.php:44
+#@ mtphr-galleries
+msgid "Displays a list of Metaphor Gallery categories."
+msgstr "Displays a list of Metaphor Gallery categories."
+
+#: includes/widget.php:53
+#@ mtphr-galleries
+msgid "Metaphor Gallery Categories"
+msgstr "Metaphor Gallery Categories"
+
+#: includes/widget.php:101
+#, php-format
+#@ mtphr-galleries
+msgid "All %s"
+msgstr "All %s"
+
+#: includes/widget.php:159
+#@ mtphr-galleries
+msgid "Title:"
+msgstr "Title:"
+
+#: includes/widget.php:166
+#@ mtphr-galleries
+msgid "Show post counts"
+msgstr "Show post counts"
+
+#: includes/widget.php:170
+#@ mtphr-galleries
+msgid "Show hierarchy"
+msgstr "Show hierarchy"
+
+#: includes/widget.php:176
+#@ mtphr-galleries
+msgid "All Galleries Page:"
+msgstr "All Galleries Page:"
+
+#: includes/settings.php:43
+#@ mtphr-galleries
+msgid "galleries"
+msgstr "galleries"
+
