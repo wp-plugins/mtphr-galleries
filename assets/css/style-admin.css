@@ -1,0 +1,18 @@
+/* Dashboard Menu Icon
+------------------------------------------------------------ */
+
+#menu-posts-mtphr_gallery .wp-menu-image {
+	background: url(../images/icon-16.png) no-repeat 6px -32px !important;
+}
+#menu-posts-mtphr_gallery:hover .wp-menu-image,
+#menu-posts-mtphr_gallery.wp-has-current-submenu .wp-menu-image {
+	background-position:6px 0px !important;
+}
+
+/* Edit Screen Icon
+------------------------------------------------------------ */
+
+#icon-edit.icon32-posts-mtphr_gallery,
+#icon-mtphr_galleries {
+	background: url(../images/icon-32.png) no-repeat;
+}
