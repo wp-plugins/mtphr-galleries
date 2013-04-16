@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 1.0.2 =
+* Fixed attachment insert issue.
+
 = 1.0.1 =
 * Updated css classes for responsive and non-responsive site.
 * Added filter to set responsiveness.
@@ -42,6 +45,9 @@ Documentation is coming soon!
 * Initial upload of Metaphor Galleries.
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+Fixed attachment insert issue.
 
 = 1.0.1 =
 Updated css classes for responsive and non-responsive site. Added filter to set responsiveness.
