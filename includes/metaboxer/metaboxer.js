@@ -173,7 +173,7 @@ $('.mtphr-galleries-metaboxer-gallery-uploader a').live('click', function(e) {
 
 			$container.children('a.button').hide();
 			$container.append( '<img src="'+attachments[0].url+'" width="100" />' );
-			input.val( '{'+attachments[0].id+'}' );
+			input.val( attachments[0].id );
 		}
 		
 		// Remove the first item
