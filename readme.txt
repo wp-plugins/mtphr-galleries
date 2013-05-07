@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 1.0.3 =
+* Fixed multiple attachment insert issue.
+
 = 1.0.2 =
 * Fixed attachment insert issue.
 
@@ -45,6 +48,9 @@ Documentation is coming soon!
 * Initial upload of Metaphor Galleries.
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+Fixed multiple attachment insert issue.
 
 = 1.0.2 =
 Fixed attachment insert issue.

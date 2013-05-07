@@ -4,11 +4,11 @@
  *
  * @package Metaphor Galleries
  */
- 
 
 
 
-add_action( 'admin_init', 'mtphr_galleries_links_metabox' ); 
+
+add_action( 'admin_init', 'mtphr_galleries_links_metabox' );
 /**
  * Add gallery resources
  *
@@ -18,14 +18,14 @@ function mtphr_galleries_links_metabox() {
 
 	// Create an array to store the fields
 	$fields = array();
-	
+
 	$fields['link'] = array(
 		'id' => '_mtphr_gallery_link',
 		'type' => 'text',
 		'name' => __( 'External link', 'mtphr-galleries' ),
 		'description' => __( 'Add an external link to associate with the gallery.', 'mtphr-galleries' )
 	);
-	
+
 	$gallery_links = array(
 		'id' => '_mtphr_gallery_links_metabox',
 		'title' => __( 'Gallery Links', 'mtphr-galleries' ),
@@ -40,7 +40,7 @@ function mtphr_galleries_links_metabox() {
 
 
 
-add_action( 'admin_init', 'mtphr_galleries_resources_metabox' ); 
+add_action( 'admin_init', 'mtphr_galleries_resources_metabox' );
 /**
  * Add gallery resources
  *
@@ -50,14 +50,14 @@ function mtphr_galleries_resources_metabox() {
 
 	// Create an array to store the fields
 	$fields = array();
-	
+
 	$fields['resources'] = array(
 		'id' => '_mtphr_gallery_resources',
 		'type' => 'gallery',
 		'name' => __( 'Resources', 'mtphr-galleries' ),
 		'description' => __( 'Insert attachments or paste url directly into text field.', 'mtphr-galleries' )
 	);
-	
+
 	$gallery_resources = array(
 		'id' => '_mtphr_gallery_resources_metabox',
 		'title' => __( 'Gallery Resources', 'mtphr-galleries' ),
@@ -74,7 +74,7 @@ function mtphr_galleries_resources_metabox() {
 
 
 
-add_action( 'admin_init', 'mtphr_galleries_settings_metabox' ); 
+add_action( 'admin_init', 'mtphr_galleries_settings_metabox' );
 /**
  * Add gallery settings
  *
@@ -84,7 +84,7 @@ function mtphr_galleries_settings_metabox() {
 
 	// Create an array to store the fields
 	$fields = array();
-	
+
 	// Add the type field
 	$fields['type'] = array(
 		'id' => '_mtphr_gallery_slider_type',
@@ -127,7 +127,7 @@ function mtphr_galleries_settings_metabox() {
 			)
 		)
 	);
-	
+
 	// Add the rotate speed field
 	$fields['speed'] = array(
 		'id' => '_mtphr_gallery_slider_speed',
@@ -143,7 +143,7 @@ function mtphr_galleries_settings_metabox() {
 			)
 		)
 	);
-	
+
 	// Add the rotate navigation field
 	$fields['directional_nav'] = array(
 		'id' => '_mtphr_gallery_slider_directional_nav',
@@ -158,7 +158,7 @@ function mtphr_galleries_settings_metabox() {
 			)
 		)
 	);
-	
+
 	// Add the rotate navigation field
 	$fields['control_nav'] = array(
 		'id' => '_mtphr_gallery_slider_control_nav',
@@ -167,7 +167,7 @@ function mtphr_galleries_settings_metabox() {
 		'label' => __('Enable', 'mtphr-galleries'),
 		'description' => __('Set the control navigation options.', 'mtphr-galleries')
 	);
-	
+
 	$gallery_resources = array(
 		'id' => '_mtphr_gallery_settings_metabox',
 		'title' => __( 'Gallery Settings', 'mtphr-galleries' ),

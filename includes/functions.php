@@ -18,13 +18,13 @@ function mtphr_galleries_settings() {
 
 	// Get the options
 	$settings = get_option('mtphr_galleries_settings', array());
-	
+
 	$defaults = array(
 		'slug' => 'galleries',
 		'singular_label' => __( 'Gallery', 'mtphr-galleries' ),
 		'plural_label' => __( 'Galleries', 'mtphr-galleries' )
 	);
-	
+
 	return wp_parse_args( $settings, $defaults );
 }
 
@@ -94,16 +94,16 @@ function get_mtphr_gallery_thumbnail( $post_id=false, $width=false, $height=fals
 	// Return the featured image thumbnail
 	if( $att_id = get_post_thumbnail_id( $post_id ) ) {
 		return wp_get_attachment_image( $att_id, apply_filters('mtphr_galleries_thumbnail_size', 'thumbnail') );
-		
+
 	} else {
-		
+
 		// Return the first attachment thumbnail
 		$resources = mtphr_gallery_resource_meta( $post_id );
 		if( is_array($resources) && isset($resources[0]) ) {
 			return mtphr_galleries_metaboxer_gallery_thumbnail( $resources[0], false, false, apply_filters('mtphr_galleries_thumbnail_size', 'thumbnail') );
 		}
 	}
-	
+
 	return false;
 }
 
@@ -125,7 +125,7 @@ function mtphr_gallery_resource( $url ) {
  * @since 1.0.0
  */
 function get_mtphr_gallery_resource( $url, $width=false, $height=false ) {
-	return mtphr_galleries_metaboxer_gallery_resource( $url, $width, $height, apply_filters('mtphr_galleries_thumbnail_size', 'large') );		
+	return mtphr_galleries_metaboxer_gallery_resource( $url, $width, $height, apply_filters('mtphr_galleries_thumbnail_size', 'large') );
 }
 
 
@@ -137,9 +137,9 @@ function get_mtphr_gallery_resource( $url, $width=false, $height=false ) {
  * @since 1.0.0
  */
 function mtphr_gallery_count( $post_id=false ) {
-	
+
 	$post_id = $post_id ? $post_id : get_the_id();
-	
+
 	$count = 0;
 	$resources = mtphr_gallery_resource_meta( $post_id );
 	if( is_array($resources) ) {
@@ -173,42 +173,42 @@ function get_mtphr_gallery( $post_id=false, $width=false, $height=false, $args=f
 
 	// Get the post id
 	$post_id = $post_id ? $post_id : get_the_id();
-	
+
 	// Get all the custom data
 	$custom_fields = get_post_custom( $post_id );
 	$meta_data = array();
 	foreach( $custom_fields as $key => $value ) {
 		$meta_data[$key] = maybe_unserialize( $value[0] );
 	}
-	
+
 	// Manually set the layout
 	$meta_data['_mtphr_gallery_slider_layout'] = array('navigation', 'gallery');
-	
+
 	// Override meta data with supplied attributes
 	if( is_array($args) ) {
-		foreach( $args as $key => $value ) {	
+		foreach( $args as $key => $value ) {
 			$meta_data["_mtphr_gallery_{$key}"] = $value;
 		}
 	}
-	
+
 	// Extract the metadata array into variables
 	extract( $meta_data );
 
 	// Create the gallery
 	$gallery_id = 'mtphr-gallery-'.$post_id;
 	$html = '<div id="'.$gallery_id.'" class="mtphr-gallery '.sanitize_html_class($class).'">';
-	
+
 	// Set the layout
 	foreach( $_mtphr_gallery_slider_layout as $asset ) {
-	
+
 		switch( $asset ) {
-			
+
 			case 'navigation':
 				if( isset($_mtphr_gallery_slider_control_nav) && $_mtphr_gallery_slider_control_nav ) {
 					$html .= get_mtphr_galleries_navigation( $post_id );
 				}
 				break;
-				
+
 			case 'gallery':
 				$html .= '<div class="mtphr-gallery-wrapper">';
 				$html .= apply_filters( 'mtphr_gallery', get_mtphr_gallery_resources($post_id), $post_id );
@@ -219,14 +219,14 @@ function get_mtphr_gallery( $post_id=false, $width=false, $height=false, $args=f
 				break;
 		}
 	}
-	
+
 	$html .= '</div>';
-	
+
 	// Add an after action to add scripts
 	ob_start();
 	do_action( 'mtphr_gallery_slider_after', $gallery_id, $meta_data );
 	$html .= ob_get_clean();
-	
+
 	// Return the gallery
 	return $html;
 }
@@ -240,17 +240,17 @@ function get_mtphr_gallery( $post_id=false, $width=false, $height=false, $args=f
  * @since 1.0.0
  */
 function get_mtphr_galleries_navigation( $post_id=false ) {
-	
+
 	$post_id = $post_id ? $post_id : get_the_id();
-	
+
 	$navigation = '<div class="mtphr-gallery-navigation">';
-	
+
 	$count = mtphr_gallery_count();
 	for( $i=0; $i<$count; $i++ ) {
 		$link = '<a href="'.$i.'">'.intval($i+1).'</a>';
 		$navigation .= apply_filters( 'mtphr_gallery_navigation', $link, $i, $post_id );
 	}
-	
+
 	$navigation .= '</div>';
 
 	return $navigation;
@@ -265,13 +265,13 @@ function get_mtphr_galleries_navigation( $post_id=false ) {
  * @since 1.0.0
  */
 function get_mtphr_gallery_resources( $post_id=false, $width=false, $height=false ) {
-	
+
 	$post_id = $post_id ? $post_id : get_the_id();
-	
+
 	$resources = mtphr_gallery_resource_meta( $post_id );
 
 	if( is_array($resources) && isset($resources[0]) ) {
-	
+
 		$gallery = '<div class="mtphr-gallery-resource-container">';
 		foreach( $resources as $i=>$resource ) {
 			if( mtphr_galleries_metaboxer_gallery_type( $resource ) ) {
@@ -299,7 +299,7 @@ function mtphr_galleries_excerpt( $length = 200, $more = '&hellip;'  ) {
 function get_mtphr_galleries_excerpt( $length = 200, $more = '&hellip;' ) {
 	$excerpt = get_the_excerpt();
 	$length++;
-	
+
 	$output = '';
 	if( function_exists('mb_strlen') ) {
 		if ( mb_strlen( $excerpt ) > $length ) {
@@ -341,7 +341,7 @@ function get_mtphr_galleries_excerpt( $length = 200, $more = '&hellip;' ) {
  * @since 1.0.0
  */
 function mtphr_galleries_compress_script( $str ) {
-	
+
 	$lines = explode( "\n", $str );
 	$output = '';
 	foreach( $lines as $line ) {
@@ -349,7 +349,7 @@ function mtphr_galleries_compress_script( $str ) {
 			$output .= trim( $line );
 		}
 	}
-	
-	return $output; 
+
+	return $output;
 }
 
