@@ -2,7 +2,7 @@
 /*
 Plugin Name: Metaphor Galleries
 Description: Adds a custom post type to easily create media galleries to add to your site. Add a gallery archive or single gallery to any page with shortcodes.
-Version: 1.0.5
+Version: 1.0.6
 Author: Metaphor Creations
 Author URI: http://www.metaphorcreations.com
 License: GPL2
