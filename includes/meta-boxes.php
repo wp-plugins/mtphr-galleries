@@ -14,7 +14,7 @@ add_action( 'add_meta_boxes', 'mtphr_galleries_rotator_metabox' );
 
 
 /* --------------------------------------------------------- */
-/* !Render the gallery settings metabox - 1.0.5 */
+/* !Render the gallery settings metabox - 1.0.6 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_settings_render_metabox() {
@@ -50,7 +50,7 @@ function mtphr_gallery_settings_render_metabox() {
 		do_action('mtphr_galleries_metabox_before');
 
 		/* --------------------------------------------------------- */
-		/* !Gallery resources - 1.0.0 */
+		/* !Gallery resources - 1.0.5 */
 		/* --------------------------------------------------------- */
 
 		echo '<div id="mtphr-galleries-page-tabs-1" class="mtphr-galleries-page-tabs-page">';
@@ -73,7 +73,7 @@ function mtphr_gallery_settings_render_metabox() {
 		echo '</div>';
 
 		/* --------------------------------------------------------- */
-		/* !Rotator settings - 1.0.0 */
+		/* !Rotator settings - 1.0.5 */
 		/* --------------------------------------------------------- */
 
 		echo '<div id="mtphr-galleries-page-tabs-2" class="mtphr-galleries-page-tabs-page">';
@@ -153,7 +153,7 @@ function mtphr_gallery_settings_render_metabox() {
 		echo '</div>';
 
 		/* --------------------------------------------------------- */
-		/* !Gallery data - 1.0.0 */
+		/* !Gallery data - 1.0.5 */
 		/* --------------------------------------------------------- */
 
 		echo '<div id="mtphr-galleries-page-tabs-3" class="mtphr-galleries-page-tabs-page">';
@@ -195,7 +195,7 @@ function mtphr_gallery_settings_render_metabox() {
 
 function mtphr_gallery_render_thumb( $id ) {
 
-	$thumb = wp_get_attachment_image( $id, 'thumbnail' );
+	$thumb = mtphr_galleries_thumbnail( $id, false, false, 'thumbnail' );
 
   echo '<td class="mtphr-gallery-thumbnail">';
 		echo '<input type="hidden" name="_mtphr_gallery_resources[]" value="'.$id.'" />';

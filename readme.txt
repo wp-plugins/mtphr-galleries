@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 1.0.6 =
+* Fixed admin thumbnails
+
 = 1.0.5 =
 * Added order, orderby, categories, & tags attributes to archive shortcode.
 * Modified excerpt output in archive shortcode.
@@ -72,4 +75,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Multiple updates including additional shortcode attributes, custom field updates, and gallery data widget.
+Fixed admin thumbnails.
