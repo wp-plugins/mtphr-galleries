@@ -47,7 +47,7 @@ function mtphr_galleries_posttype() {
 		'show_in_menu' => true,
 		'query_var' => true,
 		'rewrite' => true,
-		'supports' => array( 'title', 'thumbnail', 'editor', 'excerpt', 'comments' ),
+		'supports' => array( 'title', 'thumbnail', 'editor', 'excerpt', 'comments', 'page-attributes' ),
 		'show_in_nav_menus' => true,
 		'rewrite' => array( 'slug' => $slug ),
 		'has_archive' => true
