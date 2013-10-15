@@ -1,12 +1,3 @@
-/**
- * Metaphor Gallery Slider
- * Date: 2/27/2013
- *
- * @author Metaphor Creations
- * @version 1.4
- *
- **/
-
 ( function($) {
 
 	var methods = {
@@ -43,21 +34,22 @@
 				}
 
 				// Create variables
-				var $gallery = $(this).find('.mtphr-gallery-resource-container'),
-					$nav_prev = $(this).find('.mtphr-gallery-nav-prev'),
-					$nav_next = $(this).find('.mtphr-gallery-nav-next'),
-					$nav_controls = $(this).find('.mtphr-gallery-navigation'),
-					gallery_width = $gallery.width(),
-					gallery_height = 0,
-					resources = [],
-					gallery_delay,
-					rotate_adjustment = settings.rotate_type,
-					after_change_timeout,
-					gallery_pause = false,
-					touch_down_x,
-					touch_down_y,
-					touch_link = '',
-					touch_target = '';
+				var $gallery_container = $(this),
+						$gallery = $(this).find('.mtphr-gallery-resource-container'),
+						$nav_prev = $(this).find('.mtphr-gallery-nav-prev'),
+						$nav_next = $(this).find('.mtphr-gallery-nav-next'),
+						$nav_controls = $(this).find('.mtphr-gallery-navigation'),
+						gallery_width = $gallery.width(),
+						gallery_height = 0,
+						resources = [],
+						gallery_delay,
+						rotate_adjustment = settings.rotate_type,
+						after_change_timeout,
+						gallery_pause = false,
+						touch_down_x,
+						touch_down_y,
+						touch_link = '',
+						touch_target = '';
 
 				// Add the vars
 				$gallery.data('vars', vars);
@@ -76,7 +68,7 @@
 		    /**
 		     * Setup the rotator
 		     *
-		     * @since 1.0.0
+		     * @since 1.0.4
 		     */
 		    function mtphr_galleries_rotator_setup() {
 
@@ -115,6 +107,11 @@
 					    }
 					  }
 					);
+
+					// Set the init class after the first load
+					setTimeout(function() {
+						$gallery_container.addClass('mtphr-gallery-init');
+					}, parseInt(settings.rotate_speed*100) );
 		    }
 
 		    /**
@@ -687,9 +684,54 @@
 
 
 
+				/* --------------------------------------------------------- */
+				/* !Gallery swipe - 1.0.5 */
+				/* --------------------------------------------------------- */
 
+				$gallery.swipe( {
+					triggerOnTouchEnd : true,
+					allowPageScroll: 'vertical',
+					swipeStatus : function(event, phase, direction, distance, duration, fingers) {
+						if ( phase =="end" ) {
+							if (direction == "right") {
 
+								if(vars.running) return false;
 
+					    	// Find the new resource
+					    	var new_resource = parseInt(vars.current-1);
+								if( new_resource < 0 ) {
+									new_resource = vars.count-1;
+								}
+								if( settings.rotate_type == 'slide_left' || settings.rotate_type == 'slide_right' ) {
+									rotate_adjustment = 'slide_right';
+								}
+								if( settings.nav_reverse ) {
+									if( settings.rotate_type == 'slide_down' ) {
+										rotate_adjustment = 'slide_up';
+									} else if( settings.rotate_type == 'slide_up' ) {
+										rotate_adjustment = 'slide_down';
+									}
+									vars.reverse = 1;
+								}
+								mtphr_galleries_update( new_resource );
+
+							} else if (direction == "left") {
+
+								if(vars.running) return false;
+
+					    	// Find the new resource
+					    	var new_resource = parseInt(vars.current + 1);
+								if( new_resource == vars.count ) {
+									new_resource = 0;
+								}
+								if( settings.rotate_type == 'slide_left' || settings.rotate_type == 'slide_right' ) {
+									rotate_adjustment = 'slide_left';
+								}
+								mtphr_galleries_update( new_resource );
+							}
+						}
+					}
+				});
 
 
 
@@ -721,7 +763,7 @@
 	/**
 	 * Setup the class
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 */
 	$.fn.mtphr_gallery_slider = function( method ) {
 

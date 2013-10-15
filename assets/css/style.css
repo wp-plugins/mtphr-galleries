@@ -162,6 +162,36 @@
 }
 
 /* --------------------------------------------------------- */
+/* !Likes */
+/* --------------------------------------------------------- */
+
+.mtphr-gallery-likes {
+	position: relative;
+	float: right;
+	font-size: 14px;
+	line-height: 18px;
+}
+.mtphr-gallery-likes.active {
+	cursor: default;
+}
+.mtphr-gallery-likes i {
+	color: #CCC;
+	margin-right: 8px;
+}
+.mtphr-gallery-likes.active i {
+	color: #FF0000;
+}
+.like-loader {
+	display: none;
+	position: absolute;
+	top: -1px;
+	right: 14px;
+	width: 16px;
+	height: 16px;
+	background: url(../images/like-loader.gif);
+}
+
+/* --------------------------------------------------------- */
 /* !Gallery slider */
 /* --------------------------------------------------------- */
 
@@ -179,13 +209,14 @@
 }
 .mtphr-gallery-wrapper {
 	position: relative;
+	min-height: 50px;
 }
 .mtphr-gallery-nav-prev,
 .mtphr-gallery-nav-next {
+	display: block;
 	position: absolute;
 	top: 50%;
 	z-index: 9999;
-	display: block;
 	width: 15px;
 	height: 30px;
 	background-image: url(../images/icons.png);
@@ -212,5 +243,43 @@
 	padding: 5px;
 }
 
+
+/* --------------------------------------------------------- */
+/* !Data widget */
+/* --------------------------------------------------------- */
+
+.mtphr-gallery-data table {
+	width: 100%;
+	border-spacing: 0;
+}
+.mtphr-gallery-data th,
+.mtphr-gallery-data td {
+	vertical-align: top;
+}
+.mtphr-gallery-data th {
+	padding-right: 5px;
+}
+.mtphr-gallery-link {
+	display: inline-block;
+}
+.mtphr-gallery-data table + a {
+	margin-top: 16px;
+}
+
+/* Clearfix
+------------------------------------------------------------ */
+
+.mtphr-clearfix {
+  *zoom: 1;
+}
+.mtphr-clearfix:before,
+.mtphr-clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.mtphr-clearfix:after {
+  clear: both;
+}
 
 
