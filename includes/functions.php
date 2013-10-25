@@ -510,9 +510,11 @@ function mtphr_galleries_remove_widget( $sidebars_widgets ) {
 
 		foreach( $sidebars_widgets as $s=>$sidebars ) {
 			$remove = array();
-			foreach( $sidebars as $i=>$widget ) {
-				if( strpos($widget,'mtphr-gallery-data') !== false ) {
-					$remove[] = $i;
+			if( is_array($sidebars) ) {
+				foreach( $sidebars as $i=>$widget ) {
+					if( strpos($widget,'mtphr-gallery-data') !== false ) {
+						$remove[] = $i;
+					}
 				}
 			}
 			$remove = array_reverse( $remove );

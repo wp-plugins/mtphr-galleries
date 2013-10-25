@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 1.0.7 =
+* Bug fixes
+
 = 1.0.6 =
 * Fixed admin thumbnails
 
@@ -75,4 +78,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Fixed admin thumbnails.
+Bug fixes.
