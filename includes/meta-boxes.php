@@ -14,7 +14,7 @@ add_action( 'add_meta_boxes', 'mtphr_galleries_rotator_metabox' );
 
 
 /* --------------------------------------------------------- */
-/* !Render the gallery settings metabox - 1.0.6 */
+/* !Render the gallery settings metabox - 1.0.8 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_settings_render_metabox() {
@@ -24,6 +24,7 @@ function mtphr_gallery_settings_render_metabox() {
 
 	$resources = get_post_meta( $post->ID, '_mtphr_gallery_resources', true );
 	$rotate_type = get_post_meta( $post->ID, '_mtphr_gallery_slider_type', true );
+	$rotate_type = ($rotate_type != '') ? $rotate_type : 'fade';
 	$dynamic_direction = get_post_meta( $post->ID, '_mtphr_gallery_slider_directional_nav_reverse', true ) ? 'on' : false;
 	$auto_rotate = get_post_meta( $post->ID, '_mtphr_gallery_slider_auto_rotate', true ) ? 'on' : false;
 	$rotate_delay = intval( get_post_meta( $post->ID, '_mtphr_gallery_slider_delay', true ) );
