@@ -34,6 +34,10 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 1.0.8 =
+* Metabox bug fix
+* Fixed menu icon
+
 = 1.0.7 =
 * Bug fixes
 
