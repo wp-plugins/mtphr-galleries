@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Get the settings - 1.0.5 */
+/* !Get the settings - 1.0.9 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_galleries_settings') ) {
@@ -15,7 +15,9 @@ function mtphr_galleries_settings_defaults() {
 	$defaults = array(
 		'slug' => 'galleries',
 		'singular_label' => __( 'Gallery', 'mtphr-galleries' ),
-		'plural_label' => __( 'Galleries', 'mtphr-galleries' )
+		'plural_label' => __( 'Galleries', 'mtphr-galleries' ),
+		'public' => 'true',
+		'has_archive' => 'false'
 	);
 	return $defaults;
 }
@@ -40,7 +42,7 @@ function mtphr_galleries_initialize_settings() {
 
 
 	/* --------------------------------------------------------- */
-	/* !Add the general settings - 1.0.5 */
+	/* !Add the general settings - 1.0.9 */
 	/* --------------------------------------------------------- */
 
 	/* Slug */
@@ -54,6 +56,14 @@ function mtphr_galleries_initialize_settings() {
 	/* Plural label */
 	$title = '<div class="mtphr-galleries-label-alt"><label>'.__( 'Plural label', 'mtphr-galleries' ).'</label><small>'.__('Set the plural label for the gallery post type and category', 'mtphr-galleries').'</small></div>';
 	add_settings_field( 'mtphr_galleries_settings_plural_label', $title, 'mtphr_galleries_settings_plural_label', 'mtphr_galleries_settings', 'mtphr_galleries_settings_section', array('settings' => $settings) );
+	
+	/* Public */
+	//$title = '<div class="mtphr-galleries-label-alt"><label>'.__( 'Public', 'mtphr-galleries' ).'</label><small>'.__('Set whether or not the post type should be public and has single posts', 'mtphr-galleries').'</small></div>';
+	//add_settings_field( 'mtphr_galleries_settings_public', $title, 'mtphr_galleries_settings_public', 'mtphr_galleries_settings', 'mtphr_galleries_settings_section', array('settings' => $settings) );
+	
+	/* Has archive */
+	$title = '<div class="mtphr-galleries-label-alt"><label>'.__( 'Has archive', 'mtphr-galleries' ).'</label><small>'.__('Set whether or not the post type has an archive page', 'mtphr-galleries').'</small></div>';
+	add_settings_field( 'mtphr_galleries_settings_has_archive', $title, 'mtphr_galleries_settings_has_archive', 'mtphr_galleries_settings', 'mtphr_galleries_settings_section', array('settings' => $settings) );
 
 
 	/* --------------------------------------------------------- */
@@ -112,6 +122,41 @@ function mtphr_galleries_settings_plural_label( $args ) {
 	echo '</div>';
 }
 }
+
+/* --------------------------------------------------------- */
+/* !Public - 1.0.9 */
+/* --------------------------------------------------------- */
+
+if( !function_exists('mtphr_galleries_settings_public') ) {
+function mtphr_galleries_settings_public( $args ) {
+
+	$settings = $args['settings'];
+	echo '<div id="mtphr_galleries_settings_public">';
+		echo '<select name="mtphr_galleries_settings[public]">';
+			echo '<option value="false" '.selected('false', $settings['public'], false).'>'.__('Not Public', 'mtphr-galleries').'</option>';
+			echo '<option value="true" '.selected('true', $settings['public'], false).'>'.__('Public', 'mtphr-galleries').'</option>';
+		echo '</select>';
+	echo '</div>';
+}
+}
+
+/* --------------------------------------------------------- */
+/* !Has archive - 1.0.9 */
+/* --------------------------------------------------------- */
+
+if( !function_exists('mtphr_galleries_settings_has_archive') ) {
+function mtphr_galleries_settings_has_archive( $args ) {
+
+	$settings = $args['settings'];
+	echo '<div id="mtphr_galleries_settings_has_archive">';
+		echo '<select name="mtphr_galleries_settings[has_archive]">';
+			echo '<option value="false" '.selected('false', $settings['has_archive'], false).'>'.__('No Archive Page', 'mtphr-galleries').'</option>';
+			echo '<option value="true" '.selected('true', $settings['has_archive'], false).'>'.__('Has Archive Page', 'mtphr-galleries').'</option>';
+		echo '</select>';
+	echo '</div>';
+}
+}
+
 
 
 

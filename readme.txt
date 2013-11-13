@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 1.0.9 =
+* Added setting for post type "has_archive" attribute
+
 = 1.0.8 =
 * Metabox bug fix
 * Fixed menu icon
@@ -82,4 +85,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Bug fixes.
+Added settings for post type "has_archive" attribute.
