@@ -12,7 +12,7 @@ add_action( 'wp_loaded','mtphr_galleries_posttype' );
 /**
  * Add the gallery post type
  *
- * @since 1.0.0
+ * @since 1.0.9
  */
 function mtphr_galleries_posttype() {
 
@@ -21,6 +21,8 @@ function mtphr_galleries_posttype() {
 	$slug = $settings['slug'];
 	$singular = $settings['singular_label'];
 	$plural = $settings['plural_label'];
+	$public = ( $settings['public'] == 'true' ) ? true : false;
+	$has_archive = ( $settings['has_archive'] == 'true' ) ? true : false;
 
 	// Create labels
 	$labels = array(
@@ -41,7 +43,7 @@ function mtphr_galleries_posttype() {
 	// Create the arguments
 	$args = array(
 		'labels' => $labels,
-		'public' => true,
+		'public' => $public,
 		'publicly_queryable' => true,
 		'show_ui' => true,
 		'show_in_menu' => true,
@@ -50,7 +52,7 @@ function mtphr_galleries_posttype() {
 		'supports' => array( 'title', 'thumbnail', 'editor', 'excerpt', 'comments', 'page-attributes' ),
 		'show_in_nav_menus' => true,
 		'rewrite' => array( 'slug' => $slug ),
-		'has_archive' => true
+		'has_archive' => $has_archive
 	);
 
 	// Register post type
