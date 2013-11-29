@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 1.1.0 =
+* CSS update to ensure image display in IE
+
 = 1.0.9 =
 * Added setting for post type "has_archive" attribute
 
@@ -85,4 +88,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Added settings for post type "has_archive" attribute.
+CSS update to ensure image display in IE

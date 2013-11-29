@@ -207,6 +207,11 @@
 	top: 0;
 	left: 0
 }
+.mtphr-gallery-resource img {
+	width: auto;
+	max-width: 100%;
+	height: auto;
+}
 .mtphr-gallery-wrapper {
 	position: relative;
 	min-height: 50px;
