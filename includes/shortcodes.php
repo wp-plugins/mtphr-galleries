@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Display the gallery archive - 1.1.1 */
+/* !Display the gallery archive - 1.1.2 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_archive_display( $atts, $content = null ) {
@@ -126,16 +126,17 @@ function mtphr_gallery_archive_display( $atts, $content = null ) {
 						case 'excerpt':
 
 							if( $excerpt_length > 0 ) {
+							
+								$excerpt = wp_html_excerpt( get_the_excerpt(), intval($excerpt_length) );
 	
 								$links = array();
 								preg_match('/{(.*?)\}/s', $excerpt_more, $links);
 								if( isset($links[0]) ) {
 									$more_link = '<a href="'.$permalink.'">'.$links[1].'</a>';
 									$more = preg_replace('/{(.*?)\}/s', $more_link, $excerpt_more);
+									$excerpt .= $more;
 								}
-								$excerpt = wp_html_excerpt( get_the_excerpt(), intval($excerpt_length) );
-								$excerpt .= $more;
-
+								
 								// Display the member excerpt
 								echo '<p class="mtphr-gallery-excerpt">'.apply_filters( 'mtphr_gallery_excerpt', $excerpt, $excerpt_length, $excerpt_more ).'</p>';
 							}
