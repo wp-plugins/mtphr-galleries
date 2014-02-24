@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Display the gallery archive - 1.1.2 */
+/* !Display the gallery archive - 2.0.0 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_archive_display( $atts, $content = null ) {

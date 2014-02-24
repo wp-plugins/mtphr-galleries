@@ -19,11 +19,25 @@ add_action( 'plugins_loaded', 'mtphr_galleries_localization' );
 
 
 
-/**
- * Return the resource meta
- *
- * @since 1.0.0
- */
+/* --------------------------------------------------------- */
+/* !Setup custom image sizes - 2.0.0 */
+/* --------------------------------------------------------- */
+
+function mtphr_galleries_image_sizes() {
+
+	if ( function_exists( 'add_image_size' ) ) {
+		add_image_size( 'mtphr-galleries-admin-thumb', 250, 160, true );
+		add_image_size( 'mtphr-galleries-image', 1200 );
+	}
+}
+add_action( 'plugins_loaded', 'mtphr_galleries_image_sizes' );
+
+
+ 
+/* --------------------------------------------------------- */
+/* !Return the resource meta - 1.0.0 */
+/* --------------------------------------------------------- */
+
 function mtphr_gallery_resource_meta( $post_id=false ) {
 	$post_id = $post_id ? $post_id : get_the_id();
 	return get_post_meta( $post_id, '_mtphr_gallery_resources', true );
@@ -32,51 +46,12 @@ function mtphr_gallery_resource_meta( $post_id=false ) {
 
 
 
-/**
- * Return the resource type
- *
- * @since 1.0.0
- */
-function mtphr_galleries_type( $url ) {
-	return mtphr_galleries_resource_type( $url );
-}
 
 
 
 
-/**
- * Display the gallery thumbnail
- *
- * @since 1.0.0
- */
-function mtphr_gallery_thumbnail( $post_id=false ) {
-	echo get_mtphr_gallery_thumbnail( $post_id );
-}
 
-/**
- * Return the gallery thumbnail
- *
- * @since 1.0.0
- */
-function get_mtphr_gallery_thumbnail( $post_id=false, $width=false, $height=false ) {
 
-	$post_id = $post_id ? $post_id : get_the_id();
-
-	// Return the featured image thumbnail
-	if( $att_id = get_post_thumbnail_id( $post_id ) ) {
-		return wp_get_attachment_image( $att_id, apply_filters('mtphr_galleries_thumbnail_size', 'thumbnail') );
-
-	} else {
-
-		// Return the first attachment thumbnail
-		$resources = mtphr_gallery_resource_meta( $post_id );
-		if( is_array($resources) && isset($resources[0]) ) {
-			return mtphr_galleries_thumbnail( $resources[0], false, false, apply_filters('mtphr_galleries_thumbnail_size', 'thumbnail') );
-		}
-	}
-
-	return false;
-}
 
 
 
@@ -120,7 +95,7 @@ function mtphr_gallery_count( $post_id=false ) {
 			}
 		}
 	}
-	return $count;
+	return apply_filters( 'mtphr_gallery_count', $count, $post_id );
 }
 
 
@@ -179,9 +154,9 @@ function get_mtphr_gallery( $post_id=false, $width=false, $height=false, $args=f
 		switch( $asset ) {
 
 			case 'like':
-				//if( isset($_mtphr_gallery_slider_control_nav) && $_mtphr_gallery_slider_control_nav ) {
+				if( isset($_mtphr_gallery_slider_control_nav) && $_mtphr_gallery_slider_control_nav ) {
 					$html .= get_mtphr_gallery_likes();
-				//}
+				}
 				break;
 
 			case 'navigation':
@@ -274,15 +249,14 @@ function get_mtphr_gallery_resources( $post_id=false, $width=false, $height=fals
 	$post_id = $post_id ? $post_id : get_the_id();
 
 	$resources = mtphr_gallery_resource_meta( $post_id );
-
 	if( is_array($resources) && isset($resources[0]) ) {
 
 		$gallery = '<div class="mtphr-gallery-resource-container">';
 		foreach( $resources as $i=>$resource ) {
-			if( mtphr_galleries_resource_type( $resource ) ) {
-				$div = '<div id="mtphr-gallery-resource-'.$i.'" class="mtphr-gallery-resource">'.get_mtphr_gallery_resource($resource, $width, $height).'</div>';
-				$gallery .=  apply_filters( 'mtphr_gallery_resource', $div, $resource, $width, $height, $post_id );
-			}
+			$div = '<div id="mtphr-gallery-resource-'.$i.'" class="mtphr-gallery-resource mtphr-gallery-resource-'.$resource['type'].'">';
+				$div .= get_mtphr_gallery_resource( $resource, $width, $height );
+			$div .= '</div>';
+			$gallery .=  apply_filters( 'mtphr_gallery_resource', $div, $resource, $width, $height, $post_id );
 		}
 		$gallery .= '</div>';
 		return $gallery;
@@ -314,118 +288,48 @@ function mtphr_galleries_compress_script( $str ) {
 
 
 /* --------------------------------------------------------- */
-/* !Get the gallery object type - 1.0.5 */
-/* --------------------------------------------------------- */
-
-if( !function_exists('mtphr_galleries_resource_type') ) {
-function mtphr_galleries_resource_type( $url ) {
-
-	$type = '';
-
-	$post = get_post( $url );
-	if( $post ) {
-		$type = substr($post->post_mime_type, 0, 5);
-	}
-
-	$url = esc_url_raw( $url );
-
-	if( $type == '' && strpos($url,'.jpg') !== false ) {
-    $type = 'image';
-	}
-	if( $type == '' && strpos($url,'.jpeg') !== false ) {
-    $type = 'image';
-	}
-	if( $type == '' && strpos($url,'.png') !== false ) {
-    $type = 'image';
-	}
-	if( $type == '' && strpos($url,'.gif') !== false ) {
-		$type = 'image';
-	}
-	if( $type == '' && strpos($url,'http://vimeo.com/') !== false ) {
-    $type = 'vimeo';
-	}
-	if( $type == '' && strpos($url,'http://www.youtube.com/watch?v=') !== false ) {
-    $type = 'youtube';
-	}
-	/*
-if( $type == '' && strpos($url,'.mp3') !== false ) {
-		$type = 'audio';
-	}
-	if( $type == '' && strpos($url,'.m4v') !== false ) {
-		$type = 'video';
-	}
-	if( $type == '' && strpos($url,'.mp4') !== false ) {
-		$type = 'video';
-	}
-	if( $type == '' && strpos($url,'.mov') !== false ) {
-		$type = 'video';
-	}
-	if( $type == '' && strpos($url,'.ogg') !== false ) {
-		$type = 'video';
-	}
-*/
-
-	if( $type == '' || $type == 'video' || $type == 'audio' ) {
-		return false;
-	} else {
-		return $type;
-	}
-}
-}
-if( !function_exists('mtphr_galleries_metaboxer_gallery_type') ) {
-function mtphr_galleries_metaboxer_gallery_type( $url ) {
-	mtphr_galleries_resource_type( $url );
-}
-}
-
-
-
-/* --------------------------------------------------------- */
 /* !Return the gallery resource 1.0.5 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_galleries_resource') ) {
-function mtphr_galleries_resource( $url, $width=false, $height=false, $size='medium' ) {
+function mtphr_galleries_resource( $resource, $width=false, $height=false, $size='mtphr-galleries-image' ) {
 
-	$type = '';
-
-	$post = get_post( $url );
-	if( $post ) {
-		$type = substr($post->post_mime_type, 0, 5);
-		if( $type == 'image' ) {
-			$img = wp_get_attachment_image_src( $post->ID, $size );
-			$url = $img[0];
-		}
-	}
-
-	// Get the resource type
-	if( $type == '' ) {
-		$type = mtphr_galleries_resource_type( $url );
-	}
-
-	switch( $type ) {
+	switch( $resource['type'] ) {
 		case 'image':
-			return '<img src="'.$url.'" width="'.$width.'" height="'.$height.'" />';
+			$post = get_post( $resource['id'] );
+			return wp_get_attachment_image( $post->ID, $size );			
 			break;
 
 		case 'video':
-			return false;
+			$post = get_post( $resource['id'] );
+			$poster = isset($resource['poster']) ? wp_get_attachment_image_src($resource['poster'], $size) : false;
+			$poster = $poster ? $poster[0] : '';
+			$video = '<video class="mtphr-galleries-video mtphr-galleries-mep" src="'.$post->guid.'" width="100%" height="100%" style="width:100%;height:100%;" poster="'.$poster.'">';
+				$video .= '<source src="'.$post->guid.'" type="'.$post->post_mime_type.'">';
+			$video .= '</video>';
+			return $video;
 
 		case 'audio':
-			return false;
+			$post = get_post( $resource['id'] );
+			$audio = '';
+			if( isset($resource['poster']) && $resource['poster'] != '' ) {
+				$audio .= wp_get_attachment_image( $resource['poster'], $size );	
+			}
+			$audio .= '<audio class="mtphr-galleries-audio mtphr-galleries-mep" src="'.$post->guid.'" width="100%" height="100%" style="width:100%;height:100%;">';
+				$audio .= '<source src="'.$post->guid.'" type="'.$post->post_mime_type.'">';
+			$audio .= '</audio>';
+			return $audio;
 
 		case 'vimeo':
 			$width = $width ? $width : 640;
 			$height = $height ? $height : intval( $width/16*9 );
-			$id = substr($url, 17);
-			return '<iframe src="http://player.vimeo.com/video/'.$id.'?title=0&amp;byline=0&amp;portrait=0" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+			return '<iframe class="mtphr-galleries-vimeo mtphr-galleries-iframe" src="http://player.vimeo.com/video/'.$resource['id'].'?title=0&amp;byline=0&amp;portrait=0" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 			break;
 
 		case 'youtube':
 			$width = $width ? $width : 640;
 			$height = $height ? $height : intval( $width/16*9 );
-			$id = substr($url, 31);
-			return '<iframe width="'.$width.'" height="'.$height.'" src="http://www.youtube.com/embed/'.$id.'?rel=0&showinfo=0?wmode=opaque" frameborder="0" allowfullscreen></iframe>';
+			return '<iframe class="mtphr-galleries-youtube mtphr-galleries-iframe" width="'.$width.'" height="'.$height.'" src="http://www.youtube.com/embed/'.$resource['id'].'?rel=0&showinfo=0?wmode=opaque" frameborder="0" allowfullscreen></iframe>';
 			break;
 	}
 
@@ -543,7 +447,7 @@ function get_mtphr_gallery_likes( $post_id = false ) {
 
 	$likes = get_post_meta( $post_id, '_mtphr_gallery_likes', true );
 	$class = isset($_COOKIE['mtphr_gallery_likes_'.sanitize_key(get_bloginfo('blogname')).'_'.$post_id]) ? 'mtphr-gallery-likes active' : 'mtphr-gallery-likes';
-	$html = '<a class="'.$class.'" href="#'.$post_id.'" rel="nofollow"><span class="like-loader"></span><i class="icon-heart"></i><span class="mtphr-gallery-likes-count">'.number_format(intval($likes)).'</span></a>';
+	$html = '<a class="'.$class.'" href="#'.$post_id.'" rel="nofollow"><span class="like-loader"></span><i class="mtphr-galleries-icon-like"></i><span class="mtphr-gallery-likes-count">'.number_format(intval($likes)).'</span></a>';
 	return $html;
 }
 }

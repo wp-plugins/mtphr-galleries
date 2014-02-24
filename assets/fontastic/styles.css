@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "metaphor-galleries";
+  src:url("fonts/metaphor-galleries.eot");
+  src:url("fonts/metaphor-galleries.eot?#iefix") format("embedded-opentype"),
+    url("fonts/metaphor-galleries.woff") format("woff"),
+    url("fonts/metaphor-galleries.ttf") format("truetype"),
+    url("fonts/metaphor-galleries.svg#metaphor-galleries") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "metaphor-galleries" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="mtphr-galleries-icon-"]:before,
+[class*=" mtphr-galleries-icon-"]:before {
+  font-family: "metaphor-galleries" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mtphr-galleries-icon-preview:before {
+  content: "a";
+}
+.mtphr-galleries-icon-delete-1:before {
+  content: "b";
+}
+.mtphr-galleries-icon-delete-2:before {
+  content: "c";
+}
+.mtphr-galleries-icon-video:before {
+  content: "d";
+}
+.mtphr-galleries-icon-audio:before {
+  content: "e";
+}
+.mtphr-galleries-icon-warning:before {
+  content: "f";
+}
+.mtphr-galleries-icon-youtube:before {
+  content: "g";
+}
+.mtphr-galleries-icon-vimeo:before {
+  content: "h";
+}
+.mtphr-galleries-icon-like:before {
+  content: "i";
+}

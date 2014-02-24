@@ -169,7 +169,7 @@
 	position: relative;
 	float: right;
 	font-size: 14px;
-	line-height: 18px;
+	text-decoration: none;
 }
 .mtphr-gallery-likes.active {
 	cursor: default;
@@ -178,17 +178,20 @@
 	color: #CCC;
 	margin-right: 8px;
 }
+.mtphr-gallery-likes i:before {
+	vertical-align: top;
+}
 .mtphr-gallery-likes.active i {
 	color: #FF0000;
 }
 .like-loader {
+	vertical-align: top;
 	display: none;
-	position: absolute;
-	top: -1px;
-	right: 14px;
 	width: 16px;
 	height: 16px;
 	background: url(../images/like-loader.gif);
+	margin-right: 8px;
+	margin-top: -1px;
 }
 
 /* --------------------------------------------------------- */
@@ -205,12 +208,15 @@
 	display: none;
 	position: absolute;
 	top: 0;
-	left: 0
+	left: 0;
+	line-height: 0;
+	text-align: center;
 }
 .mtphr-gallery-resource img {
 	width: auto;
 	max-width: 100%;
 	height: auto;
+	text-align: center;
 }
 .mtphr-gallery-wrapper {
 	position: relative;

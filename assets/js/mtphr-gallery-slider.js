@@ -20,18 +20,22 @@
 					after_load						: function(){}
 				};
 
-				// Useful variables. Play carefully.
-        var vars = {
-	        count						: 0,
-	        current					: 0,
-	        reverse					: 0,
-	        running					: 0
-        };
-
 				// Add any set options
 				if (options) {
 					$.extend(settings, options);
 				}
+				
+				// Useful variables. Play carefully.
+        var vars = {
+	        count						: 0,
+	        previous				: null,
+	        current					: 0,
+	        next						: null,
+	        reverse					: 0,
+	        running					: 0,
+	        speed						: settings.rotate_speed,
+	        ease						: settings.rotate_ease,
+        };
 
 				// Create variables
 				var $gallery_container = $(this),
@@ -79,6 +83,9 @@
 						resources.push($(this));
 
 					});
+					
+					// Setup the resource
+		    	mtphr_galleries_setup_resource( 0 );
 
 					// Resize the resources
 					mtphr_galleries_resize_resources();
@@ -147,9 +154,14 @@
 		    	if( settings.auto_rotate ) {
 			    	clearInterval( gallery_delay );
 			    }
+			    
+			    // Set the next variable
+			    vars.next = new_resource;
 
 		    	// Trigger the before change callback
-          settings.before_change.call( this, $gallery );
+          settings.before_change.call( $gallery_container, $gallery );
+          $gallery_container.trigger('mtphr_galleries_before_change_single', [resources, vars]);
+          $('body').trigger('mtphr_galleries_before_change', [$gallery_container, resources, vars]);
 
           // Set the running variable
           vars.running = 1;
@@ -160,13 +172,21 @@
 					// Rotate the new resource in
 					mtphr_galleries_in( new_resource );
 
-					// Set the current resource
+					// Set the previous & current resource
+					vars.previous = vars.current;
 					vars.current = new_resource;
 
 					// Trigger the after change callback
 					after_change_timeout = setTimeout( function() {
+					
+						mtphr_galleries_resize();
+					
+						// Clear the next variable
+						vars.next = null;
 
-						settings.after_change.call( this, $gallery );
+						settings.after_change.call( $gallery_container, $gallery );
+						$gallery_container.trigger('mtphr_galleries_after_change_single', [resources, vars]);
+						$('body').trigger('mtphr_galleries_after_change', [$gallery_container, resources, vars]);
 
 						// Reset the rotator type & variables
 						rotate_adjustment = settings.rotate_type;
@@ -193,6 +213,31 @@
           	$nav_controls.children('a[href="'+new_resource+'"]').addClass('active');
           }
 		    }
+		    
+		    /* --------------------------------------------------------- */
+		    /* !Setup the resources - 2.0.0 */
+		    /* --------------------------------------------------------- */
+		    
+		    function mtphr_galleries_setup_resource( new_resource ) {
+			    
+			    var $resource = $(resources[new_resource]);
+		    	if( $resource.hasClass('mtphr-gallery-resource-video') && $resource.find('.mejs-container').length == 0  ) {
+			    	$resource.children('video').mediaelementplayer({
+							width: '100%',
+							height: '100%',
+							videoVolume: 'horizontal'
+						});
+		    	} else if( $resource.hasClass('mtphr-gallery-resource-audio') && $resource.find('.mejs-container').length == 0  ) {
+			    	$resource.children('audio').mediaelementplayer({
+							width: '100%',
+							height: '100%'
+						});
+		    	} else if( $resource.hasClass('mtphr-gallery-resource-youtube') || $resource.hasClass('mtphr-gallery-resource-vimeo')  ) { 		
+		    		var w = $gallery.width(),
+								h = w/16*9;
+						$resource.find('iframe').width(w).height(h);
+		    	}
+		    }
 
 		    /**
 		     * Create the rotator in function calls
@@ -203,6 +248,9 @@
 
 		    	// Update the links
 		    	mtphr_galleries_update_links( new_resource );
+		    	
+		    	// Setup the resource
+		    	mtphr_galleries_setup_resource( new_resource );
 
 			    // Find the rotation type and create the dynamic rotation in function
 					var rotate_in_name = 'mtphr_galleries_'+rotate_adjustment+'_in';
@@ -597,64 +645,80 @@
 						$gallery.prepend($resource);
 					});
 			  }
+			  
+			  
+			  
+			  
+			  
+			  /* --------------------------------------------------------- */
+			  /* !Set the next item */
+			  /* --------------------------------------------------------- */
+			  
+			  function mtphr_galleries_next() {
+				  
+				  if(vars.running) return false;
+
+		    	// Find the new resource
+		    	var new_resource = parseInt(vars.current + 1);
+					if( new_resource == vars.count ) {
+						new_resource = 0;
+					}
+					mtphr_galleries_update( new_resource );
+			  }
+			  
+			  /* --------------------------------------------------------- */
+			  /* !Set the previous item */
+			  /* --------------------------------------------------------- */
+			  
+			  function mtphr_galleries_prev() {
+				  
+				  if(vars.running) return false;
+
+		    	// Find the new resource
+		    	var new_resource = parseInt(vars.current-1);
+					if( new_resource < 0 ) {
+						new_resource = vars.count-1;
+					}
+					if( settings.nav_reverse ) {
+						if( settings.rotate_type == 'slide_left' ) {
+							rotate_adjustment = 'slide_right';
+						} else if( settings.rotate_type == 'slide_right' ) {
+							rotate_adjustment = 'slide_left';
+						} else if( settings.rotate_type == 'slide_down' ) {
+							rotate_adjustment = 'slide_up';
+						} else if( settings.rotate_type == 'slide_up' ) {
+							rotate_adjustment = 'slide_down';
+						}
+						vars.reverse = 1;
+					}
+					mtphr_galleries_update( new_resource );
+			  }
 
 
 
-
-		    /**
-		     * Navigation clicks
-		     *
-		     * @since 1.0.0
-		     */
+		    /* --------------------------------------------------------- */
+		    /* !Listen for directional navigation clicks */
+		    /* --------------------------------------------------------- */
+		    
 		    if( $nav_prev ) {
 
 		    	$nav_prev.bind('click', function( e ) {
 		    		e.preventDefault();
-
-		    		if(vars.running) return false;
-
-			    	// Find the new resource
-			    	var new_resource = parseInt(vars.current-1);
-						if( new_resource < 0 ) {
-							new_resource = vars.count-1;
-						}
-						if( settings.nav_reverse ) {
-							if( settings.rotate_type == 'slide_left' ) {
-								rotate_adjustment = 'slide_right';
-							} else if( settings.rotate_type == 'slide_right' ) {
-								rotate_adjustment = 'slide_left';
-							} else if( settings.rotate_type == 'slide_down' ) {
-								rotate_adjustment = 'slide_up';
-							} else if( settings.rotate_type == 'slide_up' ) {
-								rotate_adjustment = 'slide_down';
-							}
-							vars.reverse = 1;
-						}
-						mtphr_galleries_update( new_resource );
+						mtphr_galleries_prev();
 		    	});
 
 		    	$nav_next.bind('click', function(e) {
 		    		e.preventDefault();
-
-		    		if(vars.running) return false;
-
-			    	// Find the new resource
-			    	var new_resource = parseInt(vars.current + 1);
-						if( new_resource == vars.count ) {
-							new_resource = 0;
-						}
-						mtphr_galleries_update( new_resource );
+						mtphr_galleries_next();
 		    	});
 		    }
 
 
 
-
-		    /**
-		     * Nav controls
-		     *
-		     * @since 1.0.0
-		     */
+		    /* --------------------------------------------------------- */
+		    /* !Listen for navigation clicks */
+		    /* --------------------------------------------------------- */
+		    
 		    $nav_controls.children('a').bind('click', function( e ) {
 	    		e.preventDefault();
 
@@ -732,6 +796,54 @@
 						}
 					}
 				});
+				
+				
+				
+				/* --------------------------------------------------------- */
+		    /* !Listen for external events - 2.0.0 */
+		    /* --------------------------------------------------------- */
+
+		    $gallery_container.on('mtphr_gallery_next', function( e ) {
+		    	mtphr_galleries_next();
+				});
+				
+				$gallery_container.on('mtphr_gallery_prev', function( e ) {
+		    	mtphr_galleries_prev();
+				});
+				
+				$gallery_container.on('mtphr_gallery_goto', function( e, pos ) {
+					console.log(pos);
+		    	mtphr_galleries_update( parseInt(pos) );
+				});
+
+				
+				
+				/* --------------------------------------------------------- */
+				/* !iFrame resize */
+				/* --------------------------------------------------------- */
+				
+				function mtphr_galleries_resize_iframe() {
+				
+					$('.mtphr-galleries-iframe').each( function() {
+						
+						var w = $(this).parent().width(),
+								h = w/16*9;
+								
+						$(this).width(w).height(h);
+					});
+				}
+				
+				
+				/* --------------------------------------------------------- */
+				/* !Resize */
+				/* --------------------------------------------------------- */
+				
+				function mtphr_galleries_resize() {
+					gallery_width = $gallery.width();
+			    mtphr_galleries_resize_resources();
+			    mtphr_galleries_resize_iframe();
+				}
+
 
 
 
@@ -743,15 +855,16 @@
 		     * @since 1.0.0
 		     */
 		    $(window).resize( function() {
-			    gallery_width = $gallery.width();
-			    mtphr_galleries_resize_resources();
+			    mtphr_galleries_resize();
 		    });
 
 
 
 
 		    // Trigger the afterLoad callback
-        settings.after_load.call(this, $gallery);
+        settings.after_load.call($gallery_container, $gallery);
+        $gallery_container.trigger('mtphr_galleries_after_load_single', [resources, vars]);
+        $('body').trigger('mtphr_galleries_after_load', [$gallery_container, resources, vars]);
 
 			});
 		}

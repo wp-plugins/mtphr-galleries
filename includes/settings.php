@@ -1,12 +1,16 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Get the settings - 1.0.9 */
+/* !Get the settings - 1.2.0 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_galleries_settings') ) {
 function mtphr_galleries_settings() {
 	$settings = get_option( 'mtphr_galleries_settings', array() );
+	
+	// Translate the settings
+	$settings = mtphr_galleries_translate_settings( $settings );
+
 	return wp_parse_args( $settings, mtphr_galleries_settings_defaults() );
 }
 }
@@ -38,7 +42,7 @@ function mtphr_galleries_initialize_settings() {
 	/* !Add the setting sections - 1.0.5 */
 	/* --------------------------------------------------------- */
 
-	add_settings_section( 'mtphr_galleries_settings_section', __( 'General settings', 'mtphr-galleries' ).'<input type="submit" class="button button-primary" value="'.__('Save Changes', 'mtphr-galleries').'">', false, 'mtphr_galleries_settings' );
+	add_settings_section( 'mtphr_galleries_settings_section', __( 'General settings', 'mtphr-galleries' ).'<input type="submit" class="button button-small" value="'.__('Save Changes', 'mtphr-galleries').'">', false, 'mtphr_galleries_settings' );
 
 
 	/* --------------------------------------------------------- */
@@ -161,18 +165,24 @@ function mtphr_galleries_settings_has_archive( $args ) {
 
 
 /* --------------------------------------------------------- */
-/* !Sanitize the setting fields - 1.0.5 */
+/* !Sanitize the setting fields - 1.2.0 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_galleries_settings_sanitize') ) {
 function mtphr_galleries_settings_sanitize( $fields ) {
 
+	// Create an array for WPML to translate
+	$wpml = array();
+
 	// General settings
 	if( isset($fields['slug']) ) {
 		$fields['slug'] = isset( $fields['slug'] ) ? sanitize_text_field($fields['slug']) : '';
-		$fields['singular_label'] = isset( $fields['singular_label'] ) ? sanitize_text_field($fields['singular_label']) : '';
-		$fields['plural_label'] = isset( $fields['plural_label'] ) ? sanitize_text_field($fields['plural_label']) : '';
+		$fields['singular_label'] = $wpml['singular_label'] = isset( $fields['singular_label'] ) ? sanitize_text_field($fields['singular_label']) : '';
+		$fields['plural_label'] = $wpml['plural_label'] = isset( $fields['plural_label'] ) ? sanitize_text_field($fields['plural_label']) : '';
 	}
+	
+	// Register translatable fields
+	mtphr_galleries_register_translate_settings( $wpml );
 
 	return wp_parse_args( $fields, get_option('mtphr_galleries_settings', array()) );
 }
