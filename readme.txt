@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: custom post type, galleries, gallery, photos, vimeo, youtube, slider
 Requires at least: 3.2
 Tested up to: 3.8.1
-Stable tag: 1.1.2
+Stable tag: /trunk/
 License: GPL2
 
 Creates a custom gallery post type to display your photos and videos.
@@ -33,6 +33,9 @@ Documentation is coming soon!
 1. Coming soon.
 
 == Changelog ==
+
+= 2.0.1 =
+* Fixed errors with 2.0.0 update
 
 = 2.0.0 =
 * Updated menu icon to dashicon

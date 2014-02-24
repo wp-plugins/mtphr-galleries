@@ -163,7 +163,11 @@ function get_mtphr_gallery_resource_thumbnail( $resource ) {
 	if( isset( $resource['type']) ) {
 		switch( $resource['type'] ) {
 			case 'image':
-				return wp_get_attachment_image( $resource['id'], apply_filters('mtphr_galleries_thumbnail_size', 'thumbnail') );
+				if( isset($resource['external']) ) {
+					return '<img src="'.$resource['id'].'" />';
+				} else {
+					return wp_get_attachment_image( $resource['id'], apply_filters('mtphr_galleries_thumbnail_size', 'thumbnail') );
+				}
 				break;
 			case 'audio':
 				if( isset( $resource['poster']) && $resource['poster'] != '' ) {
@@ -177,13 +181,19 @@ function get_mtphr_gallery_resource_thumbnail( $resource ) {
 				break;
 			case 'youtube':
 				if( isset( $resource['poster']) && $resource['poster'] != '' ) {
-					return '<img src="'.$resource['poster'].'" />';
+					return wp_get_attachment_image( $resource['poster'], apply_filters('mtphr_galleries_thumbnail_size', 'thumbnail') );
+				} else {
+					$url = 'http://img.youtube.com/vi/'.$resource['id'].'/0.jpg';
+					return '<img src="'.$url.'" />';
 				}
 				break;
 			case 'vimeo':
 				if( isset( $resource['poster']) && $resource['poster'] != '' ) {
-					return '<div class="mtphr-gallery-thumbnail"></div>';
-					return '<img src="'.$resource['poster'].'" />';
+					return wp_get_attachment_image( $resource['poster'], apply_filters('mtphr_galleries_thumbnail_size', 'thumbnail') );
+				} else {
+					$vimeo = simplexml_load_file('http://vimeo.com/api/v2/video/'.$resource['id'].'.xml');
+					$url = $vimeo->video->thumbnail_large;
+					return '<img src="'.$url.'" />';
 				}
 				break;
 		}
@@ -223,15 +233,26 @@ function mtphr_gallery_admin_delete_button() {
 if( !function_exists('mtphr_gallery_admin_render_image_field') ) {
 function mtphr_gallery_admin_render_image_field( $resource, $pos=0 ) {
 
+	$link = isset($resource['external']) ? $resource['id'] : get_edit_post_link($resource['id']);
+
   echo '<td class="mtphr-gallery-thumbnail mtphr-gallery-image-thumbnail">';
   	echo '<div class="mtphr-gallery-thumbnail-contents">';
 			echo '<input class="mtphr-galleries-id" type="hidden" name="_mtphr_gallery_resources['.$pos.'][id]" param="id" value="'.$resource['id'].'" />';
 			echo '<input class="mtphr-galleries-type" type="hidden" name="_mtphr_gallery_resources['.$pos.'][type]" param="type" value="image" />';
-			echo mtphr_gallery_admin_render_image_thumb( $resource['id'] );
+			if( isset($resource['external']) ) {
+				echo '<input class="mtphr-galleries-type" type="hidden" name="_mtphr_gallery_resources['.$pos.'][external]" param="external" value="true" />';
+				echo mtphr_gallery_admin_render_external_image_thumb( $resource['id'] );
+			} else {
+				echo mtphr_gallery_admin_render_image_thumb( $resource['id'] );
+			}
 			echo '<div class="mtphr-galleries-admin-thumb-title clearfix">';
-				echo '<span>'.get_the_title( $resource['id'] ).'</span>';
+				if( $title = get_the_title( $resource['id'] ) ) {
+					echo '<span>'.$title.'</span>';
+				} else {
+					echo '<span>'.$resource['id'].'</span>';
+				}
 				echo '<span class="mtphr-galleries-admin-thumb-title-type">'.__('Image', 'mtphr-galleries').'</span>';
-				echo mtphr_gallery_admin_preview_button( get_edit_post_link($resource['id']) );
+				echo mtphr_gallery_admin_preview_button( $link );
 				echo mtphr_gallery_admin_delete_button();
 			echo '</div>';
 		echo '</div>';
@@ -243,6 +264,13 @@ if( !function_exists('mtphr_gallery_admin_render_image_thumb') ) {
 function mtphr_gallery_admin_render_image_thumb( $thumbnail='' ) {
 
 	$thumb = wp_get_attachment_image( $thumbnail, 'mtphr-galleries-admin-thumb' );
+	echo '<div class="mtphr-galleries-admin-thumb">'.$thumb.'</div>';
+}
+}
+if( !function_exists('mtphr_gallery_admin_render_external_image_thumb') ) {
+function mtphr_gallery_admin_render_external_image_thumb( $thumbnail='' ) {
+
+	$thumb = '<img src="'.$thumbnail.'" />';
 	echo '<div class="mtphr-galleries-admin-thumb">'.$thumb.'</div>';
 }
 }
@@ -338,10 +366,10 @@ if( !function_exists('mtphr_gallery_admin_render_youtube_field') ) {
 function mtphr_gallery_admin_render_youtube_field( $resource, $pos=0 ) {
 	
 	$id = isset($resource['id']) ? $resource['id'] : '';
-	$title = isset($resource['title']) ? $resource['title'] : '';
+	$title = isset($resource['title']) ? $resource['title'] : $id;
 	$description = isset($resource['description']) ? $resource['description'] : '';
 	$thumbnail = isset($resource['poster']) ? $resource['poster'] : '';
-	$link = isset($resource['link']) ? $resource['link'] : '';
+	$link = isset($resource['link']) ? $resource['link'] : $id;
 
   echo '<td class="mtphr-gallery-thumbnail mtphr-gallery-youtube-thumbnail">';
   	echo '<div class="mtphr-gallery-thumbnail-contents">';
@@ -386,12 +414,12 @@ function mtphr_gallery_admin_render_youtube_thumb( $thumbnail='', $pos=0 ) {
 
 if( !function_exists('mtphr_gallery_admin_render_vimeo_field') ) {
 function mtphr_gallery_admin_render_vimeo_field( $resource, $pos=0 ) {
-	
+
 	$id = isset($resource['id']) ? $resource['id'] : '';
-	$title = isset($resource['title']) ? $resource['title'] : '';
+	$title = isset($resource['title']) ? $resource['title'] : $id;
 	$description = isset($resource['description']) ? $resource['description'] : '';
 	$thumbnail = isset($resource['poster']) ? $resource['poster'] : '';
-	$link = isset($resource['link']) ? $resource['link'] : '';
+	$link = isset($resource['link']) ? $resource['link'] : $id;
 
   echo '<td class="mtphr-gallery-thumbnail mtphr-gallery-vimeo-thumbnail">';
   	echo '<div class="mtphr-gallery-thumbnail-contents">';

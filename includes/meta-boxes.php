@@ -110,42 +110,12 @@ function mtphr_gallery_settings_render_metabox() {
 						if( is_array($resources) && count($resources) > 0 ) {
 							
 							foreach( $resources as $i=>$resource ) {
+
+								$resource = apply_filters( 'mtphr_galleries_metabox_resource_data', $resource );
 	
 								if( is_array($resource) && isset($resource['type']) && array_key_exists($resource['type'], $media_types) ) {			
 									if( function_exists('mtphr_gallery_admin_render_'.$resource['type'].'_field') ) {
 										call_user_func( 'mtphr_gallery_admin_render_'.$resource['type'].'_field', $resource, $i );
-									}
-									
-								} else {
-								
-									switch( mtphr_galleries_resource_type($resource) ) {		
-										case 'image': 
-											if( array_key_exists('image', $media_types) ) {
-												mtphr_gallery_admin_render_image_field( array('id'=>$resource), $i );
-											}
-											break;		
-										case 'video':
-											if( array_key_exists('video', $media_types) ) {
-												mtphr_gallery_admin_render_video_field( array('id'=>$resource), $i );
-											}
-											break;
-										case 'audio':
-											if( array_key_exists('audio', $media_types) ) {
-												mtphr_gallery_admin_render_audio_field( array('id'=>$resource), $i );
-											}
-											break;
-										case 'youtube':
-											if( array_key_exists('youtube', $media_types) ) {
-												mtphr_gallery_admin_render_youtube_field( array('id'=>$resource), $i );
-											}
-											break;
-										case 'vimeo':
-											if( array_key_exists('vimeo', $media_types) ) {
-												mtphr_gallery_admin_render_vimeo_field( array('id'=>$resource), $i );
-											}
-											break;	
-										default:
-											break;
 									}
 								}
 							}

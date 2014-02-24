@@ -812,7 +812,6 @@
 				});
 				
 				$gallery_container.on('mtphr_gallery_goto', function( e, pos ) {
-					console.log(pos);
 		    	mtphr_galleries_update( parseInt(pos) );
 				});
 
