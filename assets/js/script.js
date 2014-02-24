@@ -1,5 +1,9 @@
 jQuery( document ).ready( function($) {
-
+	
+	/* --------------------------------------------------------- */
+	/* !Likes functionality */
+	/* --------------------------------------------------------- */
+	
 	$('.mtphr-gallery-likes').click( function(e) {
 		e.preventDefault();
 
@@ -10,7 +14,7 @@ jQuery( document ).ready( function($) {
 		postid = postid.substr( 1, postid.length );
 
 		$icon.hide();
-		$loader.show().css('display', 'block');
+		$loader.show().css('display', 'inline-block');
 
 		// Create the display
 		var data = {
@@ -22,7 +26,7 @@ jQuery( document ).ready( function($) {
 			$button.addClass('active');
 			$button.children('.mtphr-gallery-likes-count').text(response);
 			$icon.fadeIn();
-			$loader.fadeOut();
+			$loader.hide();
 		});
 	});
 

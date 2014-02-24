@@ -3,7 +3,7 @@ Contributors: metaphorcreations
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TCAJHP4AJ392N
 Tags: custom post type, galleries, gallery, photos, vimeo, youtube, slider
 Requires at least: 3.2
-Tested up to: 3.8
+Tested up to: 3.8.1
 Stable tag: /trunk/
 License: GPL2
 
@@ -33,6 +33,18 @@ Documentation is coming soon!
 1. Coming soon.
 
 == Changelog ==
+
+= 2.0.0 =
+* Updated menu icon to dashicon
+* Updated admin style for WP 8
+* Switched to fontastic icon font
+* Completely reconfigured gallery resource data
+* Added mtphr_galleries_after_load jQuery trigger
+* Added mtphr_galleries_before_change jQuery trigger
+* Added mtphr_galleries_after_change jQuery trigger
+* Added next, speed, and easse variables to jQuery
+* Added translatable text to entry meta headings
+* Updated to Bootstrap 3.1.1
 
 = 1.1.2 =
 * Fixed excerpt more link bug in archive shortcode
@@ -95,4 +107,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Bug fixes.
+Major updates to gallery attachments. Added WPML support and other updates. See Changelog.

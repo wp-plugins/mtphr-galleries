@@ -10,7 +10,7 @@ function mtphr_galleries_set_like_columns( $columns ){
 	$i = 0;
 	foreach( $columns as $key => $value ) {
 		if( $key == 'date' ) {
-			$new_columns['mtphr_gallery_likes'] = __( '<i class="icon-heart"></i>', 'mtphr-galleries' );
+			$new_columns['mtphr_gallery_likes'] = __( '<i class="mtphr-galleries-icon-like"></i>', 'mtphr-galleries' );
 		}
 		$new_columns[$key] = $value;
 		$i++;

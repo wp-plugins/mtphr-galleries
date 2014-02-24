@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Load the admin scripts - 1.0.8 */
+/* !Load the admin scripts - 2.0.0 */
 /* --------------------------------------------------------- */
 
 function mtphr_galleries_admin_scripts( $hook ) {
@@ -29,9 +29,9 @@ function mtphr_galleries_admin_scripts( $hook ) {
 		wp_enqueue_script( 'jquery-ui-tabs' );
 
 
-		// Register Font Awesome
-	  wp_register_style( 'font-awesome', MTPHR_GALLERIES_URL.'/assets/css/font-awesome.min.css', false, MTPHR_GALLERIES_VERSION );
-	  wp_enqueue_style( 'font-awesome' );
+		// Register icon font
+	  wp_register_style( 'mtphr-galleries-font', MTPHR_GALLERIES_URL.'/assets/fontastic/styles.css', false, MTPHR_GALLERIES_VERSION );
+	  wp_enqueue_style( 'mtphr-galleries-font' );
 
 		// Load the admin scripts
 		wp_register_script( 'mtphr-galleries', MTPHR_GALLERIES_URL.'/assets/js/script-admin.js', false, MTPHR_GALLERIES_VERSION, true );
@@ -39,7 +39,17 @@ function mtphr_galleries_admin_scripts( $hook ) {
 		wp_localize_script( 'mtphr-galleries', 'mtphr_galleries_vars', array(
 				'security' => wp_create_nonce( 'mtphr_galleries' ),
 				'img_title' => __( 'Upload or select images', 'mtphr-galleries' ),
-				'img_button' => __( 'Insert Image(s)', 'mtphr-galleries' )
+				'img_button' => __( 'Insert Image(s)', 'mtphr-galleries' ),
+				'poster_title' => __( 'Upload or select a poster image', 'mtphr-galleries' ),
+				'poster_button' => __( 'Insert Poster Image', 'mtphr-galleries' ),
+				'add_poster' => __( 'Add Poster Image', 'mtphr-galleries' ),
+				'remove_poster' => __( 'Remove Poster Image', 'mtphr-galleries' ),
+				'video_title' => __( 'Upload or select videos', 'mtphr-galleries' ),
+				'video_button' => __( 'Insert Video(s)', 'mtphr-galleries' ),
+				'audio_title' => __( 'Upload or select Audio Files', 'mtphr-galleries' ),
+				'audio_button' => __( 'Insert Audio File(s)', 'mtphr-galleries' ),
+				'youtube_input_title' => __( 'YouTube Video URL or ID', 'mtphr-galleries' ),
+				'vimeo_input_title' => __( 'Vimeo Video URL or ID', 'mtphr-galleries' )
 			)
 		);
 	}
@@ -57,18 +67,16 @@ add_action( 'admin_enqueue_scripts', 'mtphr_galleries_admin_scripts' );
 
 
 /* --------------------------------------------------------- */
-/* !Load the front-end scripts - 1.0.5 */
+/* !Load the front-end scripts - 2.0.0 */
 /* --------------------------------------------------------- */
 
 function mtphr_galleries_scripts() {
 
 	global $wp_styles;
 
-	// Register Font Awesome
-  wp_register_style( 'font-awesome', MTPHR_GALLERIES_URL.'/assets/css/font-awesome.min.css', false, MTPHR_GALLERIES_VERSION );
-  wp_enqueue_style( 'font-awesome' );
-  wp_enqueue_style( 'font-awesome-ie7', MTPHR_GALLERIES_URL.'/assets/css/font-awesome-ie7.min.css', false, MTPHR_GALLERIES_VERSION );
-	$wp_styles->add_data( 'font-awesome-ie7', 'conditional', 'IE 7' );
+	// Register icon font
+  wp_register_style( 'mtphr-galleries-font', MTPHR_GALLERIES_URL.'/assets/fontastic/styles.css', false, MTPHR_GALLERIES_VERSION );
+  wp_enqueue_style( 'mtphr-galleries-font' );
 
 	// Load the style sheet
 	wp_register_style( 'mtphr-galleries', MTPHR_GALLERIES_URL.'/assets/css/style.css', false, MTPHR_GALLERIES_VERSION );
@@ -79,6 +87,10 @@ function mtphr_galleries_scripts() {
 
 	// Add jQuery easing
   wp_register_script( 'jquery-easing', MTPHR_GALLERIES_URL.'/assets/js/jquery.easing.1.3.js', array('jquery'), MTPHR_GALLERIES_VERSION, true );
+  
+  // Add media element
+	wp_enqueue_style( 'wp-mediaelement' );
+	wp_enqueue_script( 'wp-mediaelement' );
 
 	// Add jQuery gallery class
 	wp_register_script( 'mtphr-gallery-slider', MTPHR_GALLERIES_URL.'/assets/js/mtphr-gallery-slider.js', array('jquery', 'jquery-easing'), MTPHR_GALLERIES_VERSION, true );
