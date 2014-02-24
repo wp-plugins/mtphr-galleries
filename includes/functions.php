@@ -253,6 +253,7 @@ function get_mtphr_gallery_resources( $post_id=false, $width=false, $height=fals
 
 		$gallery = '<div class="mtphr-gallery-resource-container">';
 		foreach( $resources as $i=>$resource ) {
+			$resource = apply_filters( 'mtphr_galleries_resource_data', $resource );
 			$div = '<div id="mtphr-gallery-resource-'.$i.'" class="mtphr-gallery-resource mtphr-gallery-resource-'.$resource['type'].'">';
 				$div .= get_mtphr_gallery_resource( $resource, $width, $height );
 			$div .= '</div>';
@@ -293,11 +294,15 @@ function mtphr_galleries_compress_script( $str ) {
 
 if( !function_exists('mtphr_galleries_resource') ) {
 function mtphr_galleries_resource( $resource, $width=false, $height=false, $size='mtphr-galleries-image' ) {
-
+	
 	switch( $resource['type'] ) {
 		case 'image':
-			$post = get_post( $resource['id'] );
-			return wp_get_attachment_image( $post->ID, $size );			
+			if( isset($resource['external']) ) {
+				return '<img src="'.$resource['id'].'" />';
+			} else {
+				$post = get_post( $resource['id'] );
+				return wp_get_attachment_image( $post->ID, $size );	
+			}		
 			break;
 
 		case 'video':

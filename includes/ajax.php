@@ -81,8 +81,7 @@ function mtphr_gallery_external_thumb_ajax() {
 			if( isset($value_array['v']) ) {
 				$value = $value_array['v'];
 			} else {
-				reset( $value_array );
-				$value = key( $value_array );
+				$value = reset( $value_array );
 			}
 			
 			$response = wp_remote_get( 'http://gdata.youtube.com/feeds/api/videos/'.$value.'?v=2&alt=json' );
