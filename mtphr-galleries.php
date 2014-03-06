@@ -2,7 +2,7 @@
 /*
 Plugin Name: Metaphor Galleries
 Description: Adds a custom post type to easily create media galleries to add to your site. Add a gallery archive or single gallery to any page with shortcodes.
-Version: 2.0.1
+Version: 2.0.2
 Author: Metaphor Creations
 Author URI: http://www.metaphorcreations.com
 License: GPL2
@@ -40,9 +40,9 @@ The icons are licensed under a Creative Commons Attribution
 
 /**Define Widget Constants */
 if ( WP_DEBUG ) {
-	define ( 'MTPHR_GALLERIES_VERSION', '2.0.1-'.time() );
+	define ( 'MTPHR_GALLERIES_VERSION', '2.0.2-'.time() );
 } else {
-	define ( 'MTPHR_GALLERIES_VERSION', '2.0.1' );
+	define ( 'MTPHR_GALLERIES_VERSION', '2.0.2' );
 }
 define ( 'MTPHR_GALLERIES_DIR', plugin_dir_path(__FILE__) );
 define ( 'MTPHR_GALLERIES_URL', plugins_url().'/mtphr-galleries' );
@@ -55,7 +55,8 @@ require_once( MTPHR_GALLERIES_DIR.'includes/post-types.php' );
 require_once( MTPHR_GALLERIES_DIR.'includes/taxonomies.php' );
 require_once( MTPHR_GALLERIES_DIR.'includes/filters.php' );
 require_once( MTPHR_GALLERIES_DIR.'includes/functions.php' );
-require_once( MTPHR_GALLERIES_DIR.'includes/widget.php' );
+require_once( MTPHR_GALLERIES_DIR.'includes/widget-categories.php' );
+require_once( MTPHR_GALLERIES_DIR.'includes/widget-data.php' );
 require_once( MTPHR_GALLERIES_DIR.'includes/shortcodes.php' );
 require_once( MTPHR_GALLERIES_DIR.'includes/display.php' );
 require_once( MTPHR_GALLERIES_DIR.'includes/helpers.php' );
