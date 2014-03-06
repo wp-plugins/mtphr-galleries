@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 2.0.2 =
+* Moved widget code into separate files to fix random bug
+
 = 2.0.1 =
 * Fixed errors with 2.0.0 update
 
@@ -110,4 +113,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Major updates to gallery attachments. Added WPML support and other updates. See Changelog.
+Moved widget code into separate files to fix random bug
