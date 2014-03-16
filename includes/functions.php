@@ -68,10 +68,10 @@ function mtphr_gallery_resource( $url ) {
 /**
  * Return the gallery resource
  *
- * @since 1.0.0
+ * @since 2.0.3
  */
 function get_mtphr_gallery_resource( $url, $width=false, $height=false ) {
-	return mtphr_galleries_resource( $url, $width, $height, apply_filters('mtphr_galleries_thumbnail_size', 'large') );
+	return mtphr_galleries_resource( $url, $width, $height, apply_filters('mtphr_galleries_resource_size', 'large') );
 }
 
 

@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 2.0.3 =
+* Fixed resource size filter
+
 = 2.0.2 =
 * Moved widget code into separate files to fix random bug
 
@@ -113,4 +116,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Moved widget code into separate files to fix random bug
+Fixed resource size filter
