@@ -227,20 +227,20 @@ function mtphr_gallery_admin_delete_button() {
 
 
 /* --------------------------------------------------------- */
-/* !Render an image thumb - 2.0.0 */
+/* !Render an image thumb - 2.0.3 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_gallery_admin_render_image_field') ) {
-function mtphr_gallery_admin_render_image_field( $resource, $pos=0 ) {
+function mtphr_gallery_admin_render_image_field( $resource, $pos=0, $name_resources ) {
 
 	$link = isset($resource['external']) ? $resource['id'] : get_edit_post_link($resource['id']);
 
   echo '<td class="mtphr-gallery-thumbnail mtphr-gallery-image-thumbnail">';
   	echo '<div class="mtphr-gallery-thumbnail-contents">';
-			echo '<input class="mtphr-galleries-id" type="hidden" name="_mtphr_gallery_resources['.$pos.'][id]" param="id" value="'.$resource['id'].'" />';
-			echo '<input class="mtphr-galleries-type" type="hidden" name="_mtphr_gallery_resources['.$pos.'][type]" param="type" value="image" />';
+			echo '<input class="mtphr-galleries-id" type="hidden" name="'.$name_resources.'['.$pos.'][id]" data-prefix="'.$name_resources.'" data-param="id" value="'.$resource['id'].'" />';
+			echo '<input class="mtphr-galleries-type" type="hidden" name="'.$name_resources.'['.$pos.'][type]" data-prefix="'.$name_resources.'" data-param="type" value="image" />';
 			if( isset($resource['external']) ) {
-				echo '<input class="mtphr-galleries-type" type="hidden" name="_mtphr_gallery_resources['.$pos.'][external]" param="external" value="true" />';
+				echo '<input class="mtphr-galleries-type" type="hidden" name="'.$name_resources.'['.$pos.'][external]" data-prefix="'.$name_resources.'" data-param="external" value="true" />';
 				echo mtphr_gallery_admin_render_external_image_thumb( $resource['id'] );
 			} else {
 				echo mtphr_gallery_admin_render_image_thumb( $resource['id'] );
@@ -277,20 +277,20 @@ function mtphr_gallery_admin_render_external_image_thumb( $thumbnail='' ) {
 
 
 /* --------------------------------------------------------- */
-/* !Render a video thumb - 2.0.0 */
+/* !Render a video thumb - 2.0.3 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_gallery_admin_render_video_field') ) {
-function mtphr_gallery_admin_render_video_field( $resource, $pos=0 ) {
+function mtphr_gallery_admin_render_video_field( $resource, $pos=0, $name_resources ) {
 
 	$thumbnail = isset($resource['poster']) ? $resource['poster'] : '';
 
   echo '<td class="mtphr-gallery-thumbnail mtphr-gallery-video-thumbnail">';
   	echo '<div class="mtphr-gallery-thumbnail-contents">';
-			echo '<input class="mtphr-galleries-id" type="hidden" name="_mtphr_gallery_resources['.$pos.'][id]" param="id" value="'.$resource['id'].'" />';
-			echo '<input class="mtphr-galleries-type" type="hidden" name="_mtphr_gallery_resources['.$pos.'][type]" param="type" value="video" />';
-			echo '<input class="mtphr-galleries-poster" type="hidden" name="_mtphr_gallery_resources['.$pos.'][poster]" param="poster" value="'.$thumbnail.'" />';
-			echo mtphr_gallery_admin_render_video_thumb( $thumbnail );
+			echo '<input class="mtphr-galleries-id" type="hidden" name="'.$name_resources.'['.$pos.'][id]" data-prefix="'.$name_resources.'" data-param="id" value="'.$resource['id'].'" />';
+			echo '<input class="mtphr-galleries-type" type="hidden" name="'.$name_resources.'['.$pos.'][type]" data-prefix="'.$name_resources.'" data-param="type" value="video" />';
+			echo '<input class="mtphr-galleries-poster" type="hidden" name="'.$name_resources.'['.$pos.'][poster]" data-prefix="'.$name_resources.'" data-param="poster" value="'.$thumbnail.'" />';
+			echo mtphr_gallery_admin_render_video_thumb( $thumbnail, $name_resources );
 			echo '<div class="mtphr-galleries-admin-thumb-title clearfix">';
 				echo '<span>'.get_the_title( $resource['id'] ).'</span>';
 				echo '<span class="mtphr-galleries-admin-thumb-title-type">'.__('Video', 'mtphr-galleries').'</span>';
@@ -303,11 +303,11 @@ function mtphr_gallery_admin_render_video_field( $resource, $pos=0 ) {
 }
 
 if( !function_exists('mtphr_gallery_admin_render_video_thumb') ) {
-function mtphr_gallery_admin_render_video_thumb( $thumbnail='' ) {
+function mtphr_gallery_admin_render_video_thumb( $thumbnail='', $name_resources='' ) {
 	
 	if( $thumbnail == ''  ) {
 		$thumb = '<i class="mtphr-galleries-icon-video"></i>';
-		$thumb .= '<a class="mtphr-galleries-poster-button add-poster" href="#">'.__('Add Poster Image', 'mtphr-galleries').'</a>';
+		$thumb .= '<a class="mtphr-galleries-poster-button add-poster" href="#" data-prefix="'.$name_resources.'">'.__('Add Poster Image', 'mtphr-galleries').'</a>';
 	} else {
 		$thumb = wp_get_attachment_image( $thumbnail, 'mtphr-galleries-admin-thumb' );
 		$thumb .= '<a class="mtphr-galleries-poster-button remove-poster" href="#">'.__('Remove Poster Image', 'mtphr-galleries').'</a>';
@@ -318,20 +318,20 @@ function mtphr_gallery_admin_render_video_thumb( $thumbnail='' ) {
 
 
 /* --------------------------------------------------------- */
-/* !Render a audio thumb - 2.0.0 */
+/* !Render a audio thumb - 2.0.3 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_gallery_admin_render_audio_field') ) {
-function mtphr_gallery_admin_render_audio_field( $resource, $pos=0 ) {
+function mtphr_gallery_admin_render_audio_field( $resource, $pos=0, $name_resources ) {
 
 	$thumbnail = isset($resource['poster']) ? $resource['poster'] : '';
 
   echo '<td class="mtphr-gallery-thumbnail mtphr-gallery-audio-thumbnail">';
   	echo '<div class="mtphr-gallery-thumbnail-contents">';
-			echo '<input class="mtphr-galleries-id" type="hidden" name="_mtphr_gallery_resources['.$pos.'][id]" param="id" value="'.$resource['id'].'" />';
-			echo '<input class="mtphr-galleries-type" type="hidden" name="_mtphr_gallery_resources['.$pos.'][type]" param="type" value="audio" />';
-			echo '<input class="mtphr-galleries-poster" type="hidden" name="_mtphr_gallery_resources['.$pos.'][poster]" param="poster" value="'.$thumbnail.'" />';
-			echo mtphr_gallery_admin_render_audio_thumb( $thumbnail );
+			echo '<input class="mtphr-galleries-id" type="hidden" name="'.$name_resources.'['.$pos.'][id]" data-prefix="'.$name_resources.'" data-param="id" value="'.$resource['id'].'" />';
+			echo '<input class="mtphr-galleries-type" type="hidden" name="'.$name_resources.'['.$pos.'][type]" data-prefix="'.$name_resources.'" data-param="type" value="audio" />';
+			echo '<input class="mtphr-galleries-poster" type="hidden" name="'.$name_resources.'['.$pos.'][poster]" data-prefix="'.$name_resources.'" data-param="poster" value="'.$thumbnail.'" />';
+			echo mtphr_gallery_admin_render_audio_thumb( $thumbnail, $name_resources );
 			echo '<div class="mtphr-galleries-admin-thumb-title clearfix">';
 				echo '<span>'.get_the_title( $resource['id'] ).'</span>';
 				echo '<span class="mtphr-galleries-admin-thumb-title-type">'.__('Audio', 'mtphr-galleries').'</span>';
@@ -344,11 +344,11 @@ function mtphr_gallery_admin_render_audio_field( $resource, $pos=0 ) {
 }
 
 if( !function_exists('mtphr_gallery_admin_render_audio_thumb') ) {
-function mtphr_gallery_admin_render_audio_thumb( $thumbnail='' ) {
+function mtphr_gallery_admin_render_audio_thumb( $thumbnail='', $name_resources='' ) {
 	
 	if( $thumbnail == ''  ) {
 		$thumb = '<i class="mtphr-galleries-icon-audio"></i>';
-		$thumb .= '<a class="mtphr-galleries-poster-button add-poster" href="#">'.__('Add Poster Image', 'mtphr-galleries').'</a>';
+		$thumb .= '<a class="mtphr-galleries-poster-button add-poster" href="#" data-prefix="'.$name_resources.'">'.__('Add Poster Image', 'mtphr-galleries').'</a>';
 	} else {
 		$thumb = wp_get_attachment_image( $thumbnail, 'mtphr-galleries-admin-thumb' );
 		$thumb .= '<a class="mtphr-galleries-poster-button remove-poster" href="#">'.__('Remove Poster Image', 'mtphr-galleries').'</a>';
@@ -359,11 +359,11 @@ function mtphr_gallery_admin_render_audio_thumb( $thumbnail='' ) {
 
 
 /* --------------------------------------------------------- */
-/* !Render a youtube thumb - 2.0.0 */
+/* !Render a youtube thumb - 2.0.3 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_gallery_admin_render_youtube_field') ) {
-function mtphr_gallery_admin_render_youtube_field( $resource, $pos=0 ) {
+function mtphr_gallery_admin_render_youtube_field( $resource, $pos=0, $name_resources ) {
 	
 	$id = isset($resource['id']) ? $resource['id'] : '';
 	$title = isset($resource['title']) ? $resource['title'] : $id;
@@ -373,12 +373,12 @@ function mtphr_gallery_admin_render_youtube_field( $resource, $pos=0 ) {
 
   echo '<td class="mtphr-gallery-thumbnail mtphr-gallery-youtube-thumbnail">';
   	echo '<div class="mtphr-gallery-thumbnail-contents">';
-			echo '<input class="mtphr-galleries-id" type="hidden" name="_mtphr_gallery_resources['.$pos.'][id]" param="id" value="'.$id.'" />';
-			echo '<input class="mtphr-galleries-title" type="hidden" name="_mtphr_gallery_resources['.$pos.'][title]" param="title" value="'.$title.'" />';
-			echo '<input class="mtphr-galleries-description" type="hidden" name="_mtphr_gallery_resources['.$pos.'][description]" param="description" value="'.$description.'" />';
-			echo '<input class="mtphr-galleries-poster" type="hidden" name="_mtphr_gallery_resources['.$pos.'][poster]" param="poster" value="'.$thumbnail.'" />';
-			echo '<input class="mtphr-galleries-link" type="hidden" name="_mtphr_gallery_resources['.$pos.'][link]" param="link" value="'.$link.'" />';
-			echo '<input class="mtphr-galleries-type" type="hidden" name="_mtphr_gallery_resources['.$pos.'][type]" param="type" value="youtube" />';
+			echo '<input class="mtphr-galleries-id" type="hidden" name="'.$name_resources.'['.$pos.'][id]" data-prefix="'.$name_resources.'" data-param="id" value="'.$id.'" />';
+			echo '<input class="mtphr-galleries-title" type="hidden" name="'.$name_resources.'['.$pos.'][title]" data-prefix="'.$name_resources.'" data-param="title" value="'.$title.'" />';
+			echo '<input class="mtphr-galleries-description" type="hidden" name="'.$name_resources.'['.$pos.'][description]" data-prefix="'.$name_resources.'" data-param="description" value="'.$description.'" />';
+			echo '<input class="mtphr-galleries-poster" type="hidden" name="'.$name_resources.'['.$pos.'][poster]" data-prefix="'.$name_resources.'" data-param="poster" value="'.$thumbnail.'" />';
+			echo '<input class="mtphr-galleries-link" type="hidden" name="'.$name_resources.'['.$pos.'][link]" data-prefix="'.$name_resources.'" data-param="link" value="'.$link.'" />';
+			echo '<input class="mtphr-galleries-type" type="hidden" name="'.$name_resources.'['.$pos.'][type]" data-prefix="'.$name_resources.'" data-param="type" value="youtube" />';
 			echo '<div class="mtphr-galleries-admin-thumb">'.mtphr_gallery_admin_render_youtube_thumb( $thumbnail ).'</div>';
 			echo '<div class="mtphr-galleries-admin-thumb-title clearfix">';
 				echo '<span>'.$title.'</span>';
@@ -409,11 +409,11 @@ function mtphr_gallery_admin_render_youtube_thumb( $thumbnail='', $pos=0 ) {
 
 
 /* --------------------------------------------------------- */
-/* !Render a vimeo thumb - 2.0.0 */
+/* !Render a vimeo thumb - 2.0.3 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_gallery_admin_render_vimeo_field') ) {
-function mtphr_gallery_admin_render_vimeo_field( $resource, $pos=0 ) {
+function mtphr_gallery_admin_render_vimeo_field( $resource, $pos=0, $name_resources ) {
 
 	$id = isset($resource['id']) ? $resource['id'] : '';
 	$title = isset($resource['title']) ? $resource['title'] : $id;
@@ -423,12 +423,12 @@ function mtphr_gallery_admin_render_vimeo_field( $resource, $pos=0 ) {
 
   echo '<td class="mtphr-gallery-thumbnail mtphr-gallery-vimeo-thumbnail">';
   	echo '<div class="mtphr-gallery-thumbnail-contents">';
-			echo '<input class="mtphr-galleries-id" type="hidden" name="_mtphr_gallery_resources['.$pos.'][id]" param="id" value="'.$id.'" />';
-			echo '<input class="mtphr-galleries-title" type="hidden" name="_mtphr_gallery_resources['.$pos.'][title]" param="title" value="'.$title.'" />';
-			echo '<input class="mtphr-galleries-description" type="hidden" name="_mtphr_gallery_resources['.$pos.'][description]" param="description" value="'.$description.'" />';
-			echo '<input class="mtphr-galleries-poster" type="hidden" name="_mtphr_gallery_resources['.$pos.'][poster]" param="poster" value="'.$thumbnail.'" />';
-			echo '<input class="mtphr-galleries-link" type="hidden" name="_mtphr_gallery_resources['.$pos.'][link]" param="link" value="'.$link.'" />';
-			echo '<input class="mtphr-galleries-type" type="hidden" name="_mtphr_gallery_resources['.$pos.'][type]" param="type" value="vimeo" />';
+			echo '<input class="mtphr-galleries-id" type="hidden" name="'.$name_resources.'['.$pos.'][id]" data-prefix="'.$name_resources.'" data-param="id" value="'.$id.'" />';
+			echo '<input class="mtphr-galleries-title" type="hidden" name="'.$name_resources.'['.$pos.'][title]" data-prefix="'.$name_resources.'" data-param="title" value="'.$title.'" />';
+			echo '<input class="mtphr-galleries-description" type="hidden" name="'.$name_resources.'['.$pos.'][description]" data-prefix="'.$name_resources.'" data-param="description" value="'.$description.'" />';
+			echo '<input class="mtphr-galleries-poster" type="hidden" name="'.$name_resources.'['.$pos.'][poster]" data-prefix="'.$name_resources.'" data-param="poster" value="'.$thumbnail.'" />';
+			echo '<input class="mtphr-galleries-link" type="hidden" name="'.$name_resources.'['.$pos.'][link]" data-prefix="'.$name_resources.'" data-param="link" value="'.$link.'" />';
+			echo '<input class="mtphr-galleries-type" type="hidden" name="'.$name_resources.'['.$pos.'][type]" data-prefix="'.$name_resources.'" data-param="type" value="vimeo" />';
 			echo '<div class="mtphr-galleries-admin-thumb">'.mtphr_gallery_admin_render_vimeo_thumb( $thumbnail ).'</div>';
 			echo '<div class="mtphr-galleries-admin-thumb-title clearfix">';
 				echo '<span>'.$title.'</span>';

@@ -8,28 +8,30 @@ jQuery( document ).ready( function($) {
 
 
 	/* --------------------------------------------------------- */
-	/* !Gallery thumbnails - 1.0.5 */
+	/* !Gallery thumbnails - 2.0.4 */
 	/* --------------------------------------------------------- */
 
-	if( $('#mtphr-galleries-thumbnails').length > 0 ) {
+	if( $('.mtphr-galleries-thumbnails').length > 0 ) {
 	
 		function mtphr_gallery_remove_external() {
-			$('#mtphr-galleries-add-external').slideUp( function() {
-				$('#mtphr-galleries-add-external-input input').val('');
-				$('#mtphr-galleries-add-external-submit a').removeAttr('type');
-				$('#mtphr-galleries-add-external-submit').find( 'span, i' ).hide();
+			$('.mtphr-galleries-add-external').slideUp( function() {
+				$('.mtphr-galleries-add-external-input input').val('');
+				$('.mtphr-galleries-add-external-submit a').removeAttr('type');
+				$('.mtphr-galleries-add-external-submit').find( 'span, i' ).hide();
 			});
 		}
 	
 		function mtphr_gallery_thumbnails_set_order( $table ) {
-			$('#mtphr-galleries-thumbnails').find('.mtphr-gallery-thumbnail').each( function(index) {	
+			$('.mtphr-galleries-thumbnails').find('.mtphr-gallery-thumbnail').each( function(index) {	
 				$(this).find('input, select').each( function() {
-					$(this).attr('name', '_mtphr_gallery_resources['+index+']['+$(this).attr('param')+']');
+					var prefix = $(this).attr('data-prefix'),
+							param = $(this).attr('data-param');
+					$(this).attr('name', prefix+'['+index+']['+param+']');
 				});
 			});
 		}
 
-		$('#mtphr-galleries-thumbnails').sortable( {
+		$('.mtphr-galleries-thumbnails').sortable( {
 			items: '.mtphr-gallery-thumbnail',
 		  helper: function(e, tr) {
 		    var $originals = tr.children();
@@ -51,7 +53,7 @@ jQuery( document ).ready( function($) {
 
 			// Fade out the item
 			$(this).parents('.mtphr-gallery-thumbnail').fadeOut( function() {
-				var $table = $(this).parents('#mtphr-galleries-thumbnails');
+				var $table = $(this).parents('.mtphr-galleries-thumbnails');
 				$(this).remove();
 			});
 		});
@@ -59,15 +61,16 @@ jQuery( document ).ready( function($) {
 
 
 		/* --------------------------------------------------------- */
-		/* !Add images */
+		/* !Add images - 2.0.4 */
 		/* --------------------------------------------------------- */
 		
-		$('#mtphr-galleries-add-image').click( function(e) {
+		$('.mtphr-galleries-add-image').click( function(e) {
 		  e.preventDefault();
 		  mtphr_gallery_remove_external();
 
 		  // Save the container
-		  var $container = $('#mtphr-galleries-thumbnails').find('tr');
+		  var $container = $(this).parent().siblings('.mtphr-galleries-thumbnails').find('tr'),
+		  		name_resources = $(this).attr('data-prefix');
 
 		  // Create a custom uploader
 		  var uploader;
@@ -93,6 +96,7 @@ jQuery( document ).ready( function($) {
 					var data = {
 						action: 'mtphr_gallery_thumb_ajax',
 						type: 'field',
+						name_resources: name_resources,
 						attachments: attachments,
 						security: mtphr_galleries_vars.security
 					};
@@ -114,15 +118,16 @@ jQuery( document ).ready( function($) {
 		
 		
 		/* --------------------------------------------------------- */
-		/* !Add videos */
+		/* !Add videos - 2.0.4 */
 		/* --------------------------------------------------------- */
 		
-		$('#mtphr-galleries-add-video').click( function(e) {
+		$('.mtphr-galleries-add-video').click( function(e) {
 		  e.preventDefault();
 		  mtphr_gallery_remove_external();
 
 		  // Save the container
-		  var $container = $('#mtphr-galleries-thumbnails').find('tr');
+		  var $container = $(this).parent().siblings('.mtphr-galleries-thumbnails').find('tr'),
+		  		name_resources = $(this).attr('data-prefix');
 
 		  // Create a custom uploader
 		  var uploader;
@@ -148,6 +153,7 @@ jQuery( document ).ready( function($) {
 					var data = {
 						action: 'mtphr_gallery_thumb_ajax',
 						type: 'field',
+						name_resources: name_resources,
 						attachments: attachments,
 						security: mtphr_galleries_vars.security
 					};
@@ -169,15 +175,16 @@ jQuery( document ).ready( function($) {
 		
 		
 		/* --------------------------------------------------------- */
-		/* !Add audio */
+		/* !Add audio - 2.0.4 */
 		/* --------------------------------------------------------- */
 		
-		$('#mtphr-galleries-add-audio').click( function(e) {
+		$('.mtphr-galleries-add-audio').click( function(e) {
 		  e.preventDefault();
 		  mtphr_gallery_remove_external();
 
 		  // Save the container
-		  var $container = $('#mtphr-galleries-thumbnails').find('tr');
+		  var $container = $(this).parent().siblings('.mtphr-galleries-thumbnails').find('tr'),
+		  		name_resources = $(this).attr('data-prefix');
 
 		  // Create a custom uploader
 		  var uploader;
@@ -203,6 +210,7 @@ jQuery( document ).ready( function($) {
 					var data = {
 						action: 'mtphr_gallery_thumb_ajax',
 						type: 'field',
+						name_resources: name_resources,
 						attachments: attachments,
 						security: mtphr_galleries_vars.security
 					};
@@ -224,20 +232,21 @@ jQuery( document ).ready( function($) {
 		
 		
 		/* --------------------------------------------------------- */
-		/* !Add external */
+		/* !Add external - 2.0.4 */
 		/* --------------------------------------------------------- */
 		
-		$('#mtphr-galleries-add-external-submit a').click( function(e) {
+		$('.mtphr-galleries-add-external-submit a').click( function(e) {
 			e.preventDefault();
 			
-			var $container = $('#mtphr-galleries-thumbnails').find('tr'),
-					$external = $('#mtphr-galleries-add-external'),
+			var $external = $(this).parents('.mtphr-galleries-add-external'),
+					$container = $external.siblings('.mtphr-galleries-thumbnails').find('tr'),
 					type = $(this).attr('type'),
 					$spinner = $(this).siblings('.spinner'),
 					$error = $(this).siblings('.mtphr-galleries-add-external-error'),
 					value = $(this).parent().prev().children('input').val(),
-					parent = $(this).attr('href');
-					
+					parent = $(this).attr('href'),
+					name_resources = $(this).attr('data-prefix');
+			
 			parent = parent.substr(1, parent.length);
 					
 			$error.hide();
@@ -248,6 +257,7 @@ jQuery( document ).ready( function($) {
 				type: type,
 				value: value,
 				parent: parent,
+				name_resources: name_resources,
 				security: mtphr_galleries_vars.security
 			};
 			jQuery.post( ajaxurl, data, function( response ) {
@@ -314,15 +324,15 @@ jQuery( document ).ready( function($) {
 		/* !Add youtube */
 		/* --------------------------------------------------------- */
 		
-		$('#mtphr-galleries-add-youtube').click( function(e) {
+		$('.mtphr-galleries-add-youtube').click( function(e) {
 		  e.preventDefault();
 		  mtphr_gallery_remove_external();
 
 		  // Save the container
-		  var $external = $('#mtphr-galleries-add-external'),
-		  		$title = $('#mtphr-galleries-add-external-title'),
-		  		$input = $('#mtphr-galleries-add-external-input input'),
-		  		$button = $('#mtphr-galleries-add-external-submit').children('a');
+		  var $external = $(this).parent().siblings('.mtphr-galleries-add-external'),
+		  		$title = $external.find('.mtphr-galleries-add-external-title'),
+		  		$input = $external.find('.mtphr-galleries-add-external-input input'),
+		  		$button = $external.find('.mtphr-galleries-add-external-submit').children('a');
 			
 			$title.text( mtphr_galleries_vars.youtube_input_title );
 			$button.attr( 'type', 'youtube' );
@@ -340,15 +350,15 @@ jQuery( document ).ready( function($) {
 		/* !Add vimeo */
 		/* --------------------------------------------------------- */
 		
-		$('#mtphr-galleries-add-vimeo').click( function(e) {
+		$('.mtphr-galleries-add-vimeo').click( function(e) {
 		  e.preventDefault();
 		  mtphr_gallery_remove_external();
 
 		  // Save the container
-		  var $external = $('#mtphr-galleries-add-external'),
-		  		$title = $('#mtphr-galleries-add-external-title'),
-		  		$input = $('#mtphr-galleries-add-external-input input'),
-		  		$button = $('#mtphr-galleries-add-external-submit').children('a');
+		  var $external = $(this).parent().siblings('.mtphr-galleries-add-external'),
+		  		$title = $external.find('.mtphr-galleries-add-external-title'),
+		  		$input = $external.find('.mtphr-galleries-add-external-input input'),
+		  		$button = $external.find('.mtphr-galleries-add-external-submit').children('a');
 			
 			$title.text( mtphr_galleries_vars.vimeo_input_title );
 			$button.attr( 'type', 'vimeo' );
@@ -361,7 +371,7 @@ jQuery( document ).ready( function($) {
 		
 		
 		/* --------------------------------------------------------- */
-		/* !Add poster image */
+		/* !Add poster image - 2.0.4 */
 		/* --------------------------------------------------------- */
 		
 		$('.mtphr-galleries-poster-button.add-poster').live( 'click', function(e) {
@@ -369,7 +379,8 @@ jQuery( document ).ready( function($) {
 
 		  // Save the container
 		  var $container = $(this).parents('.mtphr-galleries-admin-thumb'),
-		  		$input = $container.siblings('.mtphr-galleries-poster');
+		  		$input = $container.siblings('.mtphr-galleries-poster'),
+		  		name_resources = $(this).attr('data-prefix');
 
 		  // Create a custom uploader
 		  var uploader;
@@ -402,6 +413,7 @@ jQuery( document ).ready( function($) {
 					var data = {
 						action: 'mtphr_gallery_thumb_ajax',
 						type: 'thumbnail',
+						name_resources: name_resources,
 						attachments: attachments,
 						security: mtphr_galleries_vars.security
 					};

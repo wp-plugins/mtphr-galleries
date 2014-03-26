@@ -34,6 +34,11 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 2.0.4 =
+* Modified metabox code and functionality for accessability within other plugins or themes
+* Added "mtphr_galleries_data_meta" filter
+* Added "mtphr_galleries_data_metabox_middle" action
+
 = 2.0.3 =
 * Fixed resource size filter
 
@@ -116,4 +121,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Fixed resource size filter
+Updated metabox code and added additional metabox filters
