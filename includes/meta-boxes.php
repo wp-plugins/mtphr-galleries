@@ -14,16 +14,14 @@ add_action( 'add_meta_boxes', 'mtphr_galleries_rotator_metabox' );
 
 
 /* --------------------------------------------------------- */
-/* !Render the gallery settings metabox - 2.0.0 */
+/* !Render the gallery settings metabox - 2.0.4 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_settings_render_metabox() {
 
 	global $post;
 	$settings = mtphr_galleries_settings();
-	$parent = isset($_GET['post']) ? $_GET['post'] : '';
-
-	$resources = get_post_meta( $post->ID, '_mtphr_gallery_resources', true );
+	
 	$rotate_type = get_post_meta( $post->ID, '_mtphr_gallery_slider_type', true );
 	$rotate_type = ($rotate_type != '') ? $rotate_type : 'fade';
 	$dynamic_direction = get_post_meta( $post->ID, '_mtphr_gallery_slider_directional_nav_reverse', true ) ? 'on' : false;
@@ -49,15 +47,13 @@ function mtphr_gallery_settings_render_metabox() {
 		'data' => sprintf(__('%s Data', 'mtphr-galleries'), $settings['singular_label'])
 	));
 	
-	// Filter the media types
-	$media_types = apply_filters( 'mtphr_galleries_media_types', array(
-		'image' => __('Add Images', 'mtphr-galleries'),
-		'video' => __('Add Videos', 'mtphr-galleries'),
-		'audio' => __('Add Audio', 'mtphr-galleries'),
-		'youtube' => __('Add YouTube', 'mtphr-galleries'),
-		'vimeo' => __('Add Vimeo', 'mtphr-galleries')
-	));
-
+	// Filter the data meta
+	$data_meta = apply_filters( 'mtphr_galleries_data_meta', array(
+		'client' => 'client',
+		'filter' => 'filter',
+		'external_link' => 'external_link'
+	));	
+	
 	echo '<input type="hidden" name="mtphr_galleries_nonce" value="'.wp_create_nonce(basename(__FILE__)).'" />';
 
 	echo '<div id="mtphr-galleries-page-tabs">';
@@ -80,51 +76,7 @@ function mtphr_gallery_settings_render_metabox() {
 		if( isset($tabs['resources']) ) {
 		
 			echo '<div id="mtphr-galleries-page-tabs-resources" class="mtphr-galleries-page-tabs-page">';
-	
-				do_action('mtphr_galleries_resources_metabox_before');
-	
-				echo '<div id="mtphr-galleries-add-buttons">';
-					if( is_array($media_types) && count($media_types) > 0 ) {
-						foreach( $media_types as $type=>$button ) {
-							echo '<a href="#" id="mtphr-galleries-add-'.$type.'" class="button-primary">'.$button.'</a> ';
-						}
-					}
-				echo '</div>';
-				
-				echo '<table id="mtphr-galleries-add-external">';
-					echo '<tr>';
-						echo '<td id="mtphr-galleries-add-external-title"></td>';
-						echo '<td id="mtphr-galleries-add-external-input">';
-							echo '<input type="text" size="30" />';
-						echo '</td>';
-						echo '<td id="mtphr-galleries-add-external-submit">';
-							echo '<a href="#'.$parent.'" class="button">'.__('Submit', 'mtphr-galleries').'</a>';
-							echo '<span class="spinner"></span>';
-							echo '<i class="mtphr-galleries-add-external-error mtphr-galleries-icon-warning"></i>';
-						echo '</td>';
-					echo '</tr>';
-				echo '</table>';
-				
-				echo '<table id="mtphr-galleries-thumbnails">';
-					echo '<tr class="clearfix">';
-						if( is_array($resources) && count($resources) > 0 ) {
-							
-							foreach( $resources as $i=>$resource ) {
-
-								$resource = apply_filters( 'mtphr_galleries_metabox_resource_data', $resource );
-	
-								if( is_array($resource) && isset($resource['type']) && array_key_exists($resource['type'], $media_types) ) {			
-									if( function_exists('mtphr_gallery_admin_render_'.$resource['type'].'_field') ) {
-										call_user_func( 'mtphr_gallery_admin_render_'.$resource['type'].'_field', $resource, $i );
-									}
-								}
-							}
-						}
-					echo '</tr>';
-				echo '</table>';
-	
-				do_action('mtphr_galleries_resources_metabox_after');
-	
+				mtphr_galleries_resources_metabox();
 			echo '</div>';
 		}
 
@@ -222,27 +174,52 @@ function mtphr_gallery_settings_render_metabox() {
 				do_action('mtphr_galleries_data_metabox_before');
 				echo '<table class="mtphr-galleries-table">';
 					do_action('mtphr_galleries_data_metabox_top');
-	
-					echo '<tr>';
-						echo '<td class="mtphr-galleries-label">';
-							echo '<label>'.__('Client', 'mtphr-galleries').'</label>';
-							echo '<small>'.sprintf(__('Add a client to the %s', 'mtphr-galleries'), strtolower($settings['singular_label'])).'</small>';
-						echo '</td>';
-						echo '<td>';
-							echo '<input type="text" name="_mtphr_gallery_client" value="'.$client.'" />';
-						echo '</td>';
-					echo '</tr>';
-	
-					echo '<tr>';
-						echo '<td class="mtphr-galleries-label">';
-							echo '<label>'.__('External link', 'mtphr-galleries').'</label>';
-							echo '<small>'.sprintf(__('Add an external link to associate with the %s', 'mtphr-galleries'), strtolower($settings['singular_label'])).'</small>';
-						echo '</td>';
-						echo '<td>';
-							echo '<input type="text" name="_mtphr_gallery_link" value="'.$link.'" />';
-						echo '</td>';
-					echo '</tr>';
-	
+					
+					// Display the data meta
+					if( is_array($data_meta) && count($data_meta) > 0 ) {
+						foreach( $data_meta as $i=>$meta ) {
+
+							switch( $meta ) {
+							
+								case 'client':
+									
+									echo '<tr>';
+										echo '<td class="mtphr-galleries-label">';
+											echo '<label>'.__('Client', 'mtphr-galleries').'</label>';
+											echo '<small>'.sprintf(__('Add a client to the %s', 'mtphr-galleries'), strtolower($settings['singular_label'])).'</small>';
+										echo '</td>';
+										echo '<td>';
+											echo '<input type="text" name="_mtphr_gallery_client" value="'.$client.'" />';
+										echo '</td>';
+									echo '</tr>';
+					
+									break;
+									
+								case 'external_link':
+								
+									echo '<tr>';
+										echo '<td class="mtphr-galleries-label">';
+											echo '<label>'.__('External link', 'mtphr-galleries').'</label>';
+											echo '<small>'.sprintf(__('Add an external link to associate with the %s', 'mtphr-galleries'), strtolower($settings['singular_label'])).'</small>';
+										echo '</td>';
+										echo '<td>';
+											echo '<input type="text" name="_mtphr_gallery_link" value="'.$link.'" />';
+										echo '</td>';
+									echo '</tr>';
+
+									break;
+									
+								case 'filter':
+									do_action('mtphr_galleries_data_metabox_middle');
+									break;
+									
+								default:
+									break;
+									
+							}
+						}
+					}
+
 					do_action('mtphr_galleries_data_metabox_bottom');
 				echo '</table>';
 				do_action('mtphr_galleries_data_metabox_after');
@@ -256,9 +233,92 @@ function mtphr_gallery_settings_render_metabox() {
 }
 
 
+/* --------------------------------------------------------- */
+/* !Gallery resources setup - 2.0.4 */
+/* --------------------------------------------------------- */
+
+if( !function_exists('mtphr_galleries_resources_metabox') ) {
+function mtphr_galleries_resources_metabox( $name_resources='_mtphr_gallery_resources', $args=false ) {
+
+	global $post;
+	
+	$defaults = array(
+		'filter_prefix' => 'mtphr_galleries',
+		'limit_types' => ''
+	);
+	$args = wp_parse_args( $args, $defaults );
+	extract( $args );
+	
+	// Get the resources
+	$resources = get_post_meta( $post->ID, $name_resources, true );
+
+	// Filter the media types
+	$media_types = apply_filters( $filter_prefix.'_media_types', array(
+		'image' => __('Add Images', 'mtphr-galleries'),
+		'video' => __('Add Videos', 'mtphr-galleries'),
+		'audio' => __('Add Audio', 'mtphr-galleries'),
+		'youtube' => __('Add YouTube', 'mtphr-galleries'),
+		'vimeo' => __('Add Vimeo', 'mtphr-galleries')
+	));
+	
+	// Remove unwanted media types
+	if( is_array($limit_types) && count($limit_types) > 0 ) {
+		foreach( $media_types as $i=>$type ) {
+			if( !in_array($i, $limit_types) ) {
+				unset($media_types[$i]);
+			}
+		}
+	}
+
+	do_action($filter_prefix.'_resources_metabox_before');
+	
+	echo '<div class="mtphr-galleries-add-buttons">';
+		if( is_array($media_types) && count($media_types) > 0 ) {
+			foreach( $media_types as $type=>$button ) {
+				echo '<a href="#" class="mtphr-galleries-add-'.$type.' button-primary" data-prefix="'.$name_resources.'">'.$button.'</a> ';
+			}
+		}
+	echo '</div>';
+	
+	echo '<table class="mtphr-galleries-add-external">';
+		echo '<tr>';
+			echo '<td class="mtphr-galleries-add-external-title"></td>';
+			echo '<td class="mtphr-galleries-add-external-input">';
+				echo '<input type="text" size="30" />';
+			echo '</td>';
+			echo '<td class="mtphr-galleries-add-external-submit">';
+				echo '<a href="#" class="button" data-prefix="'.$name_resources.'">'.__('Submit', 'mtphr-galleries').'</a>';
+				echo '<span class="spinner"></span>';
+				echo '<i class="mtphr-galleries-add-external-error mtphr-galleries-icon-warning"></i>';
+			echo '</td>';
+		echo '</tr>';
+	echo '</table>';
+	
+	echo '<table class="mtphr-galleries-thumbnails">';
+		echo '<tr class="clearfix">';
+			if( is_array($resources) && count($resources) > 0 ) {	
+				foreach( $resources as $i=>$resource ) {
+
+					$resource = apply_filters( $filter_prefix.'_metabox_resource_data', $resource );
+
+					if( is_array($resource) && isset($resource['type']) && array_key_exists($resource['type'], $media_types) ) {			
+						if( function_exists('mtphr_gallery_admin_render_'.$resource['type'].'_field') ) {
+							call_user_func( 'mtphr_gallery_admin_render_'.$resource['type'].'_field', $resource, $i, $name_resources );
+						}
+					}
+				}
+			}
+		echo '</tr>';
+	echo '</table>';
+
+	do_action($filter_prefix.'_resources_metabox_after');
+}
+}
+
+
 
 /* --------------------------------------------------------- */
-/* !Save the custom meta - 1.0.5 */
+/* !Save the custom meta - 2.0.4 */
 /* --------------------------------------------------------- */
 
 function mtphr_galleries_metabox_save( $post_id ) {
@@ -285,13 +345,10 @@ function mtphr_galleries_metabox_save( $post_id ) {
 		return $post_id;
 	}
 	
-	if( isset($_POST['_mtphr_gallery_resources']) ) {
-
-		$resources = isset($_POST['_mtphr_gallery_resources']) ? $_POST['_mtphr_gallery_resources'] : array();
-		
-		update_post_meta( $post_id, '_mtphr_gallery_resources', $resources );
-	}
-
+	// Save the resources
+	mtphr_galleries_resources_save( $post_id, '_mtphr_gallery_resources' );
+	
+	// Save the rotator data
 	if( isset($_POST['_mtphr_gallery_slider_type']) ) {
 
 		$rotate_type = isset($_POST['_mtphr_gallery_slider_type']) ? $_POST['_mtphr_gallery_slider_type'] : '';
@@ -317,6 +374,7 @@ function mtphr_galleries_metabox_save( $post_id ) {
 		update_post_meta( $post_id, '_mtphr_gallery_slider_control_nav', $control_nav );
 	}
 	
+	// Save the additional data
 	if( isset($_POST['_mtphr_gallery_client']) ) {
 	
 		$client = isset( $_POST['_mtphr_gallery_client'] ) ? sanitize_text_field($_POST['_mtphr_gallery_client']) : '';
@@ -327,5 +385,22 @@ function mtphr_galleries_metabox_save( $post_id ) {
 	}
 }
 add_action( 'save_post', 'mtphr_galleries_metabox_save' );
+
+
+/* --------------------------------------------------------- */
+/* !Save the resources - 2.0.4 */
+/* --------------------------------------------------------- */
+
+if( !function_exists('mtphr_galleries_resources_save') ) {
+function mtphr_galleries_resources_save( $post_id, $name_resources ) {
+	
+	if( isset($_POST[$name_resources]) ) {
+		$resources = isset($_POST[$name_resources]) ? $_POST[$name_resources] : array();
+		update_post_meta( $post_id, $name_resources, $resources );
+	} else {
+		delete_post_meta( $post_id, $name_resources );
+	}
+}
+}
 
 

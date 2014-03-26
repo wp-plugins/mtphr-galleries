@@ -268,27 +268,27 @@
 /* !External inputs */
 /* --------------------------------------------------------- */
 
-#mtphr-galleries-add-external {
+.mtphr-galleries-add-external {
 	display: none;
 	border-spacing: 0;
 	margin: 10px 0;
 }
-#mtphr-galleries-add-external td {
+.mtphr-galleries-add-external td {
 	padding: 0 2px;
 }
-#mtphr-galleries-add-external > tbody > tr > td:first-child {
+.mtphr-galleries-add-external > tbody > tr > td:first-child {
 	padding-left: 0;
 }
-#mtphr-galleries-add-external > tbody > tr > td:last-child {
+.mtphr-galleries-add-external > tbody > tr > td:last-child {
 	padding-right: 0;
 }
-#mtphr-galleries-add-external-title {
+.mtphr-galleries-add-external-title {
 	font-weight: bold;
 }
-#mtphr-galleries-add-external-input input[type="text"] {
+.mtphr-galleries-add-external-input input[type="text"] {
 	width: 100%;
 }
-#mtphr-galleries-add-external-submit .spinner {
+.mtphr-galleries-add-external-submit .spinner {
 	margin-top: 4px;
 }
 .mtphr-galleries-add-external-error {
@@ -308,28 +308,28 @@
 #mtphr-galleries-page-tabs-1 {
 	padding-top: 0;
 }
-#mtphr-galleries-thumbnails {
+.mtphr-galleries-thumbnails {
 	width: 100%;
 	padding-top: 5px;
 	margin-top: 10px;
 	border-top: 1px solid #dfdfdf;
 	border-spacing: 0;
 }
-#mtphr-galleries-thumbnails .mtphr-gallery-thumbnail {
+.mtphr-galleries-thumbnails .mtphr-gallery-thumbnail {
 	position: relative;
 	float: left;
 }
-#mtphr-galleries-thumbnails .mtphr-gallery-thumbnail-contents {
+.mtphr-galleries-thumbnails .mtphr-gallery-thumbnail-contents {
 	position: relative;
 	/* border: 1px solid #dfdfdf; */
 	-webkit-box-sizing: content-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: content-box;    /* Firefox, other Gecko */
 	box-sizing: content-box; 
 }
-#mtphr-galleries-thumbnails .mtphr-gallery-thumbnail a {
+.mtphr-galleries-thumbnails .mtphr-gallery-thumbnail a {
 	text-decoration: none;
 }
-#mtphr-galleries-thumbnails > tbody > tr > td {
+.mtphr-galleries-thumbnails > tbody > tr > td {
 	cursor: move;
 	width: 250px;
 	/* height: 100px; */
@@ -438,25 +438,25 @@
 		border-color: #CCC;
 		border-bottom: none;
 	}
-	#mtphr-galleries-thumbnails .mtphr-gallery-thumbnail-delete {
+	.mtphr-galleries-thumbnails .mtphr-gallery-thumbnail-delete {
 		cursor: pointer;	
 		position: absolute;
 		right: 7px;
 		bottom: 3px;
 	}
-	#mtphr-galleries-thumbnails .mtphr-gallery-thumbnail-delete i {	
+	.mtphr-galleries-thumbnails .mtphr-gallery-thumbnail-delete i {	
 		width: 16px;
 		height: 16px;
 		font-size: 16px;
 		color: #FF0000;
 	}
-	#mtphr-galleries-thumbnails .mtphr-gallery-thumbnail-view {
+	.mtphr-galleries-thumbnails .mtphr-gallery-thumbnail-view {
 		cursor: pointer;
 		position: absolute;
 		right: 7px;
 		bottom: 29px;
 	}
-	#mtphr-galleries-thumbnails .mtphr-gallery-thumbnail-view i {	
+	.mtphr-galleries-thumbnails .mtphr-gallery-thumbnail-view i {	
 		width: 16px;
 		height: 16px;
 		font-size: 16px;

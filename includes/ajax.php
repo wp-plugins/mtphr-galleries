@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Display a gallery thumb via ajax - 2.0.0 */
+/* !Display a gallery thumb via ajax - 2.0.3 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_thumb_ajax() {
@@ -14,6 +14,7 @@ function mtphr_gallery_thumb_ajax() {
 
 	// Get variables
 	$type = $_POST['type'];
+	$name_resources = isset($_POST['name_resources']) ? $_POST['name_resources'] : '';
 	$attachments = $_POST['attachments'];
 
 	// Display the files
@@ -21,19 +22,19 @@ function mtphr_gallery_thumb_ajax() {
 		//print_r($attachment);
 		if( $attachment['type'] == 'image' ) {
 			if( $type == 'field' ) {
-				mtphr_gallery_admin_render_image_field( $attachment );
+				mtphr_gallery_admin_render_image_field( $attachment, false, $name_resources );
 			} else {
 				mtphr_gallery_admin_render_image_thumb( $attachment['id'] );
 			}
 		} elseif( $attachment['type'] == 'video' ) {
 			if( $type == 'field' ) {
-				mtphr_gallery_admin_render_video_field( $attachment );
+				mtphr_gallery_admin_render_video_field( $attachment, false, $name_resources );
 			} else {
 				mtphr_gallery_admin_render_video_thumb( $attachment['id'] );
 			}
 		} elseif( $attachment['type'] == 'audio' ) {
 			if( $type == 'field' ) {
-				mtphr_gallery_admin_render_audio_field( $attachment );
+				mtphr_gallery_admin_render_audio_field( $attachment, false, $name_resources );
 			} else {
 				mtphr_gallery_admin_render_audio_thumb( $attachment['id'] );
 			}
@@ -46,7 +47,7 @@ add_action( 'wp_ajax_mtphr_gallery_thumb_ajax', 'mtphr_gallery_thumb_ajax' );
 
 
 /* --------------------------------------------------------- */
-/* !Display an external gallery thumb via ajax - 2.0.0 */
+/* !Display an external gallery thumb via ajax - 2.0.3 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_external_thumb_ajax() {
@@ -61,6 +62,7 @@ function mtphr_gallery_external_thumb_ajax() {
 	$type = $_POST['type'];
 	$value = $_POST['value'];
 	$parent = $_POST['parent'];
+	$name_resources = $_POST['name_resources'];
 	
 	// Get the upload directory
 	$upload_dir = wp_upload_dir();
@@ -102,7 +104,7 @@ function mtphr_gallery_external_thumb_ajax() {
 					$data['poster'] = mtphr_galleries_create_external_thumb_attachment( $file_path, $file_url, $title, false, $parent );
 				}
 				sleep( 2 );
-				mtphr_gallery_admin_render_youtube_field( $data );
+				mtphr_gallery_admin_render_youtube_field( $data, false, $name_resources );
 			} else {
 				echo 'error';
 			}
@@ -131,7 +133,7 @@ function mtphr_gallery_external_thumb_ajax() {
 					$data['poster'] = mtphr_galleries_create_external_thumb_attachment( $file_path, $file_url, $title, false, $parent );
 				}
 				sleep( 2 );
-				mtphr_gallery_admin_render_vimeo_field( $data );
+				mtphr_gallery_admin_render_vimeo_field( $data, false, $name_resources );
 			} else {
 				echo 'error';
 			}

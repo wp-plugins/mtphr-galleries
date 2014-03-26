@@ -8,7 +8,7 @@ function mtphr_galleries_admin_scripts( $hook ) {
 
 	global $typenow;
 
-	if ( $typenow == 'mtphr_gallery' ) {
+	//if ( $typenow == 'mtphr_gallery' ) {
 
 		// Load scipts for the media uploader
 		if(function_exists( 'wp_enqueue_media' )){
@@ -52,7 +52,7 @@ function mtphr_galleries_admin_scripts( $hook ) {
 				'vimeo_input_title' => __( 'Vimeo Video URL or ID', 'mtphr-galleries' )
 			)
 		);
-	}
+	//}
 	
 	// Load the admin styles
 	wp_register_style( 'mtphr-galleries', MTPHR_GALLERIES_URL.'/assets/css/style-admin.css', false, MTPHR_GALLERIES_VERSION );
