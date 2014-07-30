@@ -41,7 +41,7 @@ class mtphr_gallery_categories_widget extends WP_Widget {
 
 
 	/* --------------------------------------------------------- */
-	/* !Display the widget - 1.1.2 */
+	/* !Display the widget - 2.0.5 */
 	/* --------------------------------------------------------- */
 
 	function widget( $args, $instance ) {
@@ -79,7 +79,7 @@ class mtphr_gallery_categories_widget extends WP_Widget {
 
 	     $active = ( $current == '' ) ? ' class="mtphr-galleries-current-category"' : '';
 	     $post_count = wp_count_posts('mtphr_gallery');
-	     $term_count = ( $count ) ? ' <span class="mtphr-galleries-count">('.$post_count->publish.')</span>' : '';
+	     $term_count = ( $count ) ? apply_filters('mtphr_galleries_category_widget_count', ' <span class="mtphr-galleries-count">('.$post_count->publish.')</span>', $post_count->publish) : '';
 	     $obj = get_post_type_object( 'mtphr_gallery' );
 	     $label = $obj->labels->name;
 	     echo '<li'.$active.'><a href="'.add_query_arg( 'category', false, get_permalink($all) ).'">'.sprintf(__('All %s', 'mtphr-galleries'), $label).$term_count.'</a></li>';
@@ -87,8 +87,12 @@ class mtphr_gallery_categories_widget extends WP_Widget {
 	     foreach ( $terms as $term ) {
 
 		     $active = ( $current == $term->slug ) ? ' class="mtphr-galleries-current-category"' : '';
-		     $term_count = ( $count ) ? ' <span class="mtphr-galleries-count">('.$term->count.')</span>' : '';
-	       echo '<li'.$active.'><a href="'.add_query_arg( 'category', $term->slug, get_permalink($all) ).'">'.$term->name.$term_count.'</a></li>';
+		     $term_count = ( $count ) ? apply_filters('mtphr_galleries_category_widget_count', ' <span class="mtphr-galleries-count">('.$term->count.')</span>', $term->count) : '';
+		     
+		     $href = add_query_arg( 'category', $term->slug, get_permalink($all) );
+		     $link = '<a href="'.$href.'">'.$term->name.$term_count.'</a>';
+		     
+	       echo '<li'.$active.'>'.apply_filters('mtphr_galleries_category_widget_link', $link, $term).'</li>';
 	     }
 	     echo '</ul>';
 		 }

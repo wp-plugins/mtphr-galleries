@@ -2,7 +2,7 @@
 /*
 Plugin Name: Metaphor Galleries
 Description: Adds a custom post type to easily create media galleries to add to your site. Add a gallery archive or single gallery to any page with shortcodes.
-Version: 2.0.4
+Version: 2.0.5
 Author: Metaphor Creations
 Author URI: http://www.metaphorcreations.com
 License: GPL2
@@ -39,11 +39,7 @@ The icons are licensed under a Creative Commons Attribution
 
 
 /**Define Widget Constants */
-if ( WP_DEBUG ) {
-	define ( 'MTPHR_GALLERIES_VERSION', '2.0.4-'.time() );
-} else {
-	define ( 'MTPHR_GALLERIES_VERSION', '2.0.4' );
-}
+define ( 'MTPHR_GALLERIES_VERSION', '2.0.5' );
 define ( 'MTPHR_GALLERIES_DIR', plugin_dir_path(__FILE__) );
 define ( 'MTPHR_GALLERIES_URL', plugins_url().'/mtphr-galleries' );
 

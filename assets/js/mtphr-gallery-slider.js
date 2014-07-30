@@ -146,59 +146,62 @@
 		    /**
 		     * Create the rotator update call
 		     *
-		     * @since 1.0.0
+		     * @since 2.0.5
 		     */
 		    function mtphr_galleries_update( new_resource ) {
-
-		    	// Clear the interval
-		    	if( settings.auto_rotate ) {
-			    	clearInterval( gallery_delay );
-			    }
-			    
-			    // Set the next variable
-			    vars.next = new_resource;
-
-		    	// Trigger the before change callback
-          settings.before_change.call( $gallery_container, $gallery );
-          $gallery_container.trigger('mtphr_galleries_before_change_single', [resources, vars]);
-          $('body').trigger('mtphr_galleries_before_change', [$gallery_container, resources, vars]);
-
-          // Set the running variable
-          vars.running = 1;
-
-			    // Rotate the current resource out
-					mtphr_galleries_out( new_resource );
-
-					// Rotate the new resource in
-					mtphr_galleries_in( new_resource );
-
-					// Set the previous & current resource
-					vars.previous = vars.current;
-					vars.current = new_resource;
-
-					// Trigger the after change callback
-					after_change_timeout = setTimeout( function() {
-					
-						mtphr_galleries_resize();
-					
-						// Clear the next variable
-						vars.next = null;
-
-						settings.after_change.call( $gallery_container, $gallery );
-						$gallery_container.trigger('mtphr_galleries_after_change_single', [resources, vars]);
-						$('body').trigger('mtphr_galleries_after_change', [$gallery_container, resources, vars]);
-
-						// Reset the rotator type & variables
-						rotate_adjustment = settings.rotate_type;
-						vars.reverse = 0;
-						vars.running = 0;
-
-						// Restart the interval
-						if( settings.auto_rotate ) {
-				    	mtphr_galleries_delay();
+		    
+		    	if( new_resource != vars.current ) {
+	
+			    	// Clear the interval
+			    	if( settings.auto_rotate ) {
+				    	clearInterval( gallery_delay );
 				    }
-
-					}, parseInt(settings.rotate_speed*100) );
+				    
+				    // Set the next variable
+				    vars.next = new_resource;
+	
+			    	// Trigger the before change callback
+	          settings.before_change.call( $gallery_container, $gallery );
+	          $gallery_container.trigger('mtphr_galleries_before_change_single', [resources, vars]);
+	          $('body').trigger('mtphr_galleries_before_change', [$gallery_container, resources, vars]);
+	
+	          // Set the running variable
+	          vars.running = 1;
+	
+				    // Rotate the current resource out
+						mtphr_galleries_out( new_resource );
+	
+						// Rotate the new resource in
+						mtphr_galleries_in( new_resource );
+	
+						// Set the previous & current resource
+						vars.previous = vars.current;
+						vars.current = new_resource;
+	
+						// Trigger the after change callback
+						after_change_timeout = setTimeout( function() {
+						
+							mtphr_galleries_resize();
+						
+							// Clear the next variable
+							vars.next = null;
+	
+							settings.after_change.call( $gallery_container, $gallery );
+							$gallery_container.trigger('mtphr_galleries_after_change_single', [resources, vars]);
+							$('body').trigger('mtphr_galleries_after_change', [$gallery_container, resources, vars]);
+	
+							// Reset the rotator type & variables
+							rotate_adjustment = settings.rotate_type;
+							vars.reverse = 0;
+							vars.running = 0;
+	
+							// Restart the interval
+							if( settings.auto_rotate ) {
+					    	mtphr_galleries_delay();
+					    }
+	
+						}, parseInt(settings.rotate_speed*100) );
+					}
 		    }
 
 		    /**
@@ -804,14 +807,17 @@
 		    /* --------------------------------------------------------- */
 
 		    $gallery_container.on('mtphr_gallery_next', function( e ) {
+		    	if(vars.running) return false;
 		    	mtphr_galleries_next();
 				});
 				
 				$gallery_container.on('mtphr_gallery_prev', function( e ) {
+					if(vars.running) return false;
 		    	mtphr_galleries_prev();
 				});
 				
 				$gallery_container.on('mtphr_gallery_goto', function( e, pos ) {
+					if(vars.running) return false;
 		    	mtphr_galleries_update( parseInt(pos) );
 				});
 
