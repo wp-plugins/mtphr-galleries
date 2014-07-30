@@ -8,7 +8,7 @@ jQuery( document ).ready( function($) {
 
 
 	/* --------------------------------------------------------- */
-	/* !Gallery thumbnails - 2.0.4 */
+	/* !Gallery thumbnails - 2.0.5 */
 	/* --------------------------------------------------------- */
 
 	if( $('.mtphr-galleries-thumbnails').length > 0 ) {
@@ -50,18 +50,26 @@ jQuery( document ).ready( function($) {
 		// Delete thumbnails
 		$('.mtphr-gallery-thumbnail-delete').live( 'click', function(e) {
 			e.preventDefault();
+			
+			var $container = $(this).parents('.mtphr-galleries-thumbnails'),
+					$buttons = $container.siblings('.mtphr-galleries-add-buttons'),
+					single_resource = $container.data('single');
 
 			// Fade out the item
 			$(this).parents('.mtphr-gallery-thumbnail').fadeOut( function() {
 				var $table = $(this).parents('.mtphr-galleries-thumbnails');
 				$(this).remove();
+				
+				if( single_resource ) {
+					$buttons.show();
+				}
 			});
 		});
 
 
 
 		/* --------------------------------------------------------- */
-		/* !Add images - 2.0.4 */
+		/* !Add images - 2.0.5 */
 		/* --------------------------------------------------------- */
 		
 		$('.mtphr-galleries-add-image').click( function(e) {
@@ -69,8 +77,10 @@ jQuery( document ).ready( function($) {
 		  mtphr_gallery_remove_external();
 
 		  // Save the container
-		  var $container = $(this).parent().siblings('.mtphr-galleries-thumbnails').find('tr'),
-		  		name_resources = $(this).attr('data-prefix');
+		  var $buttons = $(this).parent(),
+		  		$container = $buttons.siblings('.mtphr-galleries-thumbnails').find('tr'),
+		  		name_resources = $(this).data('prefix'),
+		  		single_resource = $(this).data('single');
 
 		  // Create a custom uploader
 		  var uploader;
@@ -83,13 +93,18 @@ jQuery( document ).ready( function($) {
 		  uploader = wp.media({
 		    title: mtphr_galleries_vars.img_title,
 		    button: { text: mtphr_galleries_vars.img_button, size: 'small' },
-		    multiple: true,
+		    multiple: !single_resource,
 		    library : {
 		    	type : 'image'
 	    	}
 		  });
 
 		  uploader.on( 'select', function() {
+		  
+		  	// Hide the buttons
+		  	if( single_resource ) {
+			  	$buttons.hide();
+		  	}
 
 				attachments = uploader.state().get('selection').toJSON();
 				if( attachments.length > 0 ) {
@@ -118,7 +133,7 @@ jQuery( document ).ready( function($) {
 		
 		
 		/* --------------------------------------------------------- */
-		/* !Add videos - 2.0.4 */
+		/* !Add videos - 2.0.5 */
 		/* --------------------------------------------------------- */
 		
 		$('.mtphr-galleries-add-video').click( function(e) {
@@ -126,8 +141,10 @@ jQuery( document ).ready( function($) {
 		  mtphr_gallery_remove_external();
 
 		  // Save the container
-		  var $container = $(this).parent().siblings('.mtphr-galleries-thumbnails').find('tr'),
-		  		name_resources = $(this).attr('data-prefix');
+		  var $buttons = $(this).parent(),
+		  		$container = $buttons.siblings('.mtphr-galleries-thumbnails').find('tr'),
+		  		name_resources = $(this).data('prefix'),
+		  		single_resource = $(this).data('single');
 
 		  // Create a custom uploader
 		  var uploader;
@@ -140,13 +157,18 @@ jQuery( document ).ready( function($) {
 		  uploader = wp.media({
 		    title: mtphr_galleries_vars.video_title,
 		    button: { text: mtphr_galleries_vars.video_button, size: 'small' },
-		    multiple: true,
+		    multiple: !single_resource,
 		    library : {
 		    	type : 'video'
 	    	}
 		  });
 
 		  uploader.on( 'select', function() {
+		  
+		  	// Hide the buttons
+		  	if( single_resource ) {
+			  	$buttons.hide();
+		  	}
 
 				attachments = uploader.state().get('selection').toJSON();
 				if( attachments.length > 0 ) {
@@ -175,7 +197,7 @@ jQuery( document ).ready( function($) {
 		
 		
 		/* --------------------------------------------------------- */
-		/* !Add audio - 2.0.4 */
+		/* !Add audio - 2.0.5 */
 		/* --------------------------------------------------------- */
 		
 		$('.mtphr-galleries-add-audio').click( function(e) {
@@ -183,8 +205,10 @@ jQuery( document ).ready( function($) {
 		  mtphr_gallery_remove_external();
 
 		  // Save the container
-		  var $container = $(this).parent().siblings('.mtphr-galleries-thumbnails').find('tr'),
-		  		name_resources = $(this).attr('data-prefix');
+		  var $buttons = $(this).parent(),
+		  		$container = $buttons.siblings('.mtphr-galleries-thumbnails').find('tr'),
+		  		name_resources = $(this).data('prefix'),
+		  		single_resource = $(this).data('single');
 
 		  // Create a custom uploader
 		  var uploader;
@@ -197,13 +221,18 @@ jQuery( document ).ready( function($) {
 		  uploader = wp.media({
 		    title: mtphr_galleries_vars.audio_title,
 		    button: { text: mtphr_galleries_vars.audio_button, size: 'small' },
-		    multiple: true,
+		    multiple: !single_resource,
 		    library : {
 		    	type : 'audio'
 	    	}
 		  });
 
 		  uploader.on( 'select', function() {
+		  
+		  	// Hide the buttons
+		  	if( single_resource ) {
+			  	$buttons.hide();
+		  	}
 
 				attachments = uploader.state().get('selection').toJSON();
 				if( attachments.length > 0 ) {
@@ -232,25 +261,32 @@ jQuery( document ).ready( function($) {
 		
 		
 		/* --------------------------------------------------------- */
-		/* !Add external - 2.0.4 */
+		/* !Add external - 2.0.5 */
 		/* --------------------------------------------------------- */
 		
 		$('.mtphr-galleries-add-external-submit a').click( function(e) {
 			e.preventDefault();
 			
 			var $external = $(this).parents('.mtphr-galleries-add-external'),
+					$buttons = $external.siblings('.mtphr-galleries-add-buttons'),
 					$container = $external.siblings('.mtphr-galleries-thumbnails').find('tr'),
 					type = $(this).attr('type'),
 					$spinner = $(this).siblings('.spinner'),
 					$error = $(this).siblings('.mtphr-galleries-add-external-error'),
 					value = $(this).parent().prev().children('input').val(),
 					parent = $(this).attr('href'),
-					name_resources = $(this).attr('data-prefix');
+					name_resources = $(this).data('prefix'),
+					single_resource = $(this).data('single');
 			
 			parent = parent.substr(1, parent.length);
 					
 			$error.hide();
 			$spinner.show();
+			
+			// Hide the buttons
+	  	if( single_resource ) {
+		  	$buttons.hide();
+	  	}
 
 		  var data = {
 				action: 'mtphr_gallery_external_thumb_ajax',

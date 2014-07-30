@@ -45,3 +45,34 @@ function mtphr_galleries_resource_data_update( $resource ) {
 }
 add_filter( 'mtphr_galleries_resource_data', 'mtphr_galleries_resource_data_update', 1 );
 add_filter( 'mtphr_galleries_metabox_resource_data', 'mtphr_galleries_resource_data_update', 1 );
+
+
+
+/* --------------------------------------------------------- */
+/* !Add the gallery rotator - 2.0.5 */
+/* --------------------------------------------------------- */
+
+function mtphr_gallery_add_rotator( $post_id ) {
+	echo apply_filters( 'mtphr_gallery', get_mtphr_gallery_resources($post_id), $post_id );
+}
+add_action( 'mtphr_gallery_wrapper', 'mtphr_gallery_add_rotator', 10 );
+
+
+
+/* --------------------------------------------------------- */
+/* !Add the directional navigation - 2.0.5 */
+/* --------------------------------------------------------- */
+
+function mtphr_gallery_add_directional_nav( $post_id, $meta_data ) {
+	
+	// Extract the metadata array into variables
+	extract( $meta_data );
+	
+	$html = '';
+	if( isset($_mtphr_gallery_slider_directional_nav) && $_mtphr_gallery_slider_directional_nav ) {
+		$html .= '<a href="#" class="mtphr-gallery-nav-prev" rel="nofollow">'.apply_filters( 'mtphr_gallery_navigation_previous', __('Previous', 'mtphr-galleries') ).'</a>';
+		$html .= '<a href="#" class="mtphr-gallery-nav-next" rel="nofollow">'.apply_filters( 'mtphr_gallery_navigation_next', __('Next', 'mtphr-galleries') ).'</a>';
+	}
+	echo $html;
+}
+add_action( 'mtphr_gallery_wrapper', 'mtphr_gallery_add_directional_nav', 15, 2 );

@@ -3,7 +3,7 @@ Contributors: metaphorcreations
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TCAJHP4AJ392N
 Tags: custom post type, galleries, gallery, photos, vimeo, youtube, slider
 Requires at least: 3.2
-Tested up to: 3.8.1
+Tested up to: 3.9.1
 Stable tag: /trunk/
 License: GPL2
 
@@ -33,6 +33,14 @@ Documentation is coming soon!
 1. Coming soon.
 
 == Changelog ==
+
+= 2.0.5 =
+* Admin css updates
+* jQuery class script updates
+* Added "mtphr_gallery_slider_top" & "mtphr_gallery_slider_bottom" action filters
+* Moved rotator display and directional nav into "mtphr_gallery_wrapper" action filter
+* Moved the settings metabox into a reusable function
+* Added option to limit resource metabox to a single resource
 
 = 2.0.4 =
 * Modified metabox code and functionality for accessability within other plugins or themes
@@ -121,4 +129,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Updated metabox code and added additional metabox filters
+Multiple updates.

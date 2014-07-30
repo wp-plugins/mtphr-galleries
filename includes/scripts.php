@@ -94,6 +94,7 @@ function mtphr_galleries_scripts() {
 
 	// Add jQuery gallery class
 	wp_register_script( 'mtphr-gallery-slider', MTPHR_GALLERIES_URL.'/assets/js/mtphr-gallery-slider.js', array('jquery', 'jquery-easing'), MTPHR_GALLERIES_VERSION, true );
+	wp_enqueue_script( 'mtphr-gallery-slider' );
 
 	wp_register_script( 'mtphr-galleries', MTPHR_GALLERIES_URL.'/assets/js/script.js', array('jquery'), MTPHR_GALLERIES_VERSION, true );
 	wp_enqueue_script( 'mtphr-galleries' );
