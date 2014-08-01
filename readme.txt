@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 2.0.6 =
+* Fixed bug in last update that removed multiple attachment selection
+
 = 2.0.5 =
 * Admin css updates
 * jQuery class script updates
@@ -129,4 +132,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Multiple updates.
+Fixed bug in last update that removed multiple attachment selection
