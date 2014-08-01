@@ -147,7 +147,7 @@ function mtphr_gallery_settings_render_metabox() {
 
 
 /* --------------------------------------------------------- */
-/* !Gallery resources setup - 2.0.4 */
+/* !Gallery resources setup - 2.0.6 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_galleries_resources_metabox') ) {
@@ -158,7 +158,7 @@ function mtphr_galleries_resources_metabox( $name_resources='_mtphr_gallery_reso
 	$defaults = array(
 		'filter_prefix' => 'mtphr_galleries',
 		'limit_types' => '',
-		'single_resource' => true
+		'single_resource' => false
 	);
 	$args = wp_parse_args( $args, $defaults );
 	extract( $args );
