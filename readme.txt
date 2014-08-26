@@ -3,7 +3,7 @@ Contributors: metaphorcreations
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TCAJHP4AJ392N
 Tags: custom post type, galleries, gallery, photos, vimeo, youtube, slider
 Requires at least: 3.2
-Tested up to: 3.9.1
+Tested up to: 3.9.2
 Stable tag: /trunk/
 License: GPL2
 
@@ -33,6 +33,9 @@ Documentation is coming soon!
 1. Coming soon.
 
 == Changelog ==
+
+= 2.0.7 =
+* Added plugin to GitHub
 
 = 2.0.6 =
 * Fixed bug in last update that removed multiple attachment selection
@@ -132,4 +135,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Fixed bug in last update that removed multiple attachment selection
+Added plugin to GitHub.
