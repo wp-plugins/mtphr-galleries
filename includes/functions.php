@@ -205,16 +205,19 @@ function get_mtphr_gallery( $post_id=false, $width=false, $height=false, $args=f
 	if( isset($_mtphr_gallery_slider_directional_nav_reverse) ) {
 		$nav_reverse = $_mtphr_gallery_slider_directional_nav_reverse ? 1 : 0;
 	}
-	$mtphr_galleries_scripts[] = array(
-		'id' => $gallery_id,
-		'rotate_type' => $_mtphr_gallery_slider_type,
-		'auto_rotate' => $rotate,
-		'rotate_delay' => intval($_mtphr_gallery_slider_delay),
-		'rotate_pause' => $pause,
-		'rotate_speed' => intval($_mtphr_gallery_slider_speed),
-		'rotate_ease' => $_mtphr_gallery_slider_ease,
-		'nav_reverse' => $nav_reverse
-	);
+	
+	if( !empty($_mtphr_gallery_slider_type) ) {
+		$mtphr_galleries_scripts[] = array(
+			'id' => $gallery_id,
+			'rotate_type' => $_mtphr_gallery_slider_type,
+			'auto_rotate' => $rotate,
+			'rotate_delay' => intval($_mtphr_gallery_slider_delay),
+			'rotate_pause' => $pause,
+			'rotate_speed' => intval($_mtphr_gallery_slider_speed),
+			'rotate_ease' => $_mtphr_gallery_slider_ease,
+			'nav_reverse' => $nav_reverse
+		);
+	}
 
 	// Return the gallery
 	return $html;

@@ -34,6 +34,10 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 2.0.8 =
+* Added a check for metadata before referencing metadata variables
+* Fixed taxonomy slug spelling
+
 = 2.0.7 =
 * Added plugin to GitHub
 
@@ -135,4 +139,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Added plugin to GitHub.
+Added a check for metadata before referencing metadata variables.

@@ -12,13 +12,13 @@ add_action( 'init', 'mtphr_galleries_categories' );
 /**
  * Create a category taxonomy
  *
- * @since 1.0.0
+ * @since 2.0.8
  */
 function mtphr_galleries_categories() {
 
 	// Set the slug
 	$settings = mtphr_galleries_settings();
-	$slug = $settings['slug'].'-catagory';
+	$slug = $settings['slug'].'-category';
 	$singular = $settings['singular_label'];
 
 	// Create labels
