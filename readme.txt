@@ -36,7 +36,7 @@ Documentation is coming soon!
 
 = 2.0.8 =
 * Added a check for metadata before referencing metadata variables
-* Fixed taxonomy slug spelling
+* Fixed taxonomy slug spelling 
 
 = 2.0.7 =
 * Added plugin to GitHub

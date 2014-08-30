@@ -468,5 +468,3 @@ function get_mtphr_gallery_likes( $post_id = false ) {
 	return $html;
 }
 }
-
-

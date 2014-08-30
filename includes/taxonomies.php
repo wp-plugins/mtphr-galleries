@@ -90,6 +90,3 @@ function mtphr_galleries_tags() {
 	// Register the taxonomy
 	register_taxonomy( 'mtphr_gallery_tag', array( 'mtphr_gallery' ), $args );
 }
-
-
-
