@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 2.0.9 =
+* Added Italian translation files
+
 = 2.0.8 =
 * Added a check for metadata before referencing metadata variables
 * Fixed taxonomy slug spelling 
@@ -139,4 +142,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Added a check for metadata before referencing metadata variables.
+Added Italian translation files.
