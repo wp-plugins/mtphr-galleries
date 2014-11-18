@@ -282,8 +282,16 @@
 		    function mtphr_galleries_resize_resources() {
 
 			    for( var i=0; i<vars.count; i++ ) {
+				    
 				    $(resources[i]).width( gallery_width+'px' );
+
+				    var hd_height = gallery_width*.5625;
+
+				    if( $(resources[i]).hasClass('mtphr-gallery-resource-video') || $(resources[i]).hasClass('mtphr-gallery-resource-audio') ) {
+				    	$(resources[i]).height( hd_height+'px' );
+			    	} 
 			    }
+			    
 			    $gallery.css('height', $(resources[vars.current]).height()+'px');
 		    }
 

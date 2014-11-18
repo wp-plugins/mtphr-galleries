@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 2.0.10 =
+* Modified slider js file for better video resizing
+
 = 2.0.9 =
 * Added Italian translation files
 
@@ -142,4 +145,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Added Italian translation files.
+Modified slider js file for better video resizing.
