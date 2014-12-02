@@ -241,6 +241,16 @@
 						$resource.find('iframe').width(w).height(h);
 		    	}
 		    }
+		    
+		    function mtphr_galleries_reset_resource( current_resource ) {
+			    
+			    var $resource = $(resources[current_resource]);
+		    	if( $resource.hasClass('mtphr-gallery-resource-video') && ($resource.find('.mejs-container').length > 0)  ) {
+			    	$resource.find('video')[0].player.pause();
+		    	} else if( $resource.hasClass('mtphr-gallery-resource-audio') && ($resource.find('.mejs-container').length > 0)  ) {
+			    	$resource.find('audio')[0].player.pause();
+		    	}
+		    }
 
 		    /**
 		     * Create the rotator in function calls
@@ -267,6 +277,9 @@
 		     * @since 1.0.0
 		     */
 		    function mtphr_galleries_out( new_resource ) {
+			    
+			    // Reset the resource
+		    	mtphr_galleries_reset_resource( vars.current );
 
 			    // Find the rotation type and create the dynamic rotation out function
 					var rotate_out_name = 'mtphr_galleries_'+rotate_adjustment+'_out';

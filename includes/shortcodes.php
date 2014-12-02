@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Display the gallery archive - 2.0.0 */
+/* !Display the gallery archive - 2.2.1 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_archive_display( $atts, $content = null ) {
@@ -14,6 +14,7 @@ function mtphr_gallery_archive_display( $atts, $content = null ) {
 		'orderby' => 'menu_order',
 		'categories' => false,
 		'tags' => false,
+		'operator' => 'IN',
 		'excerpt_length' => 140,
 		'excerpt_more' => '&hellip;',
 		'assets' => 'thumbnail,like,title,excerpt',
@@ -60,7 +61,8 @@ function mtphr_gallery_archive_display( $atts, $content = null ) {
 		$args['tax_query'][] = array(
 			'taxonomy' => 'mtphr_gallery_category',
 			'field' => 'slug',
-			'terms' => $category_array
+			'terms' => $category_array,
+			'operator' => $operator
 		);
 	}
 	if( $tags ) {
@@ -68,7 +70,8 @@ function mtphr_gallery_archive_display( $atts, $content = null ) {
 		$args['tax_query'][] = array(
 			'taxonomy' => 'mtphr_gallery_tag',
 			'field' => 'slug',
-			'terms' => $tag_array
+			'terms' => $tag_array,
+			'operator' => $operator
 		);
 	}
 

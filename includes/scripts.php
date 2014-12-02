@@ -34,7 +34,7 @@ function mtphr_galleries_admin_scripts( $hook ) {
 	  wp_enqueue_style( 'mtphr-galleries-font' );
 
 		// Load the admin scripts
-		wp_register_script( 'mtphr-galleries', MTPHR_GALLERIES_URL.'/assets/js/script-admin.js', false, MTPHR_GALLERIES_VERSION, true );
+		wp_register_script( 'mtphr-galleries', MTPHR_GALLERIES_URL.'/assets/js/admin/script.js', false, MTPHR_GALLERIES_VERSION, true );
 		wp_enqueue_script( 'mtphr-galleries' );
 		wp_localize_script( 'mtphr-galleries', 'mtphr_galleries_vars', array(
 				'security' => wp_create_nonce( 'mtphr_galleries' ),
@@ -59,7 +59,7 @@ function mtphr_galleries_admin_scripts( $hook ) {
 	wp_enqueue_style( 'mtphr-galleries' );
 
 	// Shortcode generator
-	wp_register_script( 'mtphr-galleries-sc-gen', MTPHR_GALLERIES_URL.'/assets/js/mtphr-galleries-sc-gen.js', array('jquery'), MTPHR_GALLERIES_VERSION, true );
+	wp_register_script( 'mtphr-galleries-sc-gen', MTPHR_GALLERIES_URL.'/assets/js/admin/generator.js', array('jquery'), MTPHR_GALLERIES_VERSION, true );
 	wp_enqueue_script( 'mtphr-galleries-sc-gen' );
 }
 add_action( 'admin_enqueue_scripts', 'mtphr_galleries_admin_scripts' );

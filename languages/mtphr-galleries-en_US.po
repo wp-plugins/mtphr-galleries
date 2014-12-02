@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Metaphor Galleries v1.9.99\n"
+"Project-Id-Version: Metaphor Galleries v2.0.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-02-18 17:10:35+0000\n"
+"PO-Revision-Date: 2014-12-02 21:29:51+0000\n"
 "Last-Translator: admin <joe@metaphorcreations.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,9 +20,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
+#: includes/admin/generators/gallery.php:21
+#: includes/admin/generators/gallery.php:27
+#: includes/admin/generators/gallery.php:49
 #: includes/settings.php:21
-#: includes/shortcode-gen.php:16
-#: includes/shortcode-gen.php:126
+#: includes/shortcode-gen.php:17
 #@ mtphr-galleries
 msgid "Gallery"
 msgstr ""
@@ -33,100 +35,100 @@ msgid "Galleries"
 msgstr ""
 
 #: includes/display.php:71
-#: includes/functions.php:172
+#: includes/filters.php:73
 #@ mtphr-galleries
 msgid "Previous"
 msgstr ""
 
 #: includes/display.php:72
-#: includes/functions.php:173
+#: includes/filters.php:74
 #@ mtphr-galleries
 msgid "Next"
 msgstr ""
 
-#: includes/meta-boxes.php:175
+#: includes/meta-boxes.php:273
 #@ mtphr-galleries
 msgid "Rotation type"
 msgstr ""
 
-#: includes/meta-boxes.php:179
+#: includes/meta-boxes.php:277
 #@ mtphr-galleries
 msgid "Fade"
 msgstr ""
 
-#: includes/meta-boxes.php:180
+#: includes/meta-boxes.php:278
 #@ mtphr-galleries
 msgid "Slide left"
 msgstr ""
 
-#: includes/meta-boxes.php:181
+#: includes/meta-boxes.php:279
 #@ mtphr-galleries
 msgid "Slide right"
 msgstr ""
 
-#: includes/meta-boxes.php:182
+#: includes/meta-boxes.php:280
 #@ mtphr-galleries
 msgid "Slide up"
 msgstr ""
 
-#: includes/meta-boxes.php:183
+#: includes/meta-boxes.php:281
 #@ mtphr-galleries
 msgid "Slide down"
 msgstr ""
 
-#: includes/meta-boxes.php:184
+#: includes/meta-boxes.php:282
 #@ mtphr-galleries
 msgid "Dynamic slide direction"
 msgstr ""
 
-#: includes/meta-boxes.php:190
+#: includes/meta-boxes.php:288
 #@ mtphr-galleries
 msgid "Auto rotate"
 msgstr ""
 
-#: includes/meta-boxes.php:194
-#: includes/meta-boxes.php:222
-#: includes/meta-boxes.php:233
+#: includes/meta-boxes.php:292
+#: includes/meta-boxes.php:320
+#: includes/meta-boxes.php:331
 #@ mtphr-galleries
 msgid "Enable"
 msgstr ""
 
-#: includes/meta-boxes.php:195
+#: includes/meta-boxes.php:293
 #@ mtphr-galleries
 msgid "Seconds delay"
 msgstr ""
 
-#: includes/meta-boxes.php:196
+#: includes/meta-boxes.php:294
 #@ mtphr-galleries
 msgid "Pause on mouse over"
 msgstr ""
 
-#: includes/meta-boxes.php:202
+#: includes/meta-boxes.php:300
 #@ mtphr-galleries
 msgid "Rotate speed"
 msgstr ""
 
-#: includes/meta-boxes.php:206
+#: includes/meta-boxes.php:304
 #@ mtphr-galleries
 msgid "Tenths of a second"
 msgstr ""
 
-#: includes/meta-boxes.php:218
+#: includes/meta-boxes.php:316
 #@ mtphr-galleries
 msgid "Directional navigation"
 msgstr ""
 
-#: includes/meta-boxes.php:223
+#: includes/meta-boxes.php:321
 #@ mtphr-galleries
 msgid "Autohide navigation"
 msgstr ""
 
-#: includes/meta-boxes.php:229
+#: includes/meta-boxes.php:327
 #@ mtphr-galleries
 msgid "Control navigation"
 msgstr ""
 
-#: includes/meta-boxes.php:47
+#: includes/meta-boxes.php:30
 #@ mtphr-galleries
 msgid "Resources"
 msgstr ""
@@ -191,18 +193,18 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
-#: includes/shortcodes.php:122
+#: includes/shortcodes.php:125
 #, php-format
 #@ mtphr-galleries
 msgid "Permalink to %s"
 msgstr ""
 
-#: includes/shortcodes.php:172
+#: includes/shortcodes.php:175
 #@ mtphr-galleries
 msgid "Newer"
 msgstr ""
 
-#: includes/shortcodes.php:175
+#: includes/shortcodes.php:178
 #@ mtphr-galleries
 msgid "Older"
 msgstr ""
@@ -228,6 +230,7 @@ msgstr ""
 msgid "All Categories"
 msgstr ""
 
+#: includes/admin/generators/archive.php:49
 #: includes/taxonomies.php:30
 #: includes/taxonomies.php:73
 #@ mtphr-galleries
@@ -260,40 +263,39 @@ msgstr ""
 msgid "New Category"
 msgstr ""
 
-#: includes/shortcode-gen.php:86
 #: includes/taxonomies.php:36
 #@ mtphr-galleries
 msgid "Categories"
 msgstr ""
 
-#: includes/widget.php:50
+#: includes/widget-categories.php:39
 #@ mtphr-galleries
 msgid "Metaphor Gallery Categories"
 msgstr ""
 
-#: includes/widget.php:96
+#: includes/widget-categories.php:85
 #, php-format
 #@ mtphr-galleries
 msgid "All %s"
 msgstr ""
 
-#: includes/widget.php:148
-#: includes/widget.php:329
+#: includes/widget-categories.php:141
+#: includes/widget-data.php:162
 #@ mtphr-galleries
 msgid "Title:"
 msgstr ""
 
-#: includes/widget.php:155
+#: includes/widget-categories.php:148
 #@ mtphr-galleries
 msgid "Show post counts"
 msgstr ""
 
-#: includes/widget.php:159
+#: includes/widget-categories.php:152
 #@ mtphr-galleries
 msgid "Show hierarchy"
 msgstr ""
 
-#: includes/widget.php:165
+#: includes/widget-categories.php:158
 #@ mtphr-galleries
 msgid "All Galleries Page:"
 msgstr ""
@@ -305,64 +307,64 @@ msgstr ""
 msgid "%s Settings"
 msgstr ""
 
-#: includes/meta-boxes.php:48
+#: includes/meta-boxes.php:31
 #@ mtphr-galleries
 msgid "Rotator Settings"
 msgstr ""
 
-#: includes/meta-boxes.php:49
+#: includes/meta-boxes.php:32
 #, php-format
 #@ mtphr-galleries
 msgid "%s Data"
 msgstr ""
 
-#: includes/meta-boxes.php:54
+#: includes/meta-boxes.php:171
 #@ mtphr-galleries
 msgid "Add Images"
 msgstr ""
 
-#: includes/meta-boxes.php:176
+#: includes/meta-boxes.php:274
 #@ mtphr-galleries
 msgid "Set the type of rotation for the rotator"
 msgstr ""
 
-#: includes/meta-boxes.php:191
+#: includes/meta-boxes.php:289
 #@ mtphr-galleries
 msgid "Set the delay between rotations"
 msgstr ""
 
-#: includes/meta-boxes.php:203
+#: includes/meta-boxes.php:301
 #@ mtphr-galleries
 msgid "Set the speed & easing of the rotation"
 msgstr ""
 
-#: includes/meta-boxes.php:219
+#: includes/meta-boxes.php:317
 #@ mtphr-galleries
 msgid "Set the directional navigation options"
 msgstr ""
 
-#: includes/meta-boxes.php:230
+#: includes/meta-boxes.php:328
 #@ mtphr-galleries
 msgid "Set the control navigation options"
 msgstr ""
 
-#: includes/meta-boxes.php:258
+#: includes/meta-boxes.php:101
 #@ mtphr-galleries
 msgid "Client"
 msgstr ""
 
-#: includes/meta-boxes.php:259
+#: includes/meta-boxes.php:102
 #, php-format
 #@ mtphr-galleries
 msgid "Add a client to the %s"
 msgstr ""
 
-#: includes/meta-boxes.php:268
+#: includes/meta-boxes.php:115
 #@ mtphr-galleries
 msgid "External link"
 msgstr ""
 
-#: includes/meta-boxes.php:269
+#: includes/meta-boxes.php:116
 #, php-format
 #@ mtphr-galleries
 msgid "Add an external link to associate with the %s"
@@ -429,124 +431,90 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: includes/admin/generators/archive.php:14
 #: includes/shortcode-gen.php:13
 #@ mtphr-galleries
 msgid "Gallery Archive"
 msgstr ""
 
-#: includes/shortcode-gen.php:21
+#: includes/shortcode-gen.php:23
 #@ mtphr-galleries
 msgid "Metaphor Galleries"
 msgstr ""
 
-#: includes/shortcode-gen.php:40
+#: includes/admin/generators/archive.php:20
 #@ mtphr-galleries
 msgid "Posts Per Page"
 msgstr ""
 
-#: includes/shortcode-gen.php:40
+#: includes/admin/generators/archive.php:21
 #@ mtphr-galleries
 msgid "Use -1 to display all"
 msgstr ""
 
-#: includes/shortcode-gen.php:44
+#: includes/admin/generators/archive.php:27
 #@ mtphr-galleries
 msgid "Columns"
 msgstr ""
 
-#: includes/shortcode-gen.php:55
+#: includes/admin/generators/archive.php:41
 #@ mtphr-galleries
 msgid "Order By"
 msgstr ""
 
-#: includes/shortcode-gen.php:70
+#: includes/admin/generators/archive.php:59
 #@ mtphr-galleries
 msgid "Order"
 msgstr ""
 
-#: includes/shortcode-gen.php:77
+#: includes/admin/generators/archive.php:73
 #@ mtphr-galleries
 msgid "Excerpt Length"
 msgstr ""
 
-#: includes/shortcode-gen.php:77
-#: includes/shortcode-gen.php:81
-#: includes/shortcode-gen.php:86
-#: includes/shortcode-gen.php:91
-#: includes/shortcode-gen.php:96
-#: includes/shortcode-gen.php:135
-#: includes/shortcode-gen.php:139
-#: includes/shortcode-gen.php:143
-#: includes/shortcode-gen.php:147
+#: includes/admin/generators/gallery.php:39
 #@ mtphr-galleries
 msgid "Optional"
 msgstr ""
 
-#: includes/shortcode-gen.php:81
+#: includes/admin/generators/archive.php:80
 #@ mtphr-galleries
 msgid "Excerpt More"
 msgstr ""
 
-#: includes/shortcode-gen.php:83
+#: includes/admin/generators/archive.php:88
 #@ mtphr-galleries
 msgid "Link to post"
 msgstr ""
 
-#: includes/shortcode-gen.php:87
-#: includes/shortcode-gen.php:92
-#@ mtphr-galleries
-msgid "Use slugs separated by (,) commas."
-msgstr ""
-
-#: includes/shortcode-gen.php:91
 #: includes/taxonomies.php:79
 #@ mtphr-galleries
 msgid "Tags"
 msgstr ""
 
-#: includes/shortcode-gen.php:96
+#: includes/admin/generators/archive.php:127
 #@ mtphr-galleries
 msgid "Assets"
 msgstr ""
 
-#: includes/shortcode-gen.php:97
-#@ mtphr-galleries
-msgid "Separate assets by (,) commas. Re-order or remove the following: <strong>thumbnail</strong>,<strong>like</strong>,<strong>title</strong>,<strong>excerpt</strong>"
-msgstr ""
-
-#: includes/shortcode-gen.php:126
+#: includes/admin/generators/gallery.php:27
 #@ mtphr-galleries
 msgid "Required"
 msgstr ""
 
-#: includes/shortcode-gen.php:128
+#: includes/admin/generators/gallery.php:29
 #@ mtphr-galleries
 msgid "Select a Gallery"
 msgstr ""
 
-#: includes/shortcode-gen.php:135
+#: includes/admin/generators/gallery.php:39
 #@ mtphr-galleries
 msgid "Class"
 msgstr ""
 
-#: includes/shortcode-gen.php:139
-#@ mtphr-galleries
-msgid "Width"
-msgstr ""
-
-#: includes/shortcode-gen.php:143
-#@ mtphr-galleries
-msgid "Height"
-msgstr ""
-
-#: includes/shortcode-gen.php:147
+#: includes/admin/generators/gallery.php:47
 #@ mtphr-galleries
 msgid "Layout"
-msgstr ""
-
-#: includes/shortcode-gen.php:148
-#@ mtphr-galleries
-msgid "Separate assets by (,) commas. Re-order or remove the following: <strong>gallery</strong>,<strong>navigation</strong>"
 msgstr ""
 
 #: includes/taxonomies.php:69
@@ -590,73 +558,73 @@ msgstr ""
 msgid "New Tag"
 msgstr ""
 
-#: includes/widget.php:41
+#: includes/widget-categories.php:30
 #@ mtphr-galleries
 msgid "Display a list of gallery categories"
 msgstr ""
 
-#: includes/widget.php:201
+#: includes/widget-data.php:32
 #@ mtphr-galleries
 msgid "Display individual gallery data"
 msgstr ""
 
-#: includes/widget.php:210
+#: includes/widget-data.php:41
 #@ mtphr-galleries
 msgid "Metaphor Gallery Data"
 msgstr ""
 
-#: includes/widget.php:230
-#: includes/widget.php:321
+#: includes/widget-data.php:61
+#: includes/widget-data.php:152
 #@ mtphr-galleries
 msgid "Launch"
 msgstr ""
 
-#: includes/widget.php:244
+#: includes/widget-data.php:75
 #@ mtphr-galleries
 msgid "Date:"
 msgstr ""
 
-#: includes/widget.php:252
+#: includes/widget-data.php:83
 #@ mtphr-galleries
 msgid "Client:"
 msgstr ""
 
-#: includes/widget.php:261
+#: includes/widget-data.php:92
 #@ mtphr-galleries
 msgid "Categories:"
 msgstr ""
 
-#: includes/widget.php:270
+#: includes/widget-data.php:101
 #@ mtphr-galleries
 msgid "Tags:"
 msgstr ""
 
-#: includes/widget.php:336
+#: includes/widget-data.php:168
 #@ mtphr-galleries
 msgid "Display date"
 msgstr ""
 
-#: includes/widget.php:340
+#: includes/widget-data.php:171
 #@ mtphr-galleries
 msgid "Display client"
 msgstr ""
 
-#: includes/widget.php:344
+#: includes/widget-data.php:174
 #@ mtphr-galleries
 msgid "Display categories"
 msgstr ""
 
-#: includes/widget.php:348
+#: includes/widget-data.php:177
 #@ mtphr-galleries
 msgid "Display tags"
 msgstr ""
 
-#: includes/widget.php:353
+#: includes/widget-data.php:182
 #@ mtphr-galleries
 msgid "Button label:"
 msgstr ""
 
-#: includes/widget.php:359
+#: includes/widget-data.php:188
 #@ mtphr-galleries
 msgid "Button target:"
 msgstr ""
@@ -691,53 +659,53 @@ msgstr ""
 msgid "Has Archive Page"
 msgstr ""
 
-#: includes/display.php:233
+#: includes/display.php:254
 #@ mtphr-galleries
 msgid "Image"
 msgstr ""
 
-#: includes/display.php:268
+#: includes/display.php:296
 #@ mtphr-galleries
 msgid "Video"
 msgstr ""
 
-#: includes/display.php:282
-#: includes/display.php:323
+#: includes/display.php:310
+#: includes/display.php:351
 #: includes/scripts.php:45
 #@ mtphr-galleries
 msgid "Add Poster Image"
 msgstr ""
 
-#: includes/display.php:285
-#: includes/display.php:326
+#: includes/display.php:313
+#: includes/display.php:354
 #: includes/scripts.php:46
 #@ mtphr-galleries
 msgid "Remove Poster Image"
 msgstr ""
 
-#: includes/display.php:309
+#: includes/display.php:337
 #@ mtphr-galleries
 msgid "Audio"
 msgstr ""
 
-#: includes/display.php:357
+#: includes/display.php:385
 #@ mtphr-galleries
 msgid "YouTube"
 msgstr ""
 
-#: includes/display.php:373
-#: includes/display.php:423
+#: includes/display.php:401
+#: includes/display.php:451
 #@ mtphr-galleries
 msgid "Refresh Poster Image"
 msgstr ""
 
-#: includes/display.php:376
-#: includes/display.php:426
+#: includes/display.php:404
+#: includes/display.php:454
 #@ mtphr-galleries
 msgid "Create Poster Image"
 msgstr ""
 
-#: includes/display.php:407
+#: includes/display.php:435
 #@ mtphr-galleries
 msgid "Vimeo"
 msgstr ""
@@ -747,27 +715,27 @@ msgstr ""
 msgid "<i class=\"mtphr-galleries-icon-like\"></i>"
 msgstr ""
 
-#: includes/meta-boxes.php:55
+#: includes/meta-boxes.php:172
 #@ mtphr-galleries
 msgid "Add Videos"
 msgstr ""
 
-#: includes/meta-boxes.php:56
+#: includes/meta-boxes.php:173
 #@ mtphr-galleries
 msgid "Add Audio"
 msgstr ""
 
-#: includes/meta-boxes.php:57
+#: includes/meta-boxes.php:174
 #@ mtphr-galleries
 msgid "Add YouTube"
 msgstr ""
 
-#: includes/meta-boxes.php:58
+#: includes/meta-boxes.php:175
 #@ mtphr-galleries
 msgid "Add Vimeo"
 msgstr ""
 
-#: includes/meta-boxes.php:101
+#: includes/meta-boxes.php:207
 #@ mtphr-galleries
 msgid "Submit"
 msgstr ""
@@ -810,5 +778,117 @@ msgstr ""
 #: includes/scripts.php:52
 #@ mtphr-galleries
 msgid "Vimeo Video URL or ID"
+msgstr ""
+
+#: includes/admin/generators/archive.php:43
+#@ mtphr-galleries
+msgid "ID"
+msgstr ""
+
+#: includes/admin/generators/archive.php:44
+#@ mtphr-galleries
+msgid "Author"
+msgstr ""
+
+#: includes/admin/generators/archive.php:45
+#: includes/admin/generators/archive.php:131
+#@ mtphr-galleries
+msgid "Title"
+msgstr ""
+
+#: includes/admin/generators/archive.php:46
+#@ mtphr-galleries
+msgid "Name"
+msgstr ""
+
+#: includes/admin/generators/archive.php:47
+#@ mtphr-galleries
+msgid "Date"
+msgstr ""
+
+#: includes/admin/generators/archive.php:48
+#@ mtphr-galleries
+msgid "Modified"
+msgstr ""
+
+#: includes/admin/generators/archive.php:50
+#@ mtphr-galleries
+msgid "Random"
+msgstr ""
+
+#: includes/admin/generators/archive.php:51
+#@ mtphr-galleries
+msgid "Comment Count"
+msgstr ""
+
+#: includes/admin/generators/archive.php:52
+#@ mtphr-galleries
+msgid "Menu Order"
+msgstr ""
+
+#: includes/admin/generators/archive.php:87
+#@ mtphr-galleries
+msgid "Link \"Excerpt More\" to post"
+msgstr ""
+
+#: includes/admin/generators/archive.php:98
+#@ mtphr-galleries
+msgid "Taxonomy"
+msgstr ""
+
+#: includes/admin/generators/archive.php:108
+#@ mtphr-galleries
+msgid "Terms"
+msgstr ""
+
+#: includes/admin/generators/archive.php:115
+#@ mtphr-galleries
+msgid "Operator"
+msgstr ""
+
+#: includes/admin/generators/archive.php:117
+#@ mtphr-galleries
+msgid "IN"
+msgstr ""
+
+#: includes/admin/generators/archive.php:118
+#@ mtphr-galleries
+msgid "NOT IN"
+msgstr ""
+
+#: includes/admin/generators/archive.php:119
+#@ mtphr-galleries
+msgid "AND"
+msgstr ""
+
+#: includes/admin/generators/archive.php:127
+#: includes/admin/generators/gallery.php:47
+#@ mtphr-galleries
+msgid "Drag to re-arrange"
+msgstr ""
+
+#: includes/admin/generators/archive.php:129
+#@ mtphr-galleries
+msgid "Thumbnail"
+msgstr ""
+
+#: includes/admin/generators/archive.php:130
+#@ mtphr-galleries
+msgid "Like Button"
+msgstr ""
+
+#: includes/admin/generators/archive.php:132
+#@ mtphr-galleries
+msgid "Excerpt"
+msgstr ""
+
+#: includes/admin/generators/gallery.php:40
+#@ mtphr-galleries
+msgid "Add an optional class name"
+msgstr ""
+
+#: includes/admin/generators/gallery.php:50
+#@ mtphr-galleries
+msgid "Navigation"
 msgstr ""
 
