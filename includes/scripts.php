@@ -111,7 +111,7 @@ add_action( 'wp_enqueue_scripts', 'mtphr_galleries_scripts' );
 
 
 /* --------------------------------------------------------- */
-/* !Initialize the gallery scripts - 1.0.5 */
+/* !Initialize the gallery scripts - 2.0.12 */
 /* --------------------------------------------------------- */
 
 function mtphr_galleries_init_scripts() {
@@ -126,13 +126,13 @@ function mtphr_galleries_init_scripts() {
 			jQuery( window ).load( function() {
 			<?php foreach( $mtphr_galleries_scripts as $gallery ) { ?>
 				jQuery( '#<?php echo $gallery['id']; ?>' ).mtphr_gallery_slider({
-					rotate_type : '<?php echo $gallery['rotate_type']; ?>',
-					auto_rotate : <?php echo $gallery['auto_rotate']; ?>,
-					rotate_delay : <?php echo intval($gallery['rotate_delay']); ?>,
-					rotate_pause : <?php echo $gallery['rotate_pause']; ?>,
-					rotate_speed : <?php echo intval($gallery['rotate_speed']); ?>,
-					rotate_ease : '<?php echo $gallery['rotate_ease']; ?>',
-					nav_reverse : <?php echo $gallery['nav_reverse']; ?>
+					rotate_type 	: '<?php echo $gallery['rotate_type']; ?>',
+					auto_rotate 	: <?php echo $gallery['auto_rotate']; ?>,
+					delay 				: <?php echo intval($gallery['rotate_delay']); ?>,
+					rotate_pause 	: <?php echo $gallery['rotate_pause']; ?>,
+					rotate_speed 	: <?php echo intval($gallery['rotate_speed']); ?>,
+					rotate_ease 	: '<?php echo $gallery['rotate_ease']; ?>',
+					nav_reverse 	: <?php echo $gallery['nav_reverse']; ?>
 				});
 			 <?php } ?>
 			});

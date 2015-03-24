@@ -3,7 +3,7 @@ Contributors: metaphorcreations
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TCAJHP4AJ392N
 Tags: custom post type, galleries, gallery, photos, vimeo, youtube, slider
 Requires at least: 3.2
-Tested up to: 4.0.1
+Tested up to: 4.1.1
 Stable tag: /trunk/
 License: GPL2
 
@@ -33,6 +33,9 @@ Documentation is coming soon!
 1. Coming soon.
 
 == Changelog ==
+
+= 2.0.12 =
+* Fixed bug with rotator delay
 
 = 2.0.11 =
 * Updated video scripts for slider
@@ -149,4 +152,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Updated video scripts for slider & shortcode generator scripts.
+Fixed bug with rotator delay.
