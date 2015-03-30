@@ -14,45 +14,51 @@ add_action( 'add_meta_boxes', 'mtphr_galleries_rotator_metabox' );
 
 
 /* --------------------------------------------------------- */
-/* !Render the gallery settings metabox - 2.0.4 */
+/* !Render the gallery settings metabox - 2.0.13 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_settings_render_metabox() {
 
 	global $post;
 	$settings = mtphr_galleries_settings();
-
+	
 	$client = get_post_meta($post->ID, '_mtphr_gallery_client', true);
 	$link = get_post_meta($post->ID, '_mtphr_gallery_link', true);
 	
 	// Filter the tabs
-	$tabs = apply_filters( 'mtphr_galleries_tabs', array(
+	$tabs = array(
 		'resources' => __('Resources', 'mtphr-galleries'),
 		'settings' => __('Rotator Settings', 'mtphr-galleries'),
 		'data' => sprintf(__('%s Data', 'mtphr-galleries'), $settings['singular_label'])
-	));
+	);
+	
+	if( $settings['global_slider_settings'] == 'on' ) {
+		unset( $tabs['settings'] );
+	}
+	
+	$tabs = apply_filters( 'mtphr_galleries_tabs', $tabs, $post->post_type );
 	
 	// Filter the data meta
 	$data_meta = apply_filters( 'mtphr_galleries_data_meta', array(
 		'client' => 'client',
 		'filter' => 'filter',
 		'external_link' => 'external_link'
-	));	
+	), $post->post_type );	
 	
 	echo '<input type="hidden" name="mtphr_galleries_nonce" value="'.wp_create_nonce(basename(__FILE__)).'" />';
 
 	echo '<div id="mtphr-galleries-page-tabs">';
   	echo '<ul>';
-  		do_action('mtphr_galleries_metabox_tabs_before');
+  		do_action( 'mtphr_galleries_metabox_tabs_before', $post->post_type );
 			if( is_array($tabs) && count($tabs) > 0 ) {
 				foreach( $tabs as $type=>$button ) {
 					echo '<li class="nav-tab"><a href="#mtphr-galleries-page-tabs-'.$type.'">'.$button.'</a></li>';
 				}
 			}
-			do_action('mtphr_galleries_metabox_tabs_after');
+			do_action( 'mtphr_galleries_metabox_tabs_after', $post->post_type );
 		echo '</ul>';
 
-		do_action('mtphr_galleries_metabox_before');
+		do_action( 'mtphr_galleries_metabox_before', $post->post_type );
 
 		/* --------------------------------------------------------- */
 		/* !Gallery resources - 1.0.5 */
@@ -77,16 +83,16 @@ function mtphr_gallery_settings_render_metabox() {
 		}
 
 		/* --------------------------------------------------------- */
-		/* !Gallery data - 1.0.5 */
+		/* !Gallery data - 2.0.13 */
 		/* --------------------------------------------------------- */
 		
 		if( isset($tabs['data']) ) {
 			
 			echo '<div id="mtphr-galleries-page-tabs-data" class="mtphr-galleries-page-tabs-page">';
 	
-				do_action('mtphr_galleries_data_metabox_before');
+				do_action( 'mtphr_galleries_data_metabox_before', $post->post_type );
 				echo '<table class="mtphr-galleries-table">';
-					do_action('mtphr_galleries_data_metabox_top');
+					do_action( 'mtphr_galleries_data_metabox_top', $post->post_type );
 					
 					// Display the data meta
 					if( is_array($data_meta) && count($data_meta) > 0 ) {
@@ -123,7 +129,7 @@ function mtphr_gallery_settings_render_metabox() {
 									break;
 									
 								case 'filter':
-									do_action('mtphr_galleries_data_metabox_middle');
+									do_action( 'mtphr_galleries_data_metabox_middle', $post->post_type );
 									break;
 									
 								default:
@@ -133,21 +139,21 @@ function mtphr_gallery_settings_render_metabox() {
 						}
 					}
 
-					do_action('mtphr_galleries_data_metabox_bottom');
+					do_action( 'mtphr_galleries_data_metabox_bottom', $post->post_type );
 				echo '</table>';
-				do_action('mtphr_galleries_data_metabox_after');
+				do_action( 'mtphr_galleries_data_metabox_after', $post->post_type );
 	
 			echo '</div>';
 		}
 
-		do_action('mtphr_galleries_metabox_after');
+		do_action( 'mtphr_galleries_metabox_after', $post->post_type );
 
 	echo '</div>';
 }
 
 
 /* --------------------------------------------------------- */
-/* !Gallery resources setup - 2.0.6 */
+/* !Gallery resources setup - 2.0.13 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_galleries_resources_metabox') ) {
@@ -173,7 +179,7 @@ function mtphr_galleries_resources_metabox( $name_resources='_mtphr_gallery_reso
 		'audio' => __('Add Audio', 'mtphr-galleries'),
 		'youtube' => __('Add YouTube', 'mtphr-galleries'),
 		'vimeo' => __('Add Vimeo', 'mtphr-galleries')
-	));
+	), $post->post_type );
 	
 	// Remove unwanted media types
 	if( is_array($limit_types) && count($limit_types) > 0 ) {
@@ -187,7 +193,7 @@ function mtphr_galleries_resources_metabox( $name_resources='_mtphr_gallery_reso
 	$single = $single_resource ? 'data-single="true"' : '';
 	$hidden = ($single_resource && is_array($resources)) ? 'style="display:none;"' : '';
 
-	do_action($filter_prefix.'_resources_metabox_before');
+	do_action( $filter_prefix.'_resources_metabox_before', $post->post_type );
 	
 	echo '<div class="mtphr-galleries-add-buttons" '.$hidden.'>';
 		if( is_array($media_types) && count($media_types) > 0 ) {
@@ -216,7 +222,7 @@ function mtphr_galleries_resources_metabox( $name_resources='_mtphr_gallery_reso
 			if( is_array($resources) && count($resources) > 0 ) {	
 				foreach( $resources as $i=>$resource ) {
 
-					$resource = apply_filters( $filter_prefix.'_metabox_resource_data', $resource );
+					$resource = apply_filters( $filter_prefix.'_metabox_resource_data', $resource, $post->post_type );
 
 					if( is_array($resource) && isset($resource['type']) && array_key_exists($resource['type'], $media_types) ) {			
 						if( function_exists('mtphr_gallery_admin_render_'.$resource['type'].'_field') ) {
@@ -228,13 +234,13 @@ function mtphr_galleries_resources_metabox( $name_resources='_mtphr_gallery_reso
 		echo '</tr>';
 	echo '</table>';
 
-	do_action($filter_prefix.'_resources_metabox_after');
+	do_action( $filter_prefix.'_resources_metabox_after', $post->post_type );
 }
 }
 
 
 /* --------------------------------------------------------- */
-/* !Gallery settings setup - 2.0.5 */
+/* !Gallery settings setup - 2.0.13 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_galleries_settings_metabox') ) {
@@ -264,9 +270,9 @@ function mtphr_galleries_settings_metabox( $meta_prefix='_mtphr_gallery', $args=
 	$args = wp_parse_args( $args, $defaults );
 	extract( $args );
 
-	do_action($filter_prefix.'_rotator_metabox_before');
+	do_action( $filter_prefix.'_rotator_metabox_before', $post->post_type );
 	echo '<table class="mtphr-galleries-table">';
-		do_action($filter_prefix.'_rotator_metabox_top');
+		do_action( $filter_prefix.'_rotator_metabox_top', $post->post_type );
 
 		echo '<tr>';
 			echo '<td class="mtphr-galleries-label">';
@@ -274,12 +280,15 @@ function mtphr_galleries_settings_metabox( $meta_prefix='_mtphr_gallery', $args=
 				echo '<small>'.__('Set the type of rotation for the rotator', 'mtphr-galleries').'</small>';
 			echo '</td>';
 			echo '<td>';
-				echo '<label class="mtphr-galleries-radio"><input type="radio" name="'.$meta_prefix.'_slider_type" value="fade" '.checked('fade', $rotate_type, false).' /> '.__('Fade', 'mtphr-galleries').'</label>';
-				echo '<label class="mtphr-galleries-radio"><input type="radio" name="'.$meta_prefix.'_slider_type" value="slide_left" '.checked('slide_left', $rotate_type, false).' /> '.__('Slide left', 'mtphr-galleries').'</label>';
-				echo '<label class="mtphr-galleries-radio"><input type="radio" name="'.$meta_prefix.'_slider_type" value="slide_right" '.checked('slide_right', $rotate_type, false).' /> '.__('Slide right', 'mtphr-galleries').'</label>';
-				echo '<label class="mtphr-galleries-radio"><input type="radio" name="'.$meta_prefix.'_slider_type" value="slide_up" '.checked('slide_up', $rotate_type, false).' /> '.__('Slide up', 'mtphr-galleries').'</label>';
-				echo '<label style="margin-right:20px;" class="mtphr-galleries-radio"><input type="radio" name="'.$meta_prefix.'_slider_type" value="slide_down" '.checked('slide_down', $rotate_type, false).' /> '.__('Slide down', 'mtphr-galleries').'</label>';
-				echo '<label class="mtphr-galleries-checkbox"><input type="checkbox" name="'.$meta_prefix.'_slider_directional_nav_reverse" value="on" '.checked('on', $dynamic_direction, false).' /> '.__('Dynamic slide direction', 'mtphr-galleries').'</label>';
+			
+				$args = array(
+					'name' => $meta_prefix.'_slider_type',
+					'value' => $rotate_type,
+					'name_reverse' => $meta_prefix.'_slider_directional_nav_reverse',
+					'value_reverse' => $dynamic_direction,
+				);	
+				mtphr_galleries_settings_rotation_type( $args );
+
 			echo '</td>';
 		echo '</tr>';
 
@@ -289,9 +298,17 @@ function mtphr_galleries_settings_metabox( $meta_prefix='_mtphr_gallery', $args=
 				echo '<small>'.__('Set the delay between rotations', 'mtphr-galleries').'</small>';
 			echo '</td>';
 			echo '<td>';
-				echo '<label style="margin-right:20px;" class="mtphr-galleries-checkbox"><input type="checkbox" name="'.$meta_prefix.'_slider_auto_rotate" value="on" '.checked('on', $auto_rotate, false).' /> '.__('Enable', 'mtphr-galleries').'</label>';
-				echo '<label style="margin-right:20px;" class="mtphr-galleries-checkbox"><input type="number" name="'.$meta_prefix.'_slider_delay" value="'.$rotate_delay.'" /> '.__('Seconds delay', 'mtphr-galleries').'</label>';
-				echo '<label class="mtphr-galleries-checkbox"><input type="checkbox" name="'.$meta_prefix.'_slider_pause" value="on" '.checked('on', $rotate_pause, false).' /> '.__('Pause on mouse over', 'mtphr-galleries').'</label>';
+			
+				$args = array(
+					'name' => $meta_prefix.'_slider_auto_rotate',
+					'value' => $auto_rotate,
+					'name_delay' => $meta_prefix.'_slider_delay',
+					'value_delay' => $rotate_delay,
+					'name_pause' => $meta_prefix.'_slider_pause',
+					'value_pause' => $rotate_pause,
+				);
+				mtphr_galleries_settings_auto_rotate( $args );
+
 			echo '</td>';
 		echo '</tr>';
 
@@ -301,13 +318,15 @@ function mtphr_galleries_settings_metabox( $meta_prefix='_mtphr_gallery', $args=
 				echo '<small>'.__('Set the speed & easing of the rotation', 'mtphr-galleries').'</small>';
 			echo '</td>';
 			echo '<td>';
-				echo '<label style="margin-right:20px;" class="mtphr-galleries-checkbox"><input type="number" name="'.$meta_prefix.'_slider_speed" value="'.$rotate_speed.'" /> '.__('Tenths of a second', 'mtphr-galleries').'</label>';
-				echo '<select name="'.$meta_prefix.'_slider_ease">';
-					$eases = array('linear','swing','jswing','easeInQuad','easeInCubic','easeInQuart','easeInQuint','easeInSine','easeInExpo','easeInCirc','easeInElastic','easeInBack','easeInBounce','easeOutQuad','easeOutCubic','easeOutQuart','easeOutQuint','easeOutSine','easeOutExpo','easeOutCirc','easeOutElastic','easeOutBack','easeOutBounce','easeInOutQuad','easeInOutCubic','easeInOutQuart','easeInOutQuint','easeInOutSine','easeInOutExpo','easeInOutCirc','easeInOutElastic','easeInOutBack','easeInOutBounce');
-					foreach( $eases as $ease ) {
-						echo '<option '.selected($ease, $rotate_easing, false).'>'.$ease.'</option>';
-					}
-				echo '</select>';
+			
+				$args = array(
+					'name' => $meta_prefix.'_slider_speed',
+					'value' => $rotate_speed,
+					'name_ease' => $meta_prefix.'_slider_ease',
+					'value_ease' => $rotate_easing,
+				);
+				mtphr_galleries_settings_rotate_speed( $args );
+
 			echo '</td>';
 		echo '</tr>';
 
@@ -317,8 +336,15 @@ function mtphr_galleries_settings_metabox( $meta_prefix='_mtphr_gallery', $args=
 				echo '<small>'.__('Set the directional navigation options', 'mtphr-galleries').'</small>';
 			echo '</td>';
 			echo '<td>';
-				echo '<label style="margin-right:20px;" class="mtphr-galleries-checkbox"><input type="checkbox" name="'.$meta_prefix.'_slider_directional_nav" value="on" '.checked('on', $directional_nav, false).' /> '.__('Enable', 'mtphr-galleries').'</label>';
-				echo '<label class="mtphr-galleries-checkbox"><input type="checkbox" name="'.$meta_prefix.'_slider_directional_nav_hide" value="on" '.checked('on', $hide_directional_nav, false).' /> '.__('Autohide navigation', 'mtphr-galleries').'</label>';
+			
+				$args = array(
+					'name' => $meta_prefix.'_slider_directional_nav',
+					'value' => $directional_nav,
+					'name_hide' => $meta_prefix.'_slider_directional_nav_hide',
+					'value_hide' => $hide_directional_nav,
+				);
+				mtphr_galleries_settings_directional_navigation( $args );
+
 			echo '</td>';
 		echo '</tr>';
 
@@ -328,13 +354,20 @@ function mtphr_galleries_settings_metabox( $meta_prefix='_mtphr_gallery', $args=
 				echo '<small>'.__('Set the control navigation options', 'mtphr-galleries').'</small>';
 			echo '</td>';
 			echo '<td>';
-				echo '<label style="margin-right:20px;" class="mtphr-galleries-checkbox"><input type="checkbox" name="'.$meta_prefix.'_slider_control_nav" value="on" '.checked('on', $control_nav, false).' /> '.__('Enable', 'mtphr-galleries').'</label>';
+			
+				$args = array(
+					'name' => $meta_prefix.'_slider_control_nav',
+					'value' => $control_nav,
+					'label' => __('Enable', 'mtphr-galleries'),
+				);
+				mtphr_galleries_settings_checkbox( $args );
+
 			echo '</td>';
 		echo '</tr>';
 
-		do_action($filter_prefix.'_rotator_metabox_bottom');
+		do_action( $filter_prefix.'_rotator_metabox_bottom', $post->post_type );
 	echo '</table>';
-	do_action($filter_prefix.'_rotator_metabox_after');
+	do_action( $filter_prefix.'_rotator_metabox_after', $post->post_type );
 }
 }
 

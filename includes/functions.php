@@ -113,9 +113,11 @@ function mtphr_gallery( $post_id=false, $width=false, $height=false, $args=false
 /**
  * Return the gallery
  *
- * @since 2.0.5
+ * @since 2.0.13
  */
 function get_mtphr_gallery( $post_id=false, $width=false, $height=false, $args=false, $class='' ) {
+	
+	$settings = mtphr_galleries_settings();
 
 	// Get the post id
 	$post_id = $post_id ? $post_id : get_the_id();
@@ -139,6 +141,8 @@ function get_mtphr_gallery( $post_id=false, $width=false, $height=false, $args=f
 
 	// Extract the metadata array into variables
 	extract( $meta_data );
+	
+	$control_nav = ($settings['global_slider_settings'] == 'on') ? ( $settings['slider_control_nav'] == 'on' ) : (isset($_mtphr_gallery_slider_control_nav) && $_mtphr_gallery_slider_control_nav);
 
 	// Create the gallery
 	$gallery_id = 'mtphr-gallery-'.$post_id;
@@ -158,13 +162,13 @@ function get_mtphr_gallery( $post_id=false, $width=false, $height=false, $args=f
 			switch( $asset ) {
 	
 				case 'like':
-					if( isset($_mtphr_gallery_slider_control_nav) && $_mtphr_gallery_slider_control_nav ) {
+					if( $control_nav ) {
 						$html .= get_mtphr_gallery_likes();
 					}
 					break;
 	
 				case 'navigation':
-					if( isset($_mtphr_gallery_slider_control_nav) && $_mtphr_gallery_slider_control_nav ) {
+					if( $control_nav ) {
 						$html .= get_mtphr_galleries_navigation( $post_id );
 					}
 					break;
@@ -195,28 +199,36 @@ function get_mtphr_gallery( $post_id=false, $width=false, $height=false, $args=f
 
 	// Add to the gallery scripts to display in the footer
 	global $mtphr_galleries_scripts;
-	$rotate = 0; $pause = 0; $nav_autohide = 0; $nav_reverse = 0;
-	if( isset($_mtphr_gallery_slider_auto_rotate) ) {
-		$rotate = $_mtphr_gallery_slider_auto_rotate ? 1 : 0;
-	}
-	if( isset($_mtphr_gallery_slider_pause) ) {
-		$pause = $_mtphr_gallery_slider_pause ? 1 : 0;
-	}
-	if( isset($_mtphr_gallery_slider_directional_nav_reverse) ) {
-		$nav_reverse = $_mtphr_gallery_slider_directional_nav_reverse ? 1 : 0;
-	}
 	
-	if( !empty($_mtphr_gallery_slider_type) ) {
-		$mtphr_galleries_scripts[] = array(
-			'id' => $gallery_id,
-			'rotate_type' => $_mtphr_gallery_slider_type,
-			'auto_rotate' => $rotate,
-			'rotate_delay' => intval($_mtphr_gallery_slider_delay),
-			'rotate_pause' => $pause,
-			'rotate_speed' => intval($_mtphr_gallery_slider_speed),
-			'rotate_ease' => $_mtphr_gallery_slider_ease,
-			'nav_reverse' => $nav_reverse
-		);
+	if( $settings['global_slider_settings'] == 'on' ) {
+		
+		$mtphr_galleries_scripts = array( 'on' );
+		
+	} else {
+		
+		$rotate = 0; $pause = 0; $nav_autohide = 0; $nav_reverse = 0;
+		if( isset($_mtphr_gallery_slider_auto_rotate) ) {
+			$rotate = $_mtphr_gallery_slider_auto_rotate ? 1 : 0;
+		}
+		if( isset($_mtphr_gallery_slider_pause) ) {
+			$pause = $_mtphr_gallery_slider_pause ? 1 : 0;
+		}
+		if( isset($_mtphr_gallery_slider_directional_nav_reverse) ) {
+			$nav_reverse = $_mtphr_gallery_slider_directional_nav_reverse ? 1 : 0;
+		}
+		
+		if( !empty($_mtphr_gallery_slider_type) ) {
+			$mtphr_galleries_scripts[] = array(
+				'id' => $gallery_id,
+				'rotate_type' => $_mtphr_gallery_slider_type,
+				'auto_rotate' => $rotate,
+				'rotate_delay' => intval($_mtphr_gallery_slider_delay),
+				'rotate_pause' => $pause,
+				'rotate_speed' => intval($_mtphr_gallery_slider_speed),
+				'rotate_ease' => $_mtphr_gallery_slider_ease,
+				'nav_reverse' => $nav_reverse
+			);
+		}
 	}
 
 	// Return the gallery

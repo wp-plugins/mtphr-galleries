@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Metaphor Galleries v2.0.10\n"
+"Project-Id-Version: Metaphor Galleries v2.0.13\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-12-02 21:38:14+0000\n"
+"PO-Revision-Date: 2015-03-30 15:52:45+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,8 +23,8 @@ msgstr ""
 #: includes/admin/generators/gallery.php:21
 #: includes/admin/generators/gallery.php:27
 #: includes/admin/generators/gallery.php:49
+#: includes/admin/shortcode-gen.php:17
 #: includes/settings.php:21
-#: includes/shortcode-gen.php:17
 #@ mtphr-galleries
 msgid "Gallery"
 msgstr "Gallery"
@@ -35,100 +35,106 @@ msgid "Galleries"
 msgstr "Galleries"
 
 #: includes/display.php:71
-#: includes/filters.php:73
+#: includes/filters.php:80
 #@ mtphr-galleries
 msgid "Previous"
 msgstr "Precedente"
 
 #: includes/display.php:72
-#: includes/filters.php:74
+#: includes/filters.php:81
 #@ mtphr-galleries
 msgid "Next"
 msgstr "Successivo"
 
-#: includes/meta-boxes.php:273
+#: includes/admin/meta-boxes.php:279
+#: includes/settings.php:103
 #@ mtphr-galleries
 msgid "Rotation type"
 msgstr "Tipologia rotazione"
 
-#: includes/meta-boxes.php:277
+#: includes/admin/fields.php:239
 #@ mtphr-galleries
 msgid "Fade"
 msgstr "Dissolvenza"
 
-#: includes/meta-boxes.php:278
+#: includes/admin/fields.php:240
 #@ mtphr-galleries
 msgid "Slide left"
 msgstr "Slide a sinistra"
 
-#: includes/meta-boxes.php:279
+#: includes/admin/fields.php:241
 #@ mtphr-galleries
 msgid "Slide right"
 msgstr "Slide a destra"
 
-#: includes/meta-boxes.php:280
+#: includes/admin/fields.php:242
 #@ mtphr-galleries
 msgid "Slide up"
 msgstr "Slide sopra"
 
-#: includes/meta-boxes.php:281
+#: includes/admin/fields.php:243
 #@ mtphr-galleries
 msgid "Slide down"
 msgstr "Slide sotto"
 
-#: includes/meta-boxes.php:282
+#: includes/admin/fields.php:245
 #@ mtphr-galleries
 msgid "Dynamic slide direction"
 msgstr "Direzione slide dinamica"
 
-#: includes/meta-boxes.php:288
+#: includes/admin/meta-boxes.php:297
+#: includes/settings.php:118
 #@ mtphr-galleries
 msgid "Auto rotate"
 msgstr "Rotazione automatica"
 
-#: includes/meta-boxes.php:292
-#: includes/meta-boxes.php:320
-#: includes/meta-boxes.php:331
+#: includes/admin/fields.php:279
+#: includes/admin/fields.php:353
+#: includes/admin/meta-boxes.php:361
+#: includes/settings.php:172
 #@ mtphr-galleries
 msgid "Enable"
 msgstr "Abilitare"
 
-#: includes/meta-boxes.php:293
+#: includes/admin/fields.php:281
 #@ mtphr-galleries
 msgid "Seconds delay"
 msgstr "Ritardo in secondi"
 
-#: includes/meta-boxes.php:294
+#: includes/admin/fields.php:284
 #@ mtphr-galleries
 msgid "Pause on mouse over"
 msgstr "Pausa al passaggio del puntatore (mouse)"
 
-#: includes/meta-boxes.php:300
+#: includes/admin/meta-boxes.php:317
+#: includes/settings.php:135
 #@ mtphr-galleries
 msgid "Rotate speed"
 msgstr "Velocità rotazione"
 
-#: includes/meta-boxes.php:304
+#: includes/admin/fields.php:315
 #@ mtphr-galleries
 msgid "Tenths of a second"
 msgstr "Decimi di secondo"
 
-#: includes/meta-boxes.php:316
+#: includes/admin/meta-boxes.php:335
+#: includes/settings.php:150
 #@ mtphr-galleries
 msgid "Directional navigation"
 msgstr "Navigazione Direzionale"
 
-#: includes/meta-boxes.php:321
+#: includes/admin/fields.php:354
 #@ mtphr-galleries
 msgid "Autohide navigation"
 msgstr "Nascondi automaticamente la navigazione"
 
-#: includes/meta-boxes.php:327
+#: includes/admin/meta-boxes.php:353
+#: includes/settings.php:165
 #@ mtphr-galleries
 msgid "Control navigation"
 msgstr "Navigazione di controllo"
 
-#: includes/meta-boxes.php:30
+#: includes/admin/meta-boxes.php:30
 #@ mtphr-galleries
 msgid "Resources"
 msgstr "Risorse"
@@ -188,7 +194,7 @@ msgstr "Nessun %s Trovato"
 msgid "No %s Found in Trash"
 msgstr "Nessun %s trovato nel cestino"
 
-#: includes/settings.php:53
+#: includes/settings.php:66
 #@ mtphr-galleries
 msgid "Slug"
 msgstr "Abbreviazione"
@@ -300,71 +306,76 @@ msgstr "Mostrare gerarchia"
 msgid "All Galleries Page:"
 msgstr "Aggiungi la pagina Gallerie:"
 
-#: includes/meta-boxes.php:10
-#: includes/settings.php:220
+#: includes/admin/meta-boxes.php:10
+#: includes/settings.php:334
 #, php-format
 #@ mtphr-galleries
 msgid "%s Settings"
 msgstr "%s Impostazioni"
 
-#: includes/meta-boxes.php:31
+#: includes/admin/meta-boxes.php:31
 #@ mtphr-galleries
 msgid "Rotator Settings"
 msgstr "Impostazioni Rotator"
 
-#: includes/meta-boxes.php:32
+#: includes/admin/meta-boxes.php:32
 #, php-format
 #@ mtphr-galleries
 msgid "%s Data"
 msgstr "%s Dati"
 
-#: includes/meta-boxes.php:171
+#: includes/admin/meta-boxes.php:177
 #@ mtphr-galleries
 msgid "Add Images"
 msgstr "Aggiungi Immagini"
 
-#: includes/meta-boxes.php:274
+#: includes/admin/meta-boxes.php:280
+#: includes/settings.php:103
 #@ mtphr-galleries
 msgid "Set the type of rotation for the rotator"
 msgstr "Impostare la tipologia di rotazione per il rotator"
 
-#: includes/meta-boxes.php:289
+#: includes/admin/meta-boxes.php:298
+#: includes/settings.php:118
 #@ mtphr-galleries
 msgid "Set the delay between rotations"
 msgstr "Impostare il ritardo tra le rotazioni"
 
-#: includes/meta-boxes.php:301
+#: includes/admin/meta-boxes.php:318
+#: includes/settings.php:135
 #@ mtphr-galleries
 msgid "Set the speed & easing of the rotation"
 msgstr "Impostare la velocità e l'easing della rotazione"
 
-#: includes/meta-boxes.php:317
+#: includes/admin/meta-boxes.php:336
+#: includes/settings.php:150
 #@ mtphr-galleries
 msgid "Set the directional navigation options"
 msgstr "Impostare le opzioni di navigazione direzionale"
 
-#: includes/meta-boxes.php:328
+#: includes/admin/meta-boxes.php:354
+#: includes/settings.php:165
 #@ mtphr-galleries
 msgid "Set the control navigation options"
 msgstr "Impostare le opzioni di navigazione di controllo"
 
-#: includes/meta-boxes.php:101
+#: includes/admin/meta-boxes.php:107
 #@ mtphr-galleries
 msgid "Client"
 msgstr "Client"
 
-#: includes/meta-boxes.php:102
+#: includes/admin/meta-boxes.php:108
 #, php-format
 #@ mtphr-galleries
 msgid "Add a client to the %s"
 msgstr "Aggiungi un client a %s"
 
-#: includes/meta-boxes.php:115
+#: includes/admin/meta-boxes.php:121
 #@ mtphr-galleries
 msgid "External link"
 msgstr "Link Esterno"
 
-#: includes/meta-boxes.php:116
+#: includes/admin/meta-boxes.php:122
 #, php-format
 #@ mtphr-galleries
 msgid "Add an external link to associate with the %s"
@@ -380,64 +391,65 @@ msgstr "Carica o seleziona immagini"
 msgid "Insert Image(s)"
 msgstr "Inserisci una o più Immagini"
 
-#: includes/settings.php:45
+#: includes/settings.php:56
 #@ mtphr-galleries
 msgid "General settings"
 msgstr "impostazioni Generali"
 
-#: includes/settings.php:45
+#: includes/settings.php:56
+#: includes/settings.php:58
 #@ mtphr-galleries
 msgid "Save Changes"
 msgstr "Salva cambiamenti"
 
-#: includes/settings.php:53
+#: includes/settings.php:66
 #@ mtphr-galleries
 msgid "Set the slug for the gallery post type and category"
 msgstr "Impostare l'abbreviazione della tipologia di post e categoria per la gallery"
 
-#: includes/settings.php:57
+#: includes/settings.php:70
 #@ mtphr-galleries
 msgid "Singular label"
 msgstr "Etichetta Singolare"
 
-#: includes/settings.php:57
+#: includes/settings.php:70
 #@ mtphr-galleries
 msgid "Set the singular label for the gallery post type and category"
 msgstr "Impostare l'etichetta singolare per la tipologia di post e categoria della gallery"
 
-#: includes/settings.php:61
+#: includes/settings.php:74
 #@ mtphr-galleries
 msgid "Plural label"
 msgstr "Etichetta Plurale"
 
-#: includes/settings.php:61
+#: includes/settings.php:74
 #@ mtphr-galleries
 msgid "Set the plural label for the gallery post type and category"
 msgstr "Impostare l'etichetta plurale per la tipologia di post e categoria della gallery "
 
-#: includes/settings.php:97
+#: includes/settings.php:201
 #@ mtphr-galleries
 msgid "You must update permalinks after changing the slug."
 msgstr "Devi caricare i permalinks dopo aver cambiato l'abbreviazione"
 
-#: includes/settings.php:97
+#: includes/settings.php:201
 #@ mtphr-galleries
 msgid "You must not have a page slug with the same name as this slug."
 msgstr "Non devi avere un'abbreviazione della pagina con lo stesso nome di questa abbreviazione."
 
-#: includes/settings.php:201
-#: includes/settings.php:202
+#: includes/settings.php:313
+#: includes/settings.php:314
 #@ mtphr-galleries
 msgid "Settings"
 msgstr "Impostazioni"
 
 #: includes/admin/generators/archive.php:14
-#: includes/shortcode-gen.php:13
+#: includes/admin/shortcode-gen.php:13
 #@ mtphr-galleries
 msgid "Gallery Archive"
 msgstr "Archivio Gallery"
 
-#: includes/shortcode-gen.php:23
+#: includes/admin/shortcode-gen.php:23
 #@ mtphr-galleries
 msgid "Metaphor Galleries"
 msgstr "Metaphor Galleries"
@@ -629,32 +641,32 @@ msgstr "Etichetta Pulsante:"
 msgid "Button target:"
 msgstr "Pulsante target:"
 
-#: includes/settings.php:69
+#: includes/settings.php:82
 #@ mtphr-galleries
 msgid "Has archive"
 msgstr "Ha un archivio"
 
-#: includes/settings.php:69
+#: includes/settings.php:82
 #@ mtphr-galleries
 msgid "Set whether or not the post type has an archive page"
 msgstr "Impostare se la tipologia post (post type) ha o non ha una pagina archivio"
 
-#: includes/settings.php:140
+#: includes/settings.php:244
 #@ mtphr-galleries
 msgid "Not Public"
 msgstr "Non Pubblico"
 
-#: includes/settings.php:141
+#: includes/settings.php:245
 #@ mtphr-galleries
 msgid "Public"
 msgstr "Pubblico"
 
-#: includes/settings.php:157
+#: includes/settings.php:261
 #@ mtphr-galleries
 msgid "No Archive Page"
 msgstr "Nessuna Pagina Archivio"
 
-#: includes/settings.php:158
+#: includes/settings.php:262
 #@ mtphr-galleries
 msgid "Has Archive Page"
 msgstr "Ha la pagina Archivio"
@@ -710,32 +722,32 @@ msgstr "Creare un'immagine Poster"
 msgid "Vimeo"
 msgstr "Vimeo"
 
-#: includes/edit-columns.php:13
+#: includes/admin/edit-columns.php:13
 #@ mtphr-galleries
 msgid "<i class=\"mtphr-galleries-icon-like\"></i>"
 msgstr "<i class=\"mtphr-galleries-icon-like\"></i>"
 
-#: includes/meta-boxes.php:172
+#: includes/admin/meta-boxes.php:178
 #@ mtphr-galleries
 msgid "Add Videos"
 msgstr "Aggiungi Video"
 
-#: includes/meta-boxes.php:173
+#: includes/admin/meta-boxes.php:179
 #@ mtphr-galleries
 msgid "Add Audio"
 msgstr "Aggiungi Audio"
 
-#: includes/meta-boxes.php:174
+#: includes/admin/meta-boxes.php:180
 #@ mtphr-galleries
 msgid "Add YouTube"
 msgstr "Aggiungi YouTube"
 
-#: includes/meta-boxes.php:175
+#: includes/admin/meta-boxes.php:181
 #@ mtphr-galleries
 msgid "Add Vimeo"
 msgstr "Aggiungi Vimeo"
 
-#: includes/meta-boxes.php:207
+#: includes/admin/meta-boxes.php:213
 #@ mtphr-galleries
 msgid "Submit"
 msgstr "Invia"
@@ -891,4 +903,39 @@ msgstr "Aggiungere un nome di classe opzionale"
 #@ mtphr-galleries
 msgid "Navigation"
 msgstr "Navigazione"
+
+#: includes/admin/fields.php:40
+#: includes/admin/fields.php:71
+#: includes/admin/fields.php:98
+#: includes/admin/fields.php:125
+#: includes/admin/fields.php:161
+#: includes/admin/fields.php:186
+#: includes/admin/fields.php:215
+#: includes/admin/fields.php:251
+#: includes/admin/fields.php:290
+#: includes/admin/fields.php:328
+#: includes/admin/fields.php:359
+#@ mtphr-galleries
+msgid "Missing required data"
+msgstr "Manca dati richiesti"
+
+#: includes/settings.php:58
+#@ mtphr-galleries
+msgid "Rotator settings"
+msgstr "Impostazioni rotator"
+
+#: includes/settings.php:89
+#@ mtphr-galleries
+msgid "Global rotator settings"
+msgstr "Impostazioni rotatori globali"
+
+#: includes/settings.php:89
+#@ mtphr-galleries
+msgid "Disable individual rotator settings and use global settings"
+msgstr "Disattivare le impostazioni rotatore individuali e utilizzare le impostazioni globali"
+
+#: includes/settings.php:96
+#@ mtphr-galleries
+msgid "Use global settings for all sliders"
+msgstr "Utilizzare le impostazioni globali per tutti i cursori"
 

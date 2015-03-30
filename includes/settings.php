@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Get the settings - 1.2.0 */
+/* !Get the settings - 2.0.13 */
 /* --------------------------------------------------------- */
 
 if( !function_exists('mtphr_galleries_settings') ) {
@@ -21,7 +21,18 @@ function mtphr_galleries_settings_defaults() {
 		'singular_label' => __( 'Gallery', 'mtphr-galleries' ),
 		'plural_label' => __( 'Galleries', 'mtphr-galleries' ),
 		'public' => 'true',
-		'has_archive' => 'false'
+		'has_archive' => 'false',
+		'global_slider_settings' => '',
+		'slider_type' => 'fade',
+		'slider_directional_nav_reverse' => '',
+		'slider_auto_rotate' => '',
+		'slider_delay' => 7,
+		'slider_pause' => '',
+		'slider_speed' => 5,
+		'slider_ease' => 'linear',
+		'slider_directional_nav' => '',
+		'slider_directional_nav_hide' => '',
+		'slider_control_nav' => ''
 	);
 	return $defaults;
 }
@@ -30,7 +41,7 @@ function mtphr_galleries_settings_defaults() {
 
 
 /* --------------------------------------------------------- */
-/* !Initializes the settings page - 1.0.5 */
+/* !Initializes the settings page - 2.0.13 */
 /* --------------------------------------------------------- */
 
 function mtphr_galleries_initialize_settings() {
@@ -43,6 +54,8 @@ function mtphr_galleries_initialize_settings() {
 	/* --------------------------------------------------------- */
 
 	add_settings_section( 'mtphr_galleries_settings_section', __( 'General settings', 'mtphr-galleries' ).'<input type="submit" class="button button-small" value="'.__('Save Changes', 'mtphr-galleries').'">', false, 'mtphr_galleries_settings' );
+	
+	add_settings_section( 'mtphr_galleries_slider_section', __( 'Rotator settings', 'mtphr-galleries' ).'<input type="submit" class="button button-small" value="'.__('Save Changes', 'mtphr-galleries').'">', false, 'mtphr_galleries_settings' );
 
 
 	/* --------------------------------------------------------- */
@@ -68,6 +81,97 @@ function mtphr_galleries_initialize_settings() {
 	/* Has archive */
 	$title = '<div class="mtphr-galleries-label-alt"><label>'.__( 'Has archive', 'mtphr-galleries' ).'</label><small>'.__('Set whether or not the post type has an archive page', 'mtphr-galleries').'</small></div>';
 	add_settings_field( 'mtphr_galleries_settings_has_archive', $title, 'mtphr_galleries_settings_has_archive', 'mtphr_galleries_settings', 'mtphr_galleries_settings_section', array('settings' => $settings) );
+	
+	
+	/* Global slider settings */
+	add_settings_field(
+		'mtphr_galleries_general_settings_global_slider_settings',
+		mtphr_galleries_settings_label( __( 'Global rotator settings', 'mtphr-galleries' ), __('Disable individual rotator settings and use global settings', 'mtphr-galleries') ),
+		'mtphr_galleries_settings_checkbox',
+		'mtphr_galleries_settings',
+		'mtphr_galleries_slider_section',
+		array(
+			'name' => 'mtphr_galleries_settings[global_slider_settings]',
+			'value' => $settings['global_slider_settings'],
+			'label' => __('Use global settings for all sliders', 'mtphr-galleries')
+		)
+	);
+	
+	/* Rotation type */
+	add_settings_field(
+		'mtphr_galleries_general_settings_rotation_type',
+		mtphr_galleries_settings_label( __( 'Rotation type', 'mtphr-galleries' ), __('Set the type of rotation for the rotator', 'mtphr-galleries') ),
+		'mtphr_galleries_settings_rotation_type',
+		'mtphr_galleries_settings',
+		'mtphr_galleries_slider_section',
+		array(
+			'name' => 'mtphr_galleries_settings[slider_type]',
+			'value' => $settings['slider_type'],
+			'name_reverse' => 'mtphr_galleries_settings[slider_directional_nav_reverse]',
+			'value_reverse' => $settings['slider_directional_nav_reverse'],
+		)
+	);
+	
+	/* Auto rotate */
+	add_settings_field(
+		'mtphr_galleries_general_settings_auto_rotate',
+		mtphr_galleries_settings_label( __( 'Auto rotate', 'mtphr-galleries' ), __('Set the delay between rotations', 'mtphr-galleries') ),
+		'mtphr_galleries_settings_auto_rotate',
+		'mtphr_galleries_settings',
+		'mtphr_galleries_slider_section',
+		array(
+			'name' => 'mtphr_galleries_settings[slider_auto_rotate]',
+			'value' => $settings['slider_auto_rotate'],
+			'name_delay' => 'mtphr_galleries_settings[slider_delay]',
+			'value_delay' => $settings['slider_delay'],
+			'name_pause' => 'mtphr_galleries_settings[slider_pause]',
+			'value_pause' => $settings['slider_pause'],
+		)
+	);
+	
+	/* Rotate speed */
+	add_settings_field(
+		'mtphr_galleries_general_settings_rotate_speed',
+		mtphr_galleries_settings_label( __( 'Rotate speed', 'mtphr-galleries' ), __('Set the speed & easing of the rotation', 'mtphr-galleries') ),
+		'mtphr_galleries_settings_rotate_speed',
+		'mtphr_galleries_settings',
+		'mtphr_galleries_slider_section',
+		array(
+			'name' => 'mtphr_galleries_settings[slider_speed]',
+			'value' => $settings['slider_speed'],
+			'name_ease' => 'mtphr_galleries_settings[slider_ease]',
+			'value_ease' => $settings['slider_ease'],
+		)
+	);
+	
+	/* Directional navigation */
+	add_settings_field(
+		'mtphr_galleries_general_settings_directional_navigation',
+		mtphr_galleries_settings_label( __( 'Directional navigation', 'mtphr-galleries' ), __('Set the directional navigation options', 'mtphr-galleries') ),
+		'mtphr_galleries_settings_directional_navigation',
+		'mtphr_galleries_settings',
+		'mtphr_galleries_slider_section',
+		array(
+			'name' => 'mtphr_galleries_settings[slider_directional_nav]',
+			'value' => $settings['slider_directional_nav'],
+			'name_hide' => 'mtphr_galleries_settings[slider_directional_nav_hide]',
+			'value_hide' => $settings['slider_directional_nav_hide'],
+		)
+	);
+	
+	/* Control navigation */
+	add_settings_field(
+		'mtphr_galleries_general_settings_control_navigation',
+		mtphr_galleries_settings_label( __( 'Control navigation', 'mtphr-galleries' ), __('Set the control navigation options', 'mtphr-galleries') ),
+		'mtphr_galleries_settings_checkbox',
+		'mtphr_galleries_settings',
+		'mtphr_galleries_slider_section',
+		array(
+			'name' => 'mtphr_galleries_settings[slider_control_nav]',
+			'value' => $settings['slider_control_nav'],
+			'label' => __('Enable', 'mtphr-galleries'),
+		)
+	);
 
 
 	/* --------------------------------------------------------- */
@@ -179,6 +283,14 @@ function mtphr_galleries_settings_sanitize( $fields ) {
 		$fields['slug'] = isset( $fields['slug'] ) ? sanitize_text_field($fields['slug']) : '';
 		$fields['singular_label'] = $wpml['singular_label'] = isset( $fields['singular_label'] ) ? sanitize_text_field($fields['singular_label']) : '';
 		$fields['plural_label'] = $wpml['plural_label'] = isset( $fields['plural_label'] ) ? sanitize_text_field($fields['plural_label']) : '';
+		
+		$fields['global_slider_settings'] = ( isset($fields['global_slider_settings']) && $fields['global_slider_settings'] == 'on' )  ? 'on' : '';
+		$fields['slider_directional_nav_reverse'] = ( isset($fields['slider_directional_nav_reverse']) && $fields['slider_directional_nav_reverse'] == 'on' )  ? 'on' : '';
+		$fields['slider_auto_rotate'] = ( isset($fields['slider_auto_rotate']) && $fields['slider_auto_rotate'] == 'on' )  ? 'on' : '';
+		$fields['slider_pause'] = ( isset($fields['slider_pause']) && $fields['slider_pause'] == 'on' )  ? 'on' : '';
+		$fields['slider_directional_nav'] = ( isset($fields['slider_directional_nav']) && $fields['slider_directional_nav'] == 'on' )  ? 'on' : '';
+		$fields['slider_directional_nav_hide'] = ( isset($fields['slider_directional_nav_hide']) && $fields['slider_directional_nav_hide'] == 'on' )  ? 'on' : '';
+		$fields['slider_control_nav'] = ( isset($fields['slider_control_nav']) && $fields['slider_control_nav'] == 'on' )  ? 'on' : '';
 	}
 	
 	// Register translatable fields
@@ -207,6 +319,8 @@ function mtphr_galleries_settings_page() {
 }
 add_action( 'admin_menu', 'mtphr_galleries_settings_page' );
 
+
+
 /* --------------------------------------------------------- */
 /* !Render the settings page - 1.0.5 */
 /* --------------------------------------------------------- */
@@ -231,4 +345,24 @@ function mtphr_galleries_settings_display() {
 	</div><!-- /.wrap -->
 	<?php
 }
+
+
+/* --------------------------------------------------------- */
+/* !Create a settings label - 2.0.13 */
+/* --------------------------------------------------------- */
+
+if( !function_exists('mtphr_galleries_settings_label') ) {
+function mtphr_galleries_settings_label( $title, $description = '' ) {
+
+	$label = '<div class="mtphr-galleries-label-alt">';
+		$label .= '<label>'.$title.'</label>';
+		if( $description != '' ) {
+			$label .= '<small>'.$description.'</small>';
+		}
+	$label .= '</div>';
+
+	return $label;
+}
+}
+
 

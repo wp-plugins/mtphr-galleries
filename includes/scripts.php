@@ -111,7 +111,7 @@ add_action( 'wp_enqueue_scripts', 'mtphr_galleries_scripts' );
 
 
 /* --------------------------------------------------------- */
-/* !Initialize the gallery scripts - 2.0.12 */
+/* !Initialize the gallery scripts - 2.0.13 */
 /* --------------------------------------------------------- */
 
 function mtphr_galleries_init_scripts() {
@@ -124,18 +124,38 @@ function mtphr_galleries_init_scripts() {
 		?>
 		<script>
 			jQuery( window ).load( function() {
-			<?php foreach( $mtphr_galleries_scripts as $gallery ) { ?>
-				jQuery( '#<?php echo $gallery['id']; ?>' ).mtphr_gallery_slider({
-					rotate_type 	: '<?php echo $gallery['rotate_type']; ?>',
-					auto_rotate 	: <?php echo $gallery['auto_rotate']; ?>,
-					delay 				: <?php echo intval($gallery['rotate_delay']); ?>,
-					rotate_pause 	: <?php echo $gallery['rotate_pause']; ?>,
-					rotate_speed 	: <?php echo intval($gallery['rotate_speed']); ?>,
-					rotate_ease 	: '<?php echo $gallery['rotate_ease']; ?>',
-					nav_reverse 	: <?php echo $gallery['nav_reverse']; ?>
-				});
-			 <?php } ?>
-			});
+				
+			<?php
+			$settings = mtphr_galleries_settings();
+			if( $settings['global_slider_settings'] == 'on' ) { ?>
+			
+				jQuery( '.mtphr-gallery' ).mtphr_gallery_slider({
+						rotate_type 	: '<?php echo $settings['slider_type']; ?>',
+						auto_rotate 	: <?php echo ($settings['slider_auto_rotate'] == 'on') ? 1 : 0; ?>,
+						delay 				: <?php echo intval($settings['slider_delay']); ?>,
+						rotate_pause 	: <?php echo ($settings['slider_pause'] == 'on') ? 1 : 0; ?>,
+						rotate_speed 	: <?php echo intval($settings['slider_speed']); ?>,
+						rotate_ease 	: '<?php echo $settings['slider_ease']; ?>',
+						nav_reverse 	: <?php echo ($settings['slider_directional_nav_reverse'] == 'on') ? 1 : 0; ?>
+					});
+			
+			<?php } else { ?>
+				
+				<?php foreach( $mtphr_galleries_scripts as $gallery ) { ?>
+					jQuery( '#<?php echo $gallery['id']; ?>' ).mtphr_gallery_slider({
+						rotate_type 	: '<?php echo $gallery['rotate_type']; ?>',
+						auto_rotate 	: <?php echo $gallery['auto_rotate']; ?>,
+						delay 				: <?php echo intval($gallery['rotate_delay']); ?>,
+						rotate_pause 	: <?php echo $gallery['rotate_pause']; ?>,
+						rotate_speed 	: <?php echo intval($gallery['rotate_speed']); ?>,
+						rotate_ease 	: '<?php echo $gallery['rotate_ease']; ?>',
+						nav_reverse 	: <?php echo $gallery['nav_reverse']; ?>
+					});
+				 <?php } ?>
+
+			<?php } ?>
+			
+			});	
 		</script>
 		<?php
 	}

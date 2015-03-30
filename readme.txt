@@ -34,6 +34,10 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 2.0.13 =
+* Added global rotator settings
+* Added post type arg to metabox filters
+
 = 2.0.12 =
 * Fixed bug with rotator delay
 
@@ -152,4 +156,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Fixed bug with rotator delay.
+Added global rotator settings and post type arg to metabox filters

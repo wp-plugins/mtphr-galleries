@@ -60,19 +60,28 @@ add_action( 'mtphr_gallery_wrapper', 'mtphr_gallery_add_rotator', 10 );
 
 
 /* --------------------------------------------------------- */
-/* !Add the directional navigation - 2.0.5 */
+/* !Add the directional navigation - 2.0.13 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_add_directional_nav( $post_id, $meta_data ) {
 	
+	$settings = mtphr_galleries_settings();
+	
 	// Extract the metadata array into variables
 	extract( $meta_data );
 	
-	$html = '';
-	if( isset($_mtphr_gallery_slider_directional_nav) && $_mtphr_gallery_slider_directional_nav ) {
-		$html .= '<a href="#" class="mtphr-gallery-nav-prev" rel="nofollow">'.apply_filters( 'mtphr_gallery_navigation_previous', __('Previous', 'mtphr-galleries') ).'</a>';
-		$html .= '<a href="#" class="mtphr-gallery-nav-next" rel="nofollow">'.apply_filters( 'mtphr_gallery_navigation_next', __('Next', 'mtphr-galleries') ).'</a>';
+	$directional_nav = ($settings['global_slider_settings'] == 'on') ? ( $settings['slider_directional_nav'] == 'on' ) : (isset($_mtphr_gallery_slider_directional_nav) && $_mtphr_gallery_slider_directional_nav);
+	
+	$resources = mtphr_gallery_resource_meta( $post_id );
+	if( is_array($resources) && count($resources) > 1 ) {
+		
+		$html = '';
+		if( $directional_nav ) {
+			$html .= '<a href="#" class="mtphr-gallery-nav-prev" rel="nofollow">'.apply_filters( 'mtphr_gallery_navigation_previous', __('Previous', 'mtphr-galleries') ).'</a>';
+			$html .= '<a href="#" class="mtphr-gallery-nav-next" rel="nofollow">'.apply_filters( 'mtphr_gallery_navigation_next', __('Next', 'mtphr-galleries') ).'</a>';
+		}
+		echo $html;
+		
 	}
-	echo $html;
 }
 add_action( 'mtphr_gallery_wrapper', 'mtphr_gallery_add_directional_nav', 15, 2 );
