@@ -41,7 +41,7 @@ class mtphr_gallery_categories_widget extends WP_Widget {
 
 
 	/* --------------------------------------------------------- */
-	/* !Display the widget - 2.0.5 */
+	/* !Display the widget - 2.0.14 */
 	/* --------------------------------------------------------- */
 
 	function widget( $args, $instance ) {
@@ -82,14 +82,14 @@ class mtphr_gallery_categories_widget extends WP_Widget {
 	     $term_count = ( $count ) ? apply_filters('mtphr_galleries_category_widget_count', ' <span class="mtphr-galleries-count">('.$post_count->publish.')</span>', $post_count->publish) : '';
 	     $obj = get_post_type_object( 'mtphr_gallery' );
 	     $label = $obj->labels->name;
-	     echo '<li'.$active.'><a href="'.add_query_arg( 'category', false, get_permalink($all) ).'">'.sprintf(__('All %s', 'mtphr-galleries'), $label).$term_count.'</a></li>';
+	     echo '<li'.$active.'><a href="'.esc_url( add_query_arg('category', false, get_permalink($all)) ).'">'.sprintf(__('All %s', 'mtphr-galleries'), $label).$term_count.'</a></li>';
 
 	     foreach ( $terms as $term ) {
 
 		     $active = ( $current == $term->slug ) ? ' class="mtphr-galleries-current-category"' : '';
 		     $term_count = ( $count ) ? apply_filters('mtphr_galleries_category_widget_count', ' <span class="mtphr-galleries-count">('.$term->count.')</span>', $term->count) : '';
 		     
-		     $href = add_query_arg( 'category', $term->slug, get_permalink($all) );
+		     $href = esc_url( add_query_arg('category', $term->slug, get_permalink($all)) );
 		     $link = '<a href="'.$href.'">'.$term->name.$term_count.'</a>';
 		     
 	       echo '<li'.$active.'>'.apply_filters('mtphr_galleries_category_widget_link', $link, $term).'</li>';

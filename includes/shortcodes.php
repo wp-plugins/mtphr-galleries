@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Display the gallery archive - 2.2.1 */
+/* !Display the gallery archive - 2.0.14 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_archive_display( $atts, $content = null ) {
@@ -104,7 +104,7 @@ function mtphr_gallery_archive_display( $atts, $content = null ) {
 				<?php do_action( 'mtphr_gallery_top' ); ?>
 
 				<?php
-				$permalink = ( $categories ) ? add_query_arg( array('taxonomy' => 'mtphr_gallery_category', 'terms' => $categories), get_permalink() ) : remove_query_arg( array('taxonomy', 'terms'), get_permalink() );
+				$permalink = ( $categories ) ? esc_url( add_query_arg(array('taxonomy' => 'mtphr_gallery_category', 'terms' => $categories), get_permalink()) ) : esc_url( remove_query_arg(array('taxonomy', 'terms'), get_permalink()) );
 				foreach( $asset_order as $asset ) {
 
 					switch( trim($asset) ) {
