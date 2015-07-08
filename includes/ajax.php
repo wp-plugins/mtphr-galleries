@@ -86,19 +86,19 @@ function mtphr_gallery_external_thumb_ajax() {
 				$value = reset( $value_array );
 			}
 			
-			$response = wp_remote_get( 'http://gdata.youtube.com/feeds/api/videos/'.$value.'?v=2&alt=json' );
+			$response = wp_remote_get('http://youtube.com/get_video_info?video_id='.$value);
 			if( $response['response']['code'] == 200 ) {
-				$body = json_decode($response['body'], true);	
-				$url = $body['entry']['media$group']['media$thumbnail'][2]['url'];
-				$title = $body['entry']['title']['$t'];
+				parse_str($response['body'], $ytarr);
+				$url = $ytarr['iurlhq'];
+				$title = $ytarr['title'];
 				$file_path = $gallery_upload_dir.'/youtube-'.$value.'.jpg';
 				$file_url = $gallery_upload_url.'/youtube-'.$value.'.jpg';
 				$data = array(
 					'id' => $value,
 					'title' => $title,
-					'description' => urlencode($body['entry']['media$group']['media$description']['$t']),
+					'description' => '',
 					'poster' => '',
-					'link' => $body['entry']['link'][0]['href']
+					'link' => 'https://www.youtube.com/watch?v='.$value
 				);
 				if( mtphr_galleries_copy_poster($url, $file_path) ) {
 					$data['poster'] = mtphr_galleries_create_external_thumb_attachment( $file_path, $file_url, $title, false, $parent );
@@ -177,11 +177,11 @@ function mtphr_gallery_create_external_thumb_ajax() {
 	// Display the files
 	switch( $type ) {
 		case 'youtube':
-			$response = wp_remote_get( 'http://gdata.youtube.com/feeds/api/videos/'.$value.'?v=2&alt=json' );
+			$response = wp_remote_get('http://youtube.com/get_video_info?video_id='.$value);
 			if( $response['response']['code'] == 200 ) {
-				$body = json_decode($response['body'], true);			
-				$url = $body['entry']['media$group']['media$thumbnail'][2]['url'];
-				$title = $body['entry']['title']['$t'];
+				parse_str($response['body'], $ytarr);			
+				$url = $ytarr['iurlhq'];
+				$title = $ytarr['title'];
 				$file_path = $gallery_upload_dir.'/youtube-'.$value.'.jpg';
 				$file_url = $gallery_upload_url.'/youtube-'.$value.'.jpg';	
 				

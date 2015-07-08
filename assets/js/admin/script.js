@@ -282,6 +282,7 @@ jQuery( document ).ready( function($) {
 					
 			$error.hide();
 			$spinner.show();
+			$spinner.css('visibility', 'visible');
 			
 			// Hide the buttons
 	  	if( single_resource ) {
@@ -297,8 +298,8 @@ jQuery( document ).ready( function($) {
 				security: mtphr_galleries_vars.security
 			};
 			jQuery.post( ajaxurl, data, function( response ) {
-				
-				$spinner.hide();
+								
+				$spinner.css('visibility', 'hidden');
 
 				if( response == 'error' ) {
 					$error.css('display', 'inline-block');
@@ -327,7 +328,7 @@ jQuery( document ).ready( function($) {
 		  		
 		  parent = parent.substr(1, parent.length);
 		  
-		  $spinner.show();
+		  $spinner.css('visibility', 'visible');
 
 		  var data = {
 				action: 'mtphr_gallery_create_external_thumb_ajax',
@@ -348,7 +349,7 @@ jQuery( document ).ready( function($) {
 					$container.html( $thumb );
 					mtphr_gallery_thumbnails_set_order();
 					
-					$spinner.hide();
+					$spinner.css('visibility', 'hidden');
 				}
 			});
 		});
