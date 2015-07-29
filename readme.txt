@@ -34,12 +34,6 @@ Documentation is coming soon!
 
 == Changelog ==
 
-= 2.0.15 =
-* Updated YouTube admin code due to YouTube API changes
-
-= 2.0.14 =
-* Fixed add_query_arg() and remove_query_arg() usage
-
 = 2.0.13 =
 * Added global rotator settings
 * Added post type arg to metabox filters
@@ -162,4 +156,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Updated YouTube admin code due to YouTube API changes.
+Added global rotator settings and post type arg to metabox filters.
