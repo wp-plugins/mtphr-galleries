@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 2.0.14 =
+* Fixed add_query_arg() and remove_query_arg() usage
+
 = 2.0.13 =
 * Added global rotator settings
 * Added post type arg to metabox filters
@@ -156,4 +159,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Added global rotator settings and post type arg to metabox filters.
+Fixed add_query_arg() and remove_query_arg() usage.
