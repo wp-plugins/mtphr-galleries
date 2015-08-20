@@ -34,6 +34,9 @@ Documentation is coming soon!
 
 == Changelog ==
 
+= 2.0.15 =
+* Updated YouTube admin code due to YouTube API changes
+
 = 2.0.14 =
 * Fixed add_query_arg() and remove_query_arg() usage
 
@@ -159,4 +162,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Fixed add_query_arg() and remove_query_arg() usage.
+Updated YouTube admin code due to YouTube API changes.
