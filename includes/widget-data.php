@@ -1,51 +1,17 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Register the data widget - 1.0.5 */
-/* --------------------------------------------------------- */
-
-function mtphr_gallery_data_widget_init() {
-	register_widget( 'mtphr_gallery_data_widget' );
-}
-add_action( 'widgets_init', 'mtphr_gallery_data_widget_init' );
-
-
-
-
-
-/* --------------------------------------------------------- */
-/* !Create the data widget class - 1.0.5 */
+/* !Create the data widget class - 2.0.17 */
 /* --------------------------------------------------------- */
 
 class mtphr_gallery_data_widget extends WP_Widget {
-
-
-	/* --------------------------------------------------------- */
-	/* !Initialize the widget - 1.0.5 */
-	/* --------------------------------------------------------- */
-
-	function mtphr_gallery_data_widget() {
-
-		// Widget settings
-		$widget_ops = array(
-			'classname' => 'mtphr-gallery-data',
-			'description' => __('Display individual gallery data', 'mtphr-galleries')
-		);
-
-		// Widget control settings
-		$control_ops = array(
-			'id_base' => 'mtphr-gallery-data'
-		);
-
-		// Create the widget
-		$this->WP_Widget( 'mtphr-gallery-data', __('Metaphor Gallery Data', 'mtphr-galleries'), $widget_ops, $control_ops );
+	
+	/** Constructor */
+	function __construct() {
+		parent::__construct( 'mtphr-gallery-data', __('Metaphor Gallery Data', 'mtphr-galleries'), array( 'description' => __('Display individual gallery data', 'mtphr-galleries') ) );
 	}
 
-
-	/* --------------------------------------------------------- */
-	/* !Display the widget - 1.0.5 */
-	/* --------------------------------------------------------- */
-
+	/** @see WP_Widget::widget */
 	function widget( $args, $instance ) {
 
 		extract( $args );
@@ -114,11 +80,7 @@ class mtphr_gallery_data_widget extends WP_Widget {
 		echo $after_widget;
 	}
 
-
-	/* --------------------------------------------------------- */
-	/* !Update the widget - 1.0.5 */
-	/* --------------------------------------------------------- */
-
+	/** @see WP_Widget::update */
 	function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
@@ -135,11 +97,7 @@ class mtphr_gallery_data_widget extends WP_Widget {
 		return $instance;
 	}
 
-
-	/* --------------------------------------------------------- */
-	/* !Create the widget form - 1.0.5 */
-	/* --------------------------------------------------------- */
-
+	/** @see WP_Widget::form */
 	function form( $instance ) {
 
 		// Set up some default widget settings
@@ -197,3 +155,12 @@ class mtphr_gallery_data_widget extends WP_Widget {
 	}
 }
 
+
+/* --------------------------------------------------------- */
+/* !Register the data widget - 1.0.5 */
+/* --------------------------------------------------------- */
+
+function mtphr_gallery_data_widget_init() {
+	register_widget( 'mtphr_gallery_data_widget' );
+}
+add_action( 'widgets_init', 'mtphr_gallery_data_widget_init' );

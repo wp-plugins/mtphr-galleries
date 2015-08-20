@@ -3,7 +3,7 @@ Contributors: metaphorcreations
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TCAJHP4AJ392N
 Tags: custom post type, galleries, gallery, photos, vimeo, youtube, slider
 Requires at least: 3.2
-Tested up to: 4.2.3
+Tested up to: 4.3
 Stable tag: /trunk/
 License: GPL2
 
@@ -33,6 +33,9 @@ Documentation is coming soon!
 1. Coming soon.
 
 == Changelog ==
+
+= 2.0.17 =
+* Updated widget class
 
 = 2.0.16 =
 * Bug fix in YouTube admin code
@@ -165,4 +168,4 @@ Documentation is coming soon!
 
 == Upgrade Notice ==
 
-Bug fix in YouTube admin code.
+Updated widget class.
