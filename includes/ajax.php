@@ -47,7 +47,7 @@ add_action( 'wp_ajax_mtphr_gallery_thumb_ajax', 'mtphr_gallery_thumb_ajax' );
 
 
 /* --------------------------------------------------------- */
-/* !Display an external gallery thumb via ajax - 2.0.3 */
+/* !Display an external gallery thumb via ajax - 2.0.16 */
 /* --------------------------------------------------------- */
 
 function mtphr_gallery_external_thumb_ajax() {
@@ -85,12 +85,12 @@ function mtphr_gallery_external_thumb_ajax() {
 			} else {
 				$value = reset( $value_array );
 			}
-			
+
 			$response = wp_remote_get('http://youtube.com/get_video_info?video_id='.$value);
 			if( $response['response']['code'] == 200 ) {
 				parse_str($response['body'], $ytarr);
-				$url = $ytarr['iurlhq'];
-				$title = $ytarr['title'];
+				$url = 'http://img.youtube.com/vi/'.$value.'/0.jpg';
+				$title = isset($ytarr['title']) ? $ytarr['title'] : '';
 				$file_path = $gallery_upload_dir.'/youtube-'.$value.'.jpg';
 				$file_url = $gallery_upload_url.'/youtube-'.$value.'.jpg';
 				$data = array(
