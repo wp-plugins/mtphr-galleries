@@ -1,14 +1,21 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Create the data widget class - 2.0.17 */
+/* !Create the data widget class - 2.0.18 */
 /* --------------------------------------------------------- */
 
 class mtphr_gallery_data_widget extends WP_Widget {
 	
 	/** Constructor */
 	function __construct() {
-		parent::__construct( 'mtphr-gallery-data', __('Metaphor Gallery Data', 'mtphr-galleries'), array( 'description' => __('Display individual gallery data', 'mtphr-galleries') ) );
+		parent::__construct(
+			'mtphr-gallery-data',
+			__('Metaphor Gallery Data', 'mtphr-galleries'),
+			array(
+				'classname' => 'mtphr-gallery-data',
+				'description' => __('Display individual gallery data', 'mtphr-galleries')
+			)
+		);
 	}
 
 	/** @see WP_Widget::widget */

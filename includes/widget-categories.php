@@ -1,14 +1,21 @@
 <?php
 
 /* --------------------------------------------------------- */
-/* !Create the category widget class - 2.0.17 */
+/* !Create the category widget class - 2.0.18 */
 /* --------------------------------------------------------- */
 
 class mtphr_gallery_categories_widget extends WP_Widget {
 	
 	/** Constructor */
 	function __construct() {
-		parent::__construct( 'mtphr-gallery-categories', __('Metaphor Gallery Categories', 'mtphr-galleries'), array( 'description' => __('Display a list of gallery categories', 'mtphr-galleries') ) );
+		parent::__construct(
+			'mtphr-gallery-categories',
+			__('Metaphor Gallery Categories', 'mtphr-galleries'),
+			array(
+				'classname' => 'mtphr-gallery-categories',
+				'description' => __('Display a list of gallery categories', 'mtphr-galleries')
+			)
+		);
 	}
 
 	/** @see WP_Widget::widget */
